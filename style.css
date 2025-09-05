@@ -1,0 +1,152 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: content-box;
+}
+
+
+body {
+  border: whitesmoke;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+
+header{
+  display: flex;
+  height: 100px;
+  justify-content: space-between;
+  background-color: pink;
+  align-items: center;
+  padding: 10px;
+}
+
+.logo{
+  display: flex;
+  align-items: center;
+}
+
+nav{
+  display: flex;
+}
+
+
+a{
+  text-decoration: none;
+  color:rgb(34, 11, 24);
+  
+}
+
+nav a{
+  font-weight: 600;
+  padding-right: 50px;
+  
+}
+
+nav a:hover{
+  color: white;
+}
+
+.colorMargin{
+    background-color: pink;
+    border: 3px solid rgb(238, 72, 100);
+    
+}
+.bodycolor{
+    background-color: #FFF5E1;
+}
+
+.estiloEncabezado{
+    font-family: "Pacifico", cursive;
+    font-weight: 400;
+    font-style: normal;
+    display: flex-end;
+    justify-content: center;
+    text-align: center;
+    background-color: pink;
+    
+    
+}
+
+.colorBoton1{
+    background-color: #FFC0CB;
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.colorBoton2{
+    background-color: #8B4513;
+}
+
+.colorTexto{
+    color: #5D4037;
+}
+.colorSecundario{
+    color: #B0BEC5;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+main {
+  flex: 1;
+}
+
+footer {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: pink;
+  border: 3px solid rgb(238, 72, 100);
+}
+.mi-alerta-error {
+  background-color: #ffb3b3;
+  color: #900;
+  border: 1px solid #900;
+  padding: 10px;
+  border-radius: 5px;
+      font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.mi-alerta-exito {
+  background-color: #b3ffcc;
+  color: #006622;
+  border: 1px solid #006622;
+  padding: 10px;
+  border-radius: 5px;
+      font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.mi-alerta-descuento {
+  background-color: #ffb3b3;
+  color: #900;
+  border: 1px solid #900;
+  padding: 10px;
+  border-radius: 5px;
+      font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.mi-alerta-descuento {
+  background-color: #b3d9ff;
+  color: #004080;
+  border: 1px solid #004080;
+  padding: 10px;
+  border-radius: 5px;
+      font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+}
