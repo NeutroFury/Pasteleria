@@ -20,7 +20,7 @@
 <body class="bodycolor">
     <header class="colorMargin">
         <div>
-            <h1 class="estiloEncabezado"> Pasteleria mil sabores</h1>
+            <h1 class="estiloEncabezado">Pasteleria mil sabores</h1>
             <p class="estiloEncabezado">BORNY</p>
             <a href="index.html">Home</a>
             <a href="productos.html">Productos</a>
@@ -30,7 +30,22 @@
         </div>
     </header>
     <main>
-        <p>LOGINARDO</p>
+        <div class="container mt-5">
+            <h2 class="mb-4">Iniciar Sesión</h2>
+            <div id="login-mensajes"></div>
+            <form id="formLogin">
+                <div class="mb-3">
+                    <label for="login-email" class="form-label">Correo electrónico</label>
+                    <input type="email" id="login-email" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="login-clave" class="form-label">Contraseña</label>
+                    <input type="password" id="login-clave" class="form-control">
+                </div>
+                <button type="button" class="colorBoton1" onclick="validarLogin()">Ingresar</button>
+            </form>
+        </div>
+        <script src="registro.js"></script>
     </main>
     <footer>
         <div class="card-footer">
