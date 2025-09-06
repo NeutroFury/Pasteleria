@@ -1,3 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: content-box;
+}
+
+
+body {
+  border: whitesmoke;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+header{
+  display: flex;
+  height: 100px;
+  justify-content: space-between;
+  background-color: pink;
+  align-items: center;
+  padding: 10px;
+}
+
+.logo{
+  display: flex;
+  align-items: center;
+}
+
+nav{
+  display: flex;
+}
+
+
+a{
+  text-decoration: none;
+  color:rgb(34, 11, 24);
+  
+}
+
+nav a{
+  font-weight: 600;
+  padding-right: 50px;
+  
+}
+
+nav a:hover{
+  color: white;
+}
+
 .colorMargin{
     background-color: pink;
     border: 3px solid rgb(238, 72, 100);
@@ -11,8 +61,12 @@
     font-family: "Pacifico", cursive;
     font-weight: 400;
     font-style: normal;
+    display: flex-end;
     justify-content: center;
     text-align: center;
+    background-color: pink;
+    
+    
 }
 
 .colorBoton1{
@@ -39,11 +93,7 @@ html, body {
   padding: 0;
 }
 
-body {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
+
 
 main {
   flex: 1;
