@@ -4,7 +4,6 @@
   box-sizing: content-box;
 }
 
-
 body {
   border: whitesmoke;
   min-height: 100vh;
@@ -46,6 +45,7 @@ nav a{
 
 nav a:hover{
   color: white;
+  padding-right: 50px;
 }
 
 .colorMargin{
@@ -92,8 +92,6 @@ html, body {
   margin: 0;
   padding: 0;
 }
-
-
 
 main {
   flex: 1;
@@ -148,4 +146,11 @@ footer {
       font-family: "Lato", sans-serif;
     font-weight: 400;
     font-style: italic;
+}
+
+.login_register {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-right: 20px;
 }

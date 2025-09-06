@@ -73,7 +73,7 @@ function validarFormulario() {
     mensajesDiv.innerHTML = `${mensajeCorreo}${mensajeDescuento}<div class="mi-alerta-exito ">✅ Registro exitoso</div>`;
     setTimeout(function() {
       window.location.href = "index.html";
-    }, 2000); // 2000 ms = 2 segundos
+    }, 5000);
   }
 }
 function validarLogin() {
