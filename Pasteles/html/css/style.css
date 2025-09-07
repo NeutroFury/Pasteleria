@@ -167,6 +167,11 @@ main {
   align-items: center;
   text-decoration: none;
 }
+.producto:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  transform: translateY(-4px);
+  transition: all 0.2s;
+}
 .producto a {
   text-decoration: none;
 }
@@ -520,29 +525,26 @@ footer {
   box-shadow: 0 0 0 3px #fac3d655; /* suave rosado */
 }
 
-.btn-auth{
-  width: 100%;
-  display: inline-block;
-  border: 0;
-  border-radius: 999px;
-  padding: 12px 18px;
-  font-weight: 700;
-  text-align: center;
-  margin-top: 6px;
+.btn-auth {
+  background: #d16a8a;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 0.7rem 2rem;
+  font-size: 1.1rem;
+  font-family: 'Lato', Arial, sans-serif;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(213, 106, 138, 0.10);
+  transition: background 0.2s, box-shadow 0.2s;
 }
 
-.auth-alt{
-  text-align: center;
-  margin-top: 12px;
-  color: #7c3a2d;
+.btn-auth:hover,
+.btn-auth:focus {
+  background: #b48b7d;
+  box-shadow: 0 4px 16px rgba(180, 139, 125, 0.15);
+  outline: none;
 }
 
-.auth-link{
-  color: #7c3a2d;
-  text-decoration: underline;
-}
-
-/* Mensajería coherente con tu proyecto */
 .mi-alerta-error{
   background: #ffe5e5;
   color: #7a1120;
@@ -609,6 +611,35 @@ footer {
   padding: 1rem;
   box-sizing: border-box;
   border-color: #fac3d6;
+}
+
+.form-control#mensaje:focus {
+  border-color: #d6a89c !important;
+  background: #fff6e3;
+  color: #7c3a2d;
+  box-shadow: 0 0 0 3px #d6a89c33;
+}
+
+.form-control#mensaje,
+.contacto-card input,
+.contacto-card textarea {
+  background: #fff;
+  color: #7c3a2d;
+  border: 1.5px solid #fac3d6;
+  border-radius: 12px;
+  font-size: 1.08rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+
+.form-control#mensaje:focus,
+.contacto-card input:focus,
+.contacto-card textarea:focus {
+  border-color: #d6a89c;
+  background: #fff6e3;
+  color: #7c3a2d;
+  box-shadow: 0 0 0 3px #d6a89c33;
 }
 
 .centered {
