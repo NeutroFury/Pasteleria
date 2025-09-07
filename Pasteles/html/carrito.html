@@ -40,16 +40,71 @@
 
 
     <main>
-      <div class="cardrro">
-        <h2>Título de la Card</h2>
-        <p>Contenido de la card.</p>
-        <div class="contenedor">
-          <button class="btn1Carrito">Agregar</button>
-          <button class="btn2Carrito">Eliminar</button>
-          <button class="btn3Carrito">Modificar</button>
-        </div>
+      <h1 class="estiloEncabezado" style="margin-bottom:2rem;">Mi carrito de compras</h1>
+      <div class="carrito-grid">
+        <section class="carrito-lista">
+          <div class="carrito-item">
+            <img src="img/Pastel_1.png" alt="Producto 1" class="carrito-img" />
+            <div class="carrito-info">
+              <h2 class="carrito-nombre">Producto #1</h2>
+              <p class="carrito-desc">
+                Pink lorem ipsum dolor sit amet, consectetur adipiscing elit
+              </p>
+            </div>
+            <div class="carrito-precio">$ 8.000</div>
+            <div class="carrito-cantidad">
+              <button class="carrito-btn">-</button>
+              <input type="number" value="1" min="1" class="carrito-input" />
+              <button class="carrito-btn">+</button>
+            </div>
+          </div>
+          <div class="carrito-item">
+            <img src="img/Pastel_2.png" alt="Producto 2" class="carrito-img" />
+            <div class="carrito-info">
+              <h2 class="carrito-nombre">Producto #2</h2>
+              <p class="carrito-desc">
+                Pink lorem ipsum dolor sit amet, consectetur adipiscing elit
+              </p>
+            </div>
+            <div class="carrito-precio">$ 6.000</div>
+            <div class="carrito-cantidad">
+              <button class="carrito-btn">-</button>
+              <input type="number" value="1" min="1" class="carrito-input" />
+              <button class="carrito-btn">+</button>
+            </div>
+          </div>
+          <div class="carrito-item">
+            <img src="img/Pastel_3.png" alt="Producto 3" class="carrito-img" />
+            <div class="carrito-info">
+              <h2 class="carrito-nombre">Producto #3</h2>
+              <p class="carrito-desc">
+                Pink lorem ipsum dolor sit amet, consectetur adipiscing elit
+              </p>
+            </div>
+            <div class="carrito-precio">$ 10.000</div>
+            <div class="carrito-cantidad">
+              <button class="carrito-btn">-</button>
+              <input type="number" value="1" min="1" class="carrito-input" />
+              <button class="carrito-btn">+</button>
+            </div>
+          </div>
+        </section>
+        <aside class="carrito-resumen">
+          <div class="carrito-total">
+            <span>TOTAL:</span>
+            <span class="carrito-total-precio">$ 24.000</span>
+          </div>
+          <form class="carrito-cupon">
+            <input
+              type="text"
+              placeholder="Ingrese el cupón de descuento"
+              class="carrito-cupon-input"
+            />
+            <button type="button" class="carrito-cupon-btn">APLICAR</button>
+          </form>
+          <button class="carrito-pagar-btn">PAGAR</button>
+        </aside>
       </div>
-      <img src="img/Pastel_1.png" height="200" width="200" alt="" />
     </main>
 
         <footer>
