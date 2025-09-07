@@ -120,6 +120,11 @@ main {
   box-sizing: border-box;
 }
 
+/* Centra el contenido del main */
+.centrado {
+  text-align: center;
+}
+
 /* Banner */
 .banner {
   display: flex;
@@ -564,4 +569,50 @@ footer {
   border-radius: 10px;
   font-size: .95rem;
   margin-bottom: 8px;
+}
+
+.imagen-nosotros {
+  margin-top: 2rem;
+}
+
+.imagen-box-madera {
+  display: inline-block;
+  background: #f5e3d0; /* Café madera claro */
+  border: 3px solid #c8a484; /* Borde sutil café */
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(200, 164, 132, 0.10);
+  padding: 1.2rem 1.8rem;
+  margin-top: 2rem;
+  transition: box-shadow 0.2s;
+}
+.imagen-box-madera img {
+  display: block;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.contacto-card {
+  max-width: 400px;
+  margin: 2rem auto;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(213, 106, 138, 0.10);
+  padding: 2rem 2.5rem;
+}
+
+.form-control#mensaje {
+  min-height: 120px;
+  resize: vertical;
+  width: 100%;
+  border-radius: 12px;
+  font-size: 1.08rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  border-color: #fac3d6;
+}
+
+.centered {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
