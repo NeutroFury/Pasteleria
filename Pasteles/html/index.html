@@ -10,33 +10,41 @@
     />
     <link rel="stylesheet" href="css/style.css" />
   </head>
+
   <body class="bodycolor">
-    <header>
-      <div class="logo">
-        <img
-          src="img/Logo emprendimiento reposteria beige.png"
-          alt="Logo Pastelería"
-          class="logo-img"
-        />
-        <h2 class="estiloEncabezado">Pasteleria mil sabores</h2>
-      </div>
-      <nav>
-        <ul class="lista">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="productos.html">Productos</a></li>
-          <li><a href="nosotros.html">Nosotros</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
-          <li><a href="blogs.html">Blog</a></li>
-        </ul>
-      </nav>
-      <nav>
-        <ul class="login_register">
-          <li><a href="carrito.html" class="cart">🛒 Carrito (0)</a></li>
-          <li><a href="login.html">Iniciar sesión</a></li>
-          <li><a href="registro.html">Registrar usuario</a></li>
-        </ul>
-      </nav>
-    </header>
+<header>
+  <div class="logo">
+    <img
+      src="img/Logo emprendimiento reposteria beige.png"
+      alt="Logo Pastelería"
+      class="logo-img"
+    />
+    <h2 class="estiloEncabezado">Pastelería Mil Sabores</h2>
+  </div>
+  <nav>
+    <ul class="lista">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="productos.html">Productos</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+      <li><a href="blogs.html">Blog</a></li>
+    </ul>
+  </nav>
+  <nav>
+    <ul class="login_register">
+      <!-- Mostrar "Iniciar sesión" y "Registrar usuario" si el usuario no está logueado -->
+      <li id="loginLink"><a href="login.html">Iniciar sesión</a></li>
+      <li id="registerLink"><a href="registro.html">Registrar usuario</a></li>
+      <!-- Mostrar "Cerrar sesión" y "Carrito" si el usuario está logueado -->
+      <li id="logoutLink" style="display: none;"><a href="javascript:void(0)" id="logoutLink">Cerrar sesión</a></li>
+      <li id="cartLink" style="display: none;"><a href="carrito.html" class="cart">🛒 Carrito (0)</a></li>
+    </ul>
+  </nav>
+  <!-- Mostrar el nombre del usuario si está logueado -->
+  <div id="userInfo" style="display: none; font-size: 1.2rem; color: #7c3a2d">
+    <p>Bienvenido, <span id="userEmail"></span></p>
+  </div>
+</header>
 
     <main>
       <!-- Banner principal -->
@@ -129,7 +137,7 @@
               alt="Logo"
               style="height: 40px; vertical-align: middle; margin-right: 8px"
             />
-            Pasteleria Mil Sabores
+            Pastelería Mil Sabores
           </div>
           <div style="font-size: 0.95rem; color: #7c3a2d">
             Celebrando nuestros 50 años
@@ -145,17 +153,26 @@
         </div>
         <div class="newsletter">
           <form>
-            <label for="newsletter-email">Suscríbete a nuestro newsletter:</label>
+            <label for="newsletter-email"
+              >Suscríbete a nuestro newsletter:</label
+            >
             <div class="newsletter-input-group">
-              <input type="email" id="newsletter-email" placeholder="Ingresa tu email" />
+              <input
+                type="email"
+                id="newsletter-email"
+                placeholder="Ingresa tu email"
+              />
               <button type="submit">Suscribirse</button>
             </div>
           </form>
         </div>
       </div>
       <div style="margin-top: 1rem; color: #b48b7d; font-size: 0.9rem">
-        &copy; 2025 Pasteleria Mil Sabores. Todos los derechos reservados.
+        &copy; 2025 Pastelería Mil Sabores. Todos los derechos reservados.
       </div>
     </footer>
+
+    <!-- Vincula el archivo JS para verificar el login -->
+    <script src="js/main.js"></script>
   </body>
 </html>

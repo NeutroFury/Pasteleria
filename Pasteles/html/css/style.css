@@ -23,7 +23,7 @@ header {
   justify-content: space-between;
   padding: 0.7rem 2.5rem;
   box-sizing: border-box;
-  min-height: 70px; /* Cambia 'auto' por un valor fijo */
+  min-height: 70px; 
   gap: 2rem;
 }
 
@@ -616,3 +616,85 @@ footer {
   margin-left: auto;
   margin-right: auto;
 }
+
+/* Mensajes de error y éxito */
+#mensajes {
+  margin-top: 16px; /* Separar los mensajes del formulario */
+}
+
+.mi-alerta-error,
+.mi-alerta-exito,
+.mi-alerta-descuento {
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 8px; /* Añadir margen entre los mensajes */
+  font-size: 1rem;
+  font-family: 'Lato', sans-serif;
+}
+
+.mi-alerta-error {
+  background-color: #ffe5e5;
+  color: #7a1120;
+  border: 1px solid #ffb8c0;
+}
+
+.mi-alerta-exito {
+  background-color: #e9ffe8;
+  color: #0f5d1d;
+  border: 1px solid #b3ecb8;
+}
+
+.mi-alerta-descuento {
+  background-color: #fffbe6;
+  color: #6f5300;
+  border: 1px solid #ffe58f;
+}
+
+/* Aseguramos que el contenedor de la barra de navegación utilice flexbox */
+nav {
+  display: flex;
+  justify-content: space-between; /* Distribuir los elementos de la barra de navegación */
+  align-items: center; /* Alinear verticalmente los elementos */
+  padding: 10px 20px;
+}
+
+/* Barra de navegación de la izquierda */
+nav .lista {
+  display: flex;
+  gap: 20px; /* Espacio entre los elementos de la izquierda */
+}
+
+/* Barra de navegación de la derecha (login, logout y carrito) */
+nav .login_register {
+  display: flex;
+  gap: 20px; /* Espacio entre los elementos de la derecha */
+  align-items: center;
+}
+
+/* Cada item en el login_register */
+nav .login_register li {
+  list-style: none;
+}
+
+nav .login_register li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+nav .login_register li a:hover {
+  color: #7c3a2d; /* Color al pasar el ratón por encima */
+}
+
+/* Estilo global para todos los enlaces en la barra de navegación */
+nav .login_register li a:hover {
+  color: #7c3a2d; /* Cambiar color al pasar el ratón */
+  background-color: rgba(0, 0, 0, 0.1); /* Añadir un fondo suave */
+}
+
+/* Eliminar el efecto de hover para el enlace del carrito */
+nav .login_register li#cartLink a:hover {
+  color: inherit; /* Mantener el color original */
+  background-color: inherit; /* Evitar el cambio de fondo */
+}
+

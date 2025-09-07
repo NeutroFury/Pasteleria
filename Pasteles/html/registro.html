@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pastelería Mil Sabores</title>
+    <title>Registrar Usuario | Pastelería Mil Sabores</title>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Pacifico&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
@@ -15,7 +15,7 @@
           alt="Logo Pastelería"
           class="logo-img"
         />
-        <h2 class="estiloEncabezado">Pasteleria mil sabores</h2>
+        <h2 class="estiloEncabezado">Pastelería Mil Sabores</h2>
       </div>
       <nav>
         <ul class="lista">
@@ -28,7 +28,6 @@
       </nav>
       <nav>
         <ul class="login_register">
-          <li><a href="carrito.html" class="cart">🛒 Carrito (0)</a></li>
           <li><a href="login.html">Iniciar sesión</a></li>
           <li><a href="registro.html" class="active">Registrar usuario</a></li>
         </ul>
@@ -36,58 +35,52 @@
     </header>
 
     <main>
-      <!-- ===== Auth Layout (igual que login) ===== -->
-      <section class="auth">
-        <div class="auth-card">
-          <h2 class="auth-title">Crear cuenta</h2>
-          <p class="auth-subtitle">Únete para disfrutar de promociones y novedades</p>
+      <div class="login-container">
+        <h2>Registrar Usuario</h2>
+        <form id="formRegistro">
+          <div class="form-group">
+            <label for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" class="form-control" required />
+          </div>
 
-          <div id="mensajes" class="auth-messages"></div>
+          <div class="form-group">
+            <label for="register-email">Correo electrónico</label>
+            <input type="email" id="register-email" class="form-control" required />
+          </div>
 
-          <form id="formRegistro" class="auth-form">
-            <div class="form-group">
-              <label for="nombre" class="form-label">Nombre completo</label>
-              <input type="text" id="nombre" class="form-control" autocomplete="name" required />
-            </div>
+          <div class="form-group">
+            <label for="edad">Edad</label>
+            <input type="number" id="edad" class="form-control" required />
+          </div>
 
-            <div class="form-group">
-              <label for="email" class="form-label">Correo electrónico</label>
-              <input type="email" id="email" class="form-control" autocomplete="email" required />
-            </div>
+          <div class="form-group">
+            <label for="clave1">Contraseña</label>
+            <input type="password" id="clave1" class="form-control" required />
+          </div>
 
-            <div class="form-group">
-              <label for="edad" class="form-label">Edad</label>
-              <input type="number" id="edad" class="form-control" min="0" inputmode="numeric" required />
-            </div>
+          <div class="form-group">
+            <label for="clave2">Confirmar contraseña</label>
+            <input type="password" id="clave2" class="form-control" required />
+          </div>
 
-            <div class="form-group">
-              <label for="clave1" class="form-label">Contraseña</label>
-              <input type="password" id="clave1" class="form-control" autocomplete="new-password" required />
-            </div>
+          <div class="form-group">
+            <label for="codigo">Código de descuento (Opcional)</label>
+            <input type="text" id="codigo" class="form-control" />
+          </div>
 
-            <div class="form-group">
-              <label for="clave2" class="form-label">Confirmar contraseña</label>
-              <input type="password" id="clave2" class="form-control" autocomplete="new-password" required />
-            </div>
+          <div class="form-group">
+            <label for="fechaNacimiento">Fecha de nacimiento (Opcional)</label>
+            <input type="date" id="fechaNacimiento" class="form-control" />
+          </div>
 
-            <div class="form-group">
-              <label for="codigo" class="form-label">Código de descuento (opcional)</label>
-              <input type="text" id="codigo" class="form-control" placeholder="Ej: FELICES50" />
-            </div>
+          <button type="submit" class="colorBoton1">
+            Registrarse
+          </button>
+        </form>
 
-            <div class="form-group">
-              <label for="fechaNacimiento" class="form-label">Fecha de nacimiento (opcional)</label>
-              <input type="date" id="fechaNacimiento" class="form-control" />
-            </div>
-
-            <button type="submit" class="colorBoton1 btn-auth">Registrar</button>
-          </form>
-
-          <p class="auth-alt">
-            ¿Ya tienes cuenta? <a href="login.html" class="auth-link">Inicia sesión</a>
-          </p>
-        </div>
-      </section>
+        <!-- Mensajes de error y éxito -->
+        <div id="mensajes"></div>
+      </div>
     </main>
 
     <footer>
@@ -99,9 +92,11 @@
               alt="Logo"
               style="height: 40px; vertical-align: middle; margin-right: 8px"
             />
-            Pasteleria Mil Sabores
+            Pastelería Mil Sabores
           </div>
-          <div style="font-size: 0.95rem; color: #7c3a2d">Celebrando nuestros 50 años</div>
+          <div style="font-size: 0.95rem; color: #7c3a2d">
+            Celebrando nuestros 50 años
+          </div>
         </div>
         <div class="footer-links">
           <h5>SOBRE NOSOTROS</h5>
@@ -115,24 +110,22 @@
           <form>
             <label for="newsletter-email">Suscríbete a nuestro newsletter:</label>
             <div class="newsletter-input-group">
-              <input type="email" id="newsletter-email" placeholder="Ingresa tu email" />
+              <input
+                type="email"
+                id="newsletter-email"
+                placeholder="Ingresa tu email"
+              />
               <button type="submit">Suscribirse</button>
             </div>
           </form>
         </div>
       </div>
       <div style="margin-top: 1rem; color: #b48b7d; font-size: 0.9rem">
-        &copy; 2025 Pasteleria Mil Sabores. Todos los derechos reservados.
+        &copy; 2025 Pastelería Mil Sabores. Todos los derechos reservados.
       </div>
     </footer>
 
+    <!-- Vincula el archivo JS -->
     <script src="js/registro.js"></script>
-    <script>
-      // Unificar con login: submit del form
-      document.getElementById('formRegistro').addEventListener('submit', function (e) {
-        e.preventDefault();
-        if (typeof validarFormulario === 'function') validarFormulario();
-      });
-    </script>
   </body>
 </html>
