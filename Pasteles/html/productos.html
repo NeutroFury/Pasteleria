@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pastelería Mil Sabores</title>
+    <title>Productos | Pastelería Mil Sabores</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Pacifico&display=swap"
       rel="stylesheet"
@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body class="bodycolor">
+    <!-- Header -->
     <header>
       <div class="logo">
         <img
@@ -18,12 +19,12 @@
           alt="Logo Pastelería"
           class="logo-img"
         />
-        <h2 class="estiloEncabezado">Pasteleria mil sabores</h2>
+        <h2 class="estiloEncabezado">Pastelería Mil Sabores</h2>
       </div>
       <nav>
         <ul class="lista">
           <li><a href="index.html">Home</a></li>
-          <li><a href="productos.html">Productos</a></li>
+          <li><a href="productos.html" class="active">Productos</a></li>
           <li><a href="nosotros.html">Nosotros</a></li>
           <li><a href="contacto.html">Contacto</a></li>
           <li><a href="blogs.html">Blog</a></li>
@@ -37,27 +38,18 @@
         </ul>
       </nav>
     </header>
-    <script src="js/productos.js"></script>
+
+    <!-- Main -->
     <main>
-      <div>
-        <section class="buscador">
-          <input
-            type="text"
-            id="busqueda"
-            placeholder="🔍 Buscar producto..."
-            oninput="filtrarProductos(this.value)"
-          />
-        </section>
-        <section id="catalogo"></section>
-      </div>
-      <div id="catalogo" class="mb-3">
-        <label for="mostrar" class="form-label">Productos</label>
-        <button type="button" class="Btn" onclick="mostrarCatalogo()">
-          Mostrar Catalogo
-        </button>
-      </div>
+      <h1 style="text-align: center; margin: 1.5rem 0; color: #7c3a2d; font-family: 'Pacifico', cursive;">
+        Catálogo de Productos
+      </h1>
+
+      <!-- Aquí JS insertará los productos -->
+      <div id="gridProductos"></div>
     </main>
 
+    <!-- Footer -->
     <footer>
       <div class="footer-content">
         <div>
@@ -67,7 +59,7 @@
               alt="Logo"
               style="height: 40px; vertical-align: middle; margin-right: 8px"
             />
-            Pasteleria Mil Sabores
+            Pastelería Mil Sabores
           </div>
           <div style="font-size: 0.95rem; color: #7c3a2d">
             Celebrando nuestros 50 años
@@ -85,15 +77,22 @@
           <form>
             <label for="newsletter-email">Suscríbete a nuestro newsletter:</label>
             <div class="newsletter-input-group">
-              <input type="email" id="newsletter-email" placeholder="Ingresa tu email" />
+              <input
+                type="email"
+                id="newsletter-email"
+                placeholder="Ingresa tu email"
+              />
               <button type="submit">Suscribirse</button>
             </div>
           </form>
         </div>
       </div>
       <div style="margin-top: 1rem; color: #b48b7d; font-size: 0.9rem">
-        &copy; 2025 Pasteleria Mil Sabores. Todos los derechos reservados.
+        &copy; 2025 Pastelería Mil Sabores. Todos los derechos reservados.
       </div>
     </footer>
+
+    <!-- Script catálogo -->
+    <script src="js/productos.js"></script>
   </body>
 </html>
