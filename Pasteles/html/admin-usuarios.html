@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios | Panel Administrador</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="admin-container">
+        <nav class="admin-sidebar">
+            <div class="admin-logo">
+                <h2 style="margin: 0; font-family: 'Pacifico', cursive;">Pastelería Mil Sabores</h2>
+                <p style="margin: 0.5rem 0 0 0; opacity: 0.8;">Panel Administrador</p>
+            </div>
+            
+            <ul class="admin-nav">
+                <li><a href="admin.html">Dashboard</a></li>
+                <li><a href="admin-productos.html">Productos</a></li>
+                <li><a href="admin-usuarios.html" class="active">Usuarios</a></li>
+            </ul>
+            
+        </nav>
+        
+        <main class="admin-content">
+            <div class="admin-header">
+                <div>
+                    <h1>Gestión de Usuarios</h1>
+                    <p>Administra los usuarios registrados en el sistema</p>
+                </div>
+                <div>
+                    <a href="admin-nuevo-usuario.html" class="btn-principal">Nuevo Usuario</a>
+                    <a href="index.html" class="btn-principal">🏠 Ir al Sitio</a>
+                </div>
+            </div>
+            
+            <div class="admin-filters">
+                <input type="text" id="searchInput" placeholder="Buscar usuarios...">
+                <select id="statusFilter">
+                    <option value="">Todos los estados</option>
+                    <option value="activo">Activos</option>
+                    <option value="inactivo">Inactivos</option>
+                </select>
+                <select id="typeFilter">
+                    <option value="">Todos los tipos</option>
+                    <option value="cliente">Clientes</option>
+                    <option value="admin">Administradores</option>
+                </select>
+            </div>
+            
+            <div class="admin-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Tipo</th>
+                            <th>Estado</th>
+                            <th>Fecha Registro</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody">
+                        <!-- Los usuarios se cargarán dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="admin-pagination" id="pagination">
+                <!-- La paginación se generará dinámicamente -->
+            </div>
+        </main>
+    </div>
+    
+    <script src="js/admin-usuarios.js"></script>
+</body>
+</html>

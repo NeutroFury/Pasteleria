@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const registerLink = document.getElementById("registerLink");
   const logoutLink = document.getElementById("logoutLink");
   const cartLink = document.getElementById("cartLink");
+  const adminLink = document.getElementById("adminLink");
   const userInfo = document.getElementById("userInfo");
   const userName = document.getElementById("userEmail");
 
@@ -14,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     registerLink.style.display = "none";
     logoutLink.style.display = "block"; // Mostrar "Cerrar sesión"
     cartLink.style.display = "block"; // Mostrar "Carrito"
+    adminLink.style.display = "block"; // Mostrar "Admin"
     userInfo.style.display = "block"; // Mostrar la información del usuario
     userName.textContent = loggedIn.nombre; // Mostrar el nombre del usuario
   } else {
@@ -22,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     registerLink.style.display = "block";
     logoutLink.style.display = "none";
     cartLink.style.display = "none";
+    adminLink.style.display = "none";
     userInfo.style.display = "none"; // Ocultar la información del usuario
   }
 
