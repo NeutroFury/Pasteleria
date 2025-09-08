@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Agregar el nuevo usuario a la lista de usuarios y guardarlo en localStorage
       const hasLifetime10 = codigo.toUpperCase() === "FELICES50";
       const isDuocStudent = email.endsWith("@duocuc.cl");
-      usuarios.push({ nombre, email, password: clave1, hasLifetime10, isDuocStudent, fechaNacimiento });  // Guardar más atributos del usuario
+      usuarios.push({ nombre, email, clave: clave1, hasLifetime10, isDuocStudent, fechaNacimiento });  // Guardar más atributos del usuario
       localStorage.setItem("usuarios", JSON.stringify(usuarios)); // Guardar en localStorage
 
       // Mostrar los usuarios registrados en la consola
@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Redirigir al login después de 15 segundos
       setTimeout(function () {
         window.location.href = "login.html";
-      }, 5000);
+      }, 3000);
     }
   });
 });

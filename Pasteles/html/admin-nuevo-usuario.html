@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Usuario | Panel Administrador</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="admin-container">
+        <nav class="admin-sidebar">
+            <div class="admin-logo">
+                <h2 style="margin: 0; font-family: 'Pacifico', cursive;">Pastelería Mil Sabores</h2>
+                <p style="margin: 0.5rem 0 0 0; opacity: 0.8;">Panel Administrador</p>
+            </div>
+            
+            <ul class="admin-nav">
+                <li><a href="admin.html">Dashboard</a></li>
+                <li><a href="admin-productos.html">Productos</a></li>
+                <li><a href="admin-usuarios.html" class="active">Usuarios</a></li>
+            </ul>
+        </nav>
+        
+        <main class="admin-content">
+            <div class="admin-header">
+                <div>
+                    <h1>Crear Nuevo Usuario</h1>
+                    <p>Registra un nuevo usuario en el sistema</p>
+                </div>
+                <div>
+                    <a href="admin-usuarios.html" class="admin-btn-secondary">← Volver a Usuarios</a>
+                    <a href="index.html" class="btn-principal">🏠 Ir al Sitio</a>
+                </div>
+            </div>
+            
+            <div class="admin-form">
+                <form id="userForm">
+                    <div class="form-group">
+                        <label for="nombre">Nombre Completo *</label>
+                        <input type="text" id="nombre" name="nombre" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Contraseña *</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirm-password">Confirmar Contraseña *</label>
+                        <input type="password" id="confirm-password" name="confirm-password" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="direccion">Dirección</label>
+                        <input type="text" id="direccion" name="direccion">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                        <input type="date" id="fechaNacimiento" name="fechaNacimiento">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="tipoUsuario">Tipo de Usuario *</label>
+                        <select id="tipoUsuario" name="tipoUsuario" required>
+                            <option value="">Seleccionar tipo</option>
+                            <option value="cliente">Cliente</option>
+                            <option value="admin">Administrador</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="codigoDescuento">Código de Descuento</label>
+                        <input type="text" id="codigoDescuento" name="codigoDescuento" placeholder="Ej: FELICES50">
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button type="submit" class="admin-btn">Crear Usuario</button>
+                        <a href="admin-usuarios.html" class="admin-btn-secondary">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+    
+    <script src="js/admin-nuevo-usuario.js"></script>
+</body>
+</html>
