@@ -27,7 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Lógica para cerrar sesión
   document.getElementById("logoutLink")?.addEventListener("click", () => {
-    localStorage.clear(); // Limpiar todos los datos almacenados en localStorage
+    // Solo borrar los datos de sesión, mantener el carrito y otros datos
+    localStorage.removeItem("loggedIn"); // Solo borrar la sesión del usuario
     window.location.href = "login.html"; // Redirigir a login después de cerrar sesión
   });
 });

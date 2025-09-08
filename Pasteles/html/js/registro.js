@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Redirigir al login después de 15 segundos
       setTimeout(function () {
         window.location.href = "login.html";
-      }, 15000);
+      }, 5000);
     }
   });
 });

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pastelería Mil Sabores</title>
+    <title>Carrito de Compras | Pastelería Mil Sabores</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Pacifico&display=swap"
       rel="stylesheet"
@@ -18,7 +18,7 @@
           alt="Logo Pastelería"
           class="logo-img"
         />
-        <h2 class="estiloEncabezado">Pasteleria mil sabores</h2>
+        <h2 class="estiloEncabezado">Pastelería Mil Sabores</h2>
       </div>
       <nav>
         <ul class="lista">
@@ -31,68 +31,29 @@
       </nav>
       <nav>
         <ul class="login_register">
-          <li><a href="carrito.html" class="cart">🛒 Carrito (0)</a></li>
-          <li><a href="login.html">Iniciar sesión</a></li>
-          <li><a href="registro.html">Registrar usuario</a></li>
+          <!-- Mostrar "Iniciar sesión" y "Registrar usuario" si el usuario no está logueado -->
+          <li id="loginLink"><a href="login.html">Iniciar sesión</a></li>
+          <li id="registerLink"><a href="registro.html">Registrar usuario</a></li>
+          <!-- Mostrar "Cerrar sesión" y "Carrito" si el usuario está logueado -->
+          <li id="logoutLink" style="display: none;"><a href="javascript:void(0)" id="logoutLink">Cerrar sesión</a></li>
+          <li id="cartLink" style="display: none;"><a href="carrito.html" class="cart">🛒 Carrito (0)</a></li>
         </ul>
       </nav>
+      <!-- Mostrar el nombre del usuario si está logueado -->
+      <div id="userInfo" style="display: none; font-size: 1.2rem; color: #7c3a2d">
+        <p>Bienvenido, <span id="userEmail"></span></p>
+      </div>
     </header>
 
-
     <main>
-      <h1 class="estiloEncabezado" style="margin-bottom:2rem;">Mi carrito de compras</h1>
+      <h1 class="estiloEncabezado" style="margin-bottom: 2rem;">Mi carrito de compras</h1>
       <div class="carrito-grid">
-        <section class="carrito-lista">
-          <div class="carrito-item">
-            <img src="img/Pastel_1.png" alt="Producto 1" class="carrito-img" />
-            <div class="carrito-info">
-              <h2 class="carrito-nombre">Producto #1</h2>
-              <p class="carrito-desc">
-                Pink lorem ipsum dolor sit amet, consectetur adipiscing elit
-              </p>
-            </div>
-            <div class="carrito-precio">$ 8.000</div>
-            <div class="carrito-cantidad">
-              <button class="carrito-btn">-</button>
-              <input type="number" value="1" min="1" class="carrito-input" />
-              <button class="carrito-btn">+</button>
-            </div>
-          </div>
-          <div class="carrito-item">
-            <img src="img/Pastel_2.png" alt="Producto 2" class="carrito-img" />
-            <div class="carrito-info">
-              <h2 class="carrito-nombre">Producto #2</h2>
-              <p class="carrito-desc">
-                Pink lorem ipsum dolor sit amet, consectetur adipiscing elit
-              </p>
-            </div>
-            <div class="carrito-precio">$ 6.000</div>
-            <div class="carrito-cantidad">
-              <button class="carrito-btn">-</button>
-              <input type="number" value="1" min="1" class="carrito-input" />
-              <button class="carrito-btn">+</button>
-            </div>
-          </div>
-          <div class="carrito-item">
-            <img src="img/Pastel_3.png" alt="Producto 3" class="carrito-img" />
-            <div class="carrito-info">
-              <h2 class="carrito-nombre">Producto #3</h2>
-              <p class="carrito-desc">
-                Pink lorem ipsum dolor sit amet, consectetur adipiscing elit
-              </p>
-            </div>
-            <div class="carrito-precio">$ 10.000</div>
-            <div class="carrito-cantidad">
-              <button class="carrito-btn">-</button>
-              <input type="number" value="1" min="1" class="carrito-input" />
-              <button class="carrito-btn">+</button>
-            </div>
-          </div>
+        <section class="carrito-lista" id="cart-items">
+          <!-- Los productos del carrito se cargarán aquí dinámicamente con JS -->
         </section>
         <aside class="carrito-resumen">
-          <div class="carrito-total">
-            <span>TOTAL:</span>
-            <span class="carrito-total-precio">$ 24.000</span>
+          <div class="carrito-total" id="cart-total">
+            <!-- Total del carrito se mostrará aquí dinámicamente con JS -->
           </div>
           <form class="carrito-cupon">
             <input
@@ -102,12 +63,12 @@
             />
             <button type="button" class="carrito-cupon-btn">APLICAR</button>
           </form>
-          <button class="carrito-pagar-btn">PAGAR</button>
+          <button class="carrito-pagar-btn" id="checkout-btn">PAGAR</button>
         </aside>
       </div>
     </main>
 
-        <footer>
+    <footer>
       <div class="footer-content">
         <div>
           <div class="footer-logo">
@@ -116,7 +77,7 @@
               alt="Logo"
               style="height: 40px; vertical-align: middle; margin-right: 8px"
             />
-            Pasteleria Mil Sabores
+            Pastelería Mil Sabores
           </div>
           <div style="font-size: 0.95rem; color: #7c3a2d">
             Celebrando nuestros 50 años
@@ -141,8 +102,13 @@
         </div>
       </div>
       <div style="margin-top: 1rem; color: #b48b7d; font-size: 0.9rem">
-        &copy; 2025 Pasteleria Mil Sabores. Todos los derechos reservados.
+        &copy; 2025 Pastelería Mil Sabores. Todos los derechos reservados.
       </div>
     </footer>
+
+    <!-- Vincula el archivo JS para manejar el carrito -->
+    <script src="js/carrito.js"></script>
+    <!-- Vincula el archivo JS para verificar el login -->
+    <script src="js/main.js"></script>
   </body>
 </html>
