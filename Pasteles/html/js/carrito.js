@@ -35,9 +35,9 @@ document.addEventListener("DOMContentLoaded", () => {
             <h2 class="carrito-nombre">${producto.nombre}</h2>
             <p class="carrito-desc">${producto.descripcion}</p>
             <div class="carrito-precio-detalle">
-              <span>Precio unitario: $${producto.precio}</span>
+              <span>Precio unitario: $${formatoChileno(producto.precio)}</span>
               <span>Cantidad: ${producto.cantidad}</span>
-              <span class="subtotal">Subtotal: $${subtotal}</span>
+              <span class="subtotal">Subtotal: $${formatoChileno(subtotal)}</span>
             </div>
           </div>
           <div class="carrito-cantidad">
@@ -56,6 +56,11 @@ document.addEventListener("DOMContentLoaded", () => {
     renderResumenDetallado();
   }
 
+  // Función para formatear números al estilo chileno
+  function formatoChileno(numero) {
+    return numero.toLocaleString('es-CL');
+  }
+
   // Función para renderizar el resumen detallado del carrito
   function renderResumenDetallado() {
     const subtotal = carrito.reduce((sum, producto) => sum + producto.precio * producto.cantidad, 0);
@@ -68,21 +73,21 @@ document.addEventListener("DOMContentLoaded", () => {
         <h3>Resumen de tu compra</h3>
         <div class="resumen-linea">
           <span>Subtotal (${carrito.length} ${carrito.length === 1 ? 'producto' : 'productos'}):</span>
-          <span>$${subtotal.toFixed(2)}</span>
+          <span>$${formatoChileno(Math.round(subtotal))}</span>
         </div>
         <div class="resumen-linea">
           <span>IVA (19%):</span>
-          <span>$${impuesto.toFixed(2)}</span>
+          <span>$${formatoChileno(Math.round(impuesto))}</span>
         </div>
         ${descuento > 0 ? `
         <div class="resumen-linea descuento">
           <span>Descuento aplicado:</span>
-          <span>-$${descuento.toFixed(2)}</span>
+          <span>-$${formatoChileno(Math.round(descuento))}</span>
         </div>
         ` : ''}
         <div class="resumen-linea total">
           <span><strong>Total a pagar:</strong></span>
-          <span><strong>$${total.toFixed(2)}</strong></span>
+          <span><strong>$${formatoChileno(Math.round(total))}</strong></span>
         </div>
       </div>
     `;

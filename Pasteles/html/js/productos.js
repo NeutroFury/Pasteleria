@@ -1,4 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Función para formatear números al estilo chileno
+  function formatoChileno(numero) {
+    return numero.toLocaleString('es-CL');
+  }
+
   // Lista de productos
   const productos = [
     { codigo: "TC001", categoria: "Tortas Cuadradas", nombre: "Torta Cuadrada de Chocolate", precio: 45000, descripcion: "Deliciosa torta de chocolate con capas de ganache y un toque de avellanas. Personalizable con mensajes especiales", img: "img/Pastel_1.png" },
@@ -32,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <img src="${producto.img}" alt="${producto.nombre}" class="producto-img" />
         <h3 class="producto-nombre">${producto.nombre}</h3>
         <p class="producto-desc">${producto.descripcion}</p>
-        <span class="producto-precio">$${producto.precio}</span>
+        <span class="producto-precio">$${formatoChileno(producto.precio)}</span>
         <button class="producto-btn">Añadir al carrito</button>
       `;
 
