@@ -33,8 +33,6 @@
       <nav>
         <ul class="login_register">
           <li><a href="carrito.html" class="cart">🛒 Carrito (0)</a></li>
-          <li><a href="login.html">Iniciar sesión</a></li>
-          <li><a href="registro.html">Registrar usuario</a></li>
         </ul>
       </nav>
     </header>
@@ -46,7 +44,7 @@
       </h1>
 
       <!-- Aquí JS insertará los productos -->
-      <div id="gridProductos"></div>
+      <div id="gridProductos" class="productos-grid"></div>
     </main>
 
     <!-- Footer -->
@@ -77,11 +75,7 @@
           <form>
             <label for="newsletter-email">Suscríbete a nuestro newsletter:</label>
             <div class="newsletter-input-group">
-              <input
-                type="email"
-                id="newsletter-email"
-                placeholder="Ingresa tu email"
-              />
+              <input type="email" id="newsletter-email" placeholder="Ingresa tu email" />
               <button type="submit">Suscribirse</button>
             </div>
           </form>
