@@ -34,6 +34,9 @@
           <li><a href="carrito.html" class="cart">🛒 Carrito (0)</a></li>
         </ul>
       </nav>
+      <div id="userInfo">
+        <p><span id="userEmail"></span></p>
+      </div>
     </header>
     <main>
       <div class="producto-detalle-grid">
@@ -42,9 +45,22 @@
             <img id="imgPrincipal" src="img/Pastel_2.png" alt="Pastel 2" />
           </div>
           <div class="producto-imagen-miniaturas">
-            <img src="img/Pastel_2.png" alt="Miniatura 1" class="miniatura-activa" onmouseover="cambiarImagen('img/Pastel_2.png')" />
-            <img src="img/Pastel_2_p1.png" alt="Miniatura 2" onmouseover="cambiarImagen('img/Pastel_2_p1.png')"/>
-            <img src="img/Pastel_2_p2.png" alt="Miniatura 3" onmouseover="cambiarImagen('img/Pastel_2_p2.png')"/>
+            <img
+              src="img/Pastel_2.png"
+              alt="Miniatura 1"
+              class="miniatura-activa"
+              onmouseover="cambiarImagen('img/Pastel_2.png')"
+            />
+            <img
+              src="img/Pastel_2_p1.png"
+              alt="Miniatura 2"
+              onmouseover="cambiarImagen('img/Pastel_2_p1.png')"
+            />
+            <img
+              src="img/Pastel_2_p2.png"
+              alt="Miniatura 3"
+              onmouseover="cambiarImagen('img/Pastel_2_p2.png')"
+            />
           </div>
         </div>
         <div class="producto-info">
@@ -53,23 +69,43 @@
             <span class="producto-precio">$50.000</span>
           </div>
           <p class="producto-descripcion">
-            Una mezcla de frutas frescas y crema chantilly sobre un suave bizcocho de vainilla, ideal para celebraciones.
+            Una mezcla de frutas frescas y crema chantilly sobre un suave
+            bizcocho de vainilla, ideal para celebraciones.
+          </p>
+
           <form class="producto-form">
             <label for="cantidad" class="form-label">Cantidad</label>
-            <select id="cantidad" class="form-control" style="width: 60px;">
+            <select id="cantidad" class="form-control" style="width: 60px">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
             </select>
-            <button type="submit" class="btn-principal" style="margin-top: 1rem; width: 100%;">Añadir al carrito</button>
+            <button
+              type="submit"
+              class="btn-principal"
+              style="margin-top: 1rem; width: 100%"
+            >
+              Añadir al carrito
+            </button>
           </form>
         </div>
       </div>
-      <hr style="margin: 2rem 0;">
+      <hr style="margin: 2rem 0" />
       <section class="productos-relacionados">
-        <h2 style="font-family: 'Pacifico', cursive; color: #7c3a2d; font-size: 1.3rem; margin-bottom: 1rem;">Productos relacionados</h2>
+        <h2
+          style="
+            font-family: 'Pacifico', cursive;
+            color: #7c3a2d;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+          "
+        >
+          Productos relacionados
+        </h2>
         <div class="productos-relacionados-grid">
-          <a href="pastel1.html"><img src="img/Pastel_1.png" alt="Pastel 1" /></a>
+          <a href="pastel1.html"
+            ><img src="img/Pastel_1.png" alt="Pastel 1"
+          /></a>
           <img src="img/pastel_3.png" alt="Pastel 3" />
           <img src="img/pastel_4.png" alt="Pastel 4" />
           <img src="img/pastel_5.png" alt="Pastel 5" />
@@ -102,9 +138,15 @@
         </div>
         <div class="newsletter">
           <form>
-            <label for="newsletter-email">Suscríbete a nuestro newsletter:</label>
+            <label for="newsletter-email"
+              >Suscríbete a nuestro newsletter:</label
+            >
             <div class="newsletter-input-group">
-              <input type="email" id="newsletter-email" placeholder="Ingresa tu email" />
+              <input
+                type="email"
+                id="newsletter-email"
+                placeholder="Ingresa tu email"
+              />
               <button type="submit">Suscribirse</button>
             </div>
           </form>
@@ -114,7 +156,7 @@
         &copy; 2025 Pasteleria Mil Sabores. Todos los derechos reservados.
       </div>
     </footer>
-    
+
     <script src="js/detalle-producto.js"></script>
-</body>
+  </body>
 </html>

@@ -20,8 +20,31 @@ document.addEventListener("DOMContentLoaded", () => {
         const liRegistro = findLiByHref('registro.html');
         const liCarrito = findLiByHref('carrito.html');
 
-        if (liLogin) liLogin.id = 'loginLink';
-        if (liRegistro) liRegistro.id = 'registerLink';
+        // Crear enlaces faltantes si no existen
+        if (!liLogin) {
+          const li = document.createElement('li');
+          li.id = 'loginLink';
+          const a = document.createElement('a');
+          a.href = 'login.html';
+          a.textContent = 'Iniciar sesión';
+          li.appendChild(a);
+          loginUl.appendChild(li);
+        } else {
+          liLogin.id = 'loginLink';
+        }
+
+        if (!liRegistro) {
+          const li = document.createElement('li');
+          li.id = 'registerLink';
+          const a = document.createElement('a');
+          a.href = 'registro.html';
+          a.textContent = 'Registrar usuario';
+          li.appendChild(a);
+          loginUl.appendChild(li);
+        } else {
+          liRegistro.id = 'registerLink';
+        }
+
         if (liCarrito) liCarrito.id = 'cartLink';
 
         // Crear logout si no existe
@@ -54,12 +77,38 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
 
-      // Cargar main.js si no está cargado
-      const alreadyLoaded = Array.from(document.scripts).some(s => (s.src || '').includes('js/main.js'));
-      if (!alreadyLoaded) {
-        const s = document.createElement('script');
-        s.src = 'js/main.js';
-        document.body.appendChild(s);
+      // Aplicar lógica de sesión directamente aquí para evitar problemas de timing
+      const loggedIn = JSON.parse(localStorage.getItem("loggedIn"));
+      const loginLink = document.getElementById("loginLink");
+      const registerLink = document.getElementById("registerLink");
+      const logoutLink = document.getElementById("logoutLink");
+      const cartLink = document.getElementById("cartLink");
+      const userInfo = document.getElementById("userInfo");
+      const userName = document.getElementById("userEmail");
+
+      if (loggedIn) {
+        // Si el usuario está logueado, ocultamos los enlaces "Iniciar sesión" y "Registrar usuario"
+        if (loginLink) loginLink.style.display = "none";
+        if (registerLink) registerLink.style.display = "none";
+        if (logoutLink) logoutLink.style.display = "block"; // Mostrar "Cerrar sesión"
+        if (cartLink) cartLink.style.display = "block"; // Mostrar "Carrito"
+        if (userInfo) userInfo.style.display = "block"; // Mostrar la información del usuario
+        if (userName) userName.textContent = loggedIn.nombre; // Mostrar el nombre del usuario
+      } else {
+        // Si no está logueado, mostramos los enlaces "Iniciar sesión" y "Registrar usuario"
+        if (loginLink) loginLink.style.display = "block";
+        if (registerLink) registerLink.style.display = "block";
+        if (logoutLink) logoutLink.style.display = "none";
+        if (cartLink) cartLink.style.display = "none";
+        if (userInfo) userInfo.style.display = "none"; // Ocultar la información del usuario
+      }
+
+      // Lógica para cerrar sesión
+      if (logoutLink) {
+        logoutLink.addEventListener("click", () => {
+          localStorage.removeItem("loggedIn"); // Solo borrar la sesión del usuario
+          window.location.href = "login.html"; // Redirigir a login después de cerrar sesión
+        });
       }
     } catch (e) {
       console.error('No se pudo preparar el header:', e);
