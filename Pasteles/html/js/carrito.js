@@ -5,8 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const cartItemsContainer = document.getElementById("cart-items");
   const cartTotalContainer = document.getElementById("cart-total");
   const checkoutBtn = document.getElementById("checkout-btn");
-  const couponBtn = document.querySelector(".carrito-cupon-btn");
-  const couponInput = document.querySelector(".carrito-cupon-input");
 
   // Función para renderizar los productos en el carrito
   function renderCarrito() {
@@ -64,9 +62,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // Función para renderizar el resumen detallado del carrito
   function renderResumenDetallado() {
     const subtotal = carrito.reduce((sum, producto) => sum + producto.precio * producto.cantidad, 0);
-    const impuesto = subtotal * 0.19; // IVA 19%
-    const descuento = calcularDescuento();
-    const total = subtotal + impuesto - descuento;
+    const { amount: descuento, label: etiquetaDescuento } = calcularDescuento();
+    const subtotalConDescuento = subtotal - descuento;
+    const impuesto = subtotalConDescuento * 0.19; // IVA 19% sobre el subtotal con descuento
+    const total = subtotalConDescuento + impuesto;
+    const hayTortaGratis = carrito.some(p => p.codigo === 'BIRTHDAY_CAKE_FREE');
 
     cartTotalContainer.innerHTML = `
       <div class="resumen-detallado">
@@ -75,16 +75,22 @@ document.addEventListener("DOMContentLoaded", () => {
           <span>Subtotal (${carrito.length} ${carrito.length === 1 ? 'producto' : 'productos'}):</span>
           <span>$${formatoChileno(Math.round(subtotal))}</span>
         </div>
+        ${descuento > 0 ? `
+        <div class="resumen-linea descuento">
+          <span>Descuento aplicado — ${etiquetaDescuento}:</span>
+          <span>-$${formatoChileno(Math.round(descuento))}</span>
+        </div>
+        ` : ''}
+        ${hayTortaGratis ? `
+        <div class="resumen-linea">
+          <span>Beneficio aplicado:</span>
+          <span>Torta de cumpleaños gratis (Duoc)</span>
+        </div>
+        ` : ''}
         <div class="resumen-linea">
           <span>IVA (19%):</span>
           <span>$${formatoChileno(Math.round(impuesto))}</span>
         </div>
-        ${descuento > 0 ? `
-        <div class="resumen-linea descuento">
-          <span>Descuento aplicado:</span>
-          <span>-$${formatoChileno(Math.round(descuento))}</span>
-        </div>
-        ` : ''}
         <div class="resumen-linea total">
           <span><strong>Total a pagar:</strong></span>
           <span><strong>$${formatoChileno(Math.round(total))}</strong></span>
@@ -95,15 +101,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Función para calcular descuentos
   function calcularDescuento() {
-    const coupon = couponInput ? couponInput.value.trim().toUpperCase() : '';
     const subtotal = carrito.reduce((sum, producto) => sum + producto.precio * producto.cantidad, 0);
-    
-    if (coupon === "DESCUENTO10") {
-      return subtotal * 0.1; // 10% de descuento
-    } else if (coupon === "BIENVENIDO") {
-      return 5000; // Descuento fijo de $5.000
-    }
-    return 0;
+
+    // Descuento de por vida para usuarios registrados con FELICES50
+    const session = JSON.parse(localStorage.getItem("loggedIn")) || null;
+    const tieneDescuentoDePorVida = session && session.hasLifetime10 === true;
+    const descuentoDePorVida = tieneDescuentoDePorVida ? subtotal * 0.1 : 0; // 10% permanente
+    const etiquetaDePorVida = tieneDescuentoDePorVida ? '10% de por vida (FELICES50)' : '';
+
+    return { amount: descuentoDePorVida, label: etiquetaDePorVida || '—' };
   }
 
   // Actualizar cantidad
@@ -120,19 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderCarrito();
   }
 
-  // Función para aplicar cupones de descuento
-  function applyDiscount() {
-    const coupon = couponInput.value.trim().toUpperCase();
-    if (coupon === "DESCUENTO10" || coupon === "BIENVENIDO") {
-      renderResumenDetallado(); // Re-renderizar con el descuento aplicado
-      couponInput.style.borderColor = "#28a745";
-      couponInput.style.backgroundColor = "#d4edda";
-    } else if (coupon !== "") {
-      couponInput.style.borderColor = "#dc3545";
-      couponInput.style.backgroundColor = "#f8d7da";
-      alert("Cupón no válido. Prueba con: DESCUENTO10 o BIENVENIDO");
-    }
-  }
+  // (Cupón eliminado; el descuento se aplica automáticamente si corresponde)
 
   // Función para manejar los eventos de cantidad y eliminar productos
   function handleCartActions(e) {
@@ -155,8 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Aplicar descuento
-  couponBtn.addEventListener("click", applyDiscount);
+  // (Sin botón de cupón)
 
   // Escuchar cambios en las cantidades
   cartItemsContainer.addEventListener("input", (e) => {
@@ -174,4 +167,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Renderizar el carrito al cargar la página
   renderCarrito();
+  
+  // Agregar automáticamente torta gratis si corresponde (una vez por día)
+  try {
+    const session = JSON.parse(localStorage.getItem("loggedIn")) || null;
+    const todayKey = new Date().toISOString().slice(0,10); // YYYY-MM-DD
+    const grantKey = `freeCakeGranted_${todayKey}`;
+    const yaAgregadaHoy = localStorage.getItem(grantKey) === '1';
+    if (session && session.freeCakeEligibleToday && !yaAgregadaHoy) {
+      // Verificar si ya existe un item gratis hoy en el carrito
+      let carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
+      const existeGratis = carritoActual.some(p => p.codigo === 'BIRTHDAY_CAKE_FREE');
+      if (!existeGratis) {
+        const itemGratis = {
+          codigo: 'BIRTHDAY_CAKE_FREE',
+          categoria: 'Promociones',
+          nombre: 'Torta de cumpleaños (gratis)',
+          precio: 0,
+          descripcion: 'Beneficio por cumpleaños para estudiantes Duoc',
+          img: 'img/Pastel_14.png',
+          cantidad: 1
+        };
+        carritoActual.push(itemGratis);
+        localStorage.setItem("carrito", JSON.stringify(carritoActual));
+        localStorage.setItem(grantKey, '1');
+        carrito = carritoActual;
+        renderCarrito();
+      }
+    }
+  } catch (e) {
+    console.error('No se pudo evaluar beneficio de torta gratis:', e);
+  }
 });

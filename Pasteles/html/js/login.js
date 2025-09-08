@@ -17,8 +17,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const usuario = usuarios.find(u => u.email === email && u.password === password);
 
     if (usuario) {
-      // Si el usuario existe, lo guardamos como "loggeado" en localStorage
-      localStorage.setItem("loggedIn", JSON.stringify({ nombre: usuario.nombre, email: usuario.email }));
+      // Calcular si hoy es su cumpleaños y es estudiante Duoc
+      const hoy = new Date();
+      let freeCakeEligibleToday = false;
+      const isDuocStudent = !!usuario.email && usuario.email.endsWith("@duocuc.cl");
+      if (isDuocStudent && usuario.fechaNacimiento) {
+        const [anioN, mesN, diaN] = usuario.fechaNacimiento.split("-");
+        if (hoy.getDate() === parseInt(diaN, 10) && (hoy.getMonth() + 1) === parseInt(mesN, 10)) {
+          freeCakeEligibleToday = true;
+        }
+      }
+
+      // Guardar sesion con todos los flags
+      localStorage.setItem("loggedIn", JSON.stringify({
+        nombre: usuario.nombre,
+        email: usuario.email,
+        hasLifetime10: !!usuario.hasLifetime10,
+        isDuocStudent,
+        fechaNacimiento: usuario.fechaNacimiento || null,
+        freeCakeEligibleToday
+      }));
       window.location.href = "index.html"; // Redirigir al home
     } else {
       // Si no coincide el usuario, mostrar error

@@ -26,6 +26,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const gridProductos = document.getElementById("gridProductos");
 
+  // Resolver href de detalle a partir de la imagen
+  function obtenerHrefDetalle(producto) {
+    const ruta = producto.img || '';
+    const nombreArchivo = ruta.split('/').pop().toLowerCase();
+    if (nombreArchivo.startsWith('pastel_')) {
+      const match = nombreArchivo.match(/^pastel_(\d+)\.png$/);
+      if (match) {
+        return `pastel${match[1]}.html`;
+      }
+    }
+    if (nombreArchivo === 'cheesecake.png') {
+      return 'pastelcheesecake.html';
+    }
+    // Fallback
+    return 'productos.html';
+  }
+
   // Función para renderizar los productos
   function renderProductos() {
     productos.forEach((producto) => {
@@ -33,8 +50,12 @@ document.addEventListener("DOMContentLoaded", () => {
       productDiv.classList.add("producto");
       productDiv.setAttribute("data-id", producto.codigo);
 
+      const hrefDetalle = obtenerHrefDetalle(producto);
+
       productDiv.innerHTML = `
-        <img src="${producto.img}" alt="${producto.nombre}" class="producto-img" />
+        <a href="${hrefDetalle}" class="producto-link">
+          <img src="${producto.img}" alt="${producto.nombre}" class="producto-img" />
+        </a>
         <h3 class="producto-nombre">${producto.nombre}</h3>
         <p class="producto-desc">${producto.descripcion}</p>
         <span class="producto-precio">$${formatoChileno(producto.precio)}</span>

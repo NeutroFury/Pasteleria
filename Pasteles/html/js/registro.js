@@ -91,14 +91,24 @@ document.addEventListener("DOMContentLoaded", () => {
       mensajesDiv.innerHTML = `${mensajeCorreo}${mensajeDescuento}<div class="mi-alerta-exito ">✅ Registro exitoso</div>`;
 
       // Agregar el nuevo usuario a la lista de usuarios y guardarlo en localStorage
-      usuarios.push({ nombre, email, password: clave1 });  // Ahora se guarda también el nombre
+      const hasLifetime10 = codigo.toUpperCase() === "FELICES50";
+      const isDuocStudent = email.endsWith("@duocuc.cl");
+      usuarios.push({ nombre, email, password: clave1, hasLifetime10, isDuocStudent, fechaNacimiento });  // Guardar más atributos del usuario
       localStorage.setItem("usuarios", JSON.stringify(usuarios)); // Guardar en localStorage
 
       // Mostrar los usuarios registrados en la consola
       console.log("Usuarios registrados: ", usuarios);
 
       // Guardar el estado de sesión con el nombre en localStorage
-      localStorage.setItem("loggedIn", JSON.stringify({ nombre, email }));
+      const hoy = new Date();
+      let freeCakeEligibleToday = false;
+      if (isDuocStudent && fechaNacimiento) {
+        const [anioN, mesN, diaN] = fechaNacimiento.split("-");
+        if (hoy.getDate() === parseInt(diaN, 10) && (hoy.getMonth() + 1) === parseInt(mesN, 10)) {
+          freeCakeEligibleToday = true;
+        }
+      }
+      localStorage.setItem("loggedIn", JSON.stringify({ nombre, email, hasLifetime10, isDuocStudent, fechaNacimiento, freeCakeEligibleToday }));
 
       // Redirigir al login después de 15 segundos
       setTimeout(function () {
