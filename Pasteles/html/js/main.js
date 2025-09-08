@@ -1,4 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Asegurar que siempre exista el usuario admin con la contraseña correcta
+  let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+  const adminIndex = usuarios.findIndex(user => user.email === "admin@admin.com");
+  
+  if (adminIndex > -1) {
+    // Actualizar el admin existente - manejar diferentes formatos
+    usuarios[adminIndex].clave = "asdasd";
+    usuarios[adminIndex].password = "asdasd";
+    usuarios[adminIndex].nombre = "admin";
+    usuarios[adminIndex].hasLifetime10 = false;
+    usuarios[adminIndex].isDuocStudent = false;
+    usuarios[adminIndex].fechaNacimiento = null;
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+  } else {
+    // Crear admin si no existe
+    usuarios.unshift({
+      nombre: "admin",
+      email: "admin@admin.com",
+      clave: "asdasd",
+      password: "asdasd",
+      hasLifetime10: false,
+      isDuocStudent: false,
+      fechaNacimiento: null
+    });
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+  }
+
   // Verificar si hay un usuario logueado
   const loggedIn = JSON.parse(localStorage.getItem("loggedIn"));
   const loginLink = document.getElementById("loginLink");

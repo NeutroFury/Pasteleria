@@ -8,48 +8,28 @@ document.addEventListener("DOMContentLoaded", () => {
   function loadUsers() {
     let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
     
-    // Si no hay usuarios, crear algunos de ejemplo
-    if (usuarios.length === 0) {
-      usuarios = [
-        {
-          nombre: "María González",
-          email: "maria.gonzalez@email.com",
-          hasLifetime10: true,
-          isDuocStudent: false,
-          fechaNacimiento: "1990-05-15"
-        },
-        {
-          nombre: "Carlos Rodríguez",
-          email: "carlos.rodriguez@duocuc.cl",
-          hasLifetime10: false,
-          isDuocStudent: true,
-          fechaNacimiento: "1995-12-03"
-        },
-        {
-          nombre: "Ana Martínez",
-          email: "ana.martinez@email.com",
-          hasLifetime10: true,
-          isDuocStudent: false,
-          fechaNacimiento: "1988-08-22"
-        },
-        {
-          nombre: "Pedro Silva",
-          email: "pedro.silva@duocuc.cl",
-          hasLifetime10: false,
-          isDuocStudent: true,
-          fechaNacimiento: "1992-03-10"
-        },
-        {
-          nombre: "Laura Fernández",
-          email: "laura.fernandez@email.com",
-          hasLifetime10: false,
-          isDuocStudent: false,
-          fechaNacimiento: "1991-11-28"
-        }
-      ];
+    // Asegurar que siempre exista el usuario admin con la contraseña correcta
+    const adminExists = usuarios.some(user => user.email === "admin@admin.com");
+    if (!adminExists) {
+      usuarios.unshift({
+        nombre: "admin",
+        email: "admin@admin.com",
+        clave: "asdasd",
+        hasLifetime10: false,
+        isDuocStudent: false,
+        fechaNacimiento: null
+      });
       
-      // Guardar usuarios de ejemplo
+      // Guardar usuarios con admin incluido
       localStorage.setItem("usuarios", JSON.stringify(usuarios));
+    } else {
+      // Si el admin existe pero no tiene la contraseña correcta, actualizarla
+      const adminIndex = usuarios.findIndex(user => user.email === "admin@admin.com");
+      if (adminIndex > -1) {
+        usuarios[adminIndex].clave = "asdasd";
+        usuarios[adminIndex].password = "asdasd"; // También actualizar el campo password por compatibilidad
+        localStorage.setItem("usuarios", JSON.stringify(usuarios));
+      }
     }
     
     // Convertir usuarios a formato de tabla con IDs y fechas simuladas
@@ -197,63 +177,73 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   
   // Función para eliminar usuario
-  window.deleteUser = function(userId) {
-    const user = allUsers.find(u => u.id === userId);
-    if (user) {
-      if (confirm(`¿Estás seguro de que quieres eliminar al usuario "${user.nombre}"?`)) {
-        // Eliminar usuario del localStorage
-        const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-        const userIndex = usuarios.findIndex(u => u.email === user.email);
-        
-        if (userIndex !== -1) {
-          usuarios.splice(userIndex, 1);
-          localStorage.setItem("usuarios", JSON.stringify(usuarios));
-          
-          // Recargar la lista
-          loadUsers();
-          alert('Usuario eliminado exitosamente');
-        }
-      }
-    }
-  };
   
   // Función para filtrar usuarios
   function setupFilters() {
-    const statusFilter = document.getElementById('status-filter');
-    const searchInput = document.querySelector('input[placeholder="Buscar usuario..."]');
+    const statusFilter = document.getElementById('statusFilter');
+    const typeFilter = document.getElementById('typeFilter');
+    const searchInput = document.getElementById('searchInput');
     
     if (statusFilter) {
       statusFilter.addEventListener('change', () => {
-        const status = statusFilter.value;
-        
-        if (status === 'all') {
-          filteredUsers = [...allUsers];
-        } else if (status === 'active') {
-          filteredUsers = allUsers.filter(user => user.estado === 'Activo');
-        } else if (status === 'inactive') {
-          filteredUsers = allUsers.filter(user => user.estado === 'Inactivo');
-        }
-        
-        currentPage = 1;
-        renderUsers();
-        renderPagination();
+        applyFilters();
+      });
+    }
+    
+    if (typeFilter) {
+      typeFilter.addEventListener('change', () => {
+        applyFilters();
       });
     }
     
     if (searchInput) {
-      searchInput.addEventListener('input', (e) => {
-        const searchTerm = e.target.value.toLowerCase();
-        
-        filteredUsers = allUsers.filter(user => 
-          user.nombre.toLowerCase().includes(searchTerm) ||
-          user.email.toLowerCase().includes(searchTerm)
-        );
-        
-        currentPage = 1;
-        renderUsers();
-        renderPagination();
+      searchInput.addEventListener('input', () => {
+        applyFilters();
       });
     }
+  }
+  
+  // Función para aplicar todos los filtros
+  function applyFilters() {
+    const statusFilter = document.getElementById('statusFilter');
+    const typeFilter = document.getElementById('typeFilter');
+    const searchInput = document.getElementById('searchInput');
+    
+    let filtered = [...allUsers];
+    
+    // Filtro por estado
+    if (statusFilter && statusFilter.value) {
+      const status = statusFilter.value;
+      if (status === 'activo') {
+        filtered = filtered.filter(user => user.estado === 'Activo');
+      } else if (status === 'inactivo') {
+        filtered = filtered.filter(user => user.estado === 'Inactivo');
+      }
+    }
+    
+    // Filtro por tipo
+    if (typeFilter && typeFilter.value) {
+      const type = typeFilter.value;
+      if (type === 'cliente') {
+        filtered = filtered.filter(user => user.email !== 'admin@test.com');
+      } else if (type === 'admin') {
+        filtered = filtered.filter(user => user.email === 'admin@test.com');
+      }
+    }
+    
+    // Filtro por búsqueda
+    if (searchInput && searchInput.value.trim()) {
+      const searchTerm = searchInput.value.toLowerCase().trim();
+      filtered = filtered.filter(user => 
+        user.nombre.toLowerCase().includes(searchTerm) ||
+        user.email.toLowerCase().includes(searchTerm)
+      );
+    }
+    
+    filteredUsers = filtered;
+    currentPage = 1;
+    renderUsers();
+    renderPagination();
   }
   
   // Función para configurar navegación
@@ -295,8 +285,33 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   
   window.deleteUser = function(id) {
-    if (confirm(`¿Estás seguro de que quieres eliminar al usuario ${id}?`)) {
-      alert(`Usuario ${id} eliminado`);
+    const user = allUsers.find(u => u.id === id);
+    if (!user) {
+      alert('Usuario no encontrado');
+      return;
+    }
+    
+    // No permitir eliminar al usuario admin
+    if (user.email === "admin@admin.com") {
+      alert('No se puede eliminar al usuario administrador');
+      return;
+    }
+    
+    if (confirm(`¿Estás seguro de que quieres eliminar al usuario "${user.nombre}" (${user.email})?`)) {
+      // Eliminar usuario del array
+      const userIndex = allUsers.findIndex(u => u.id === id);
+      if (userIndex > -1) {
+        allUsers.splice(userIndex, 1);
+        
+        // Guardar en localStorage
+        localStorage.setItem("usuarios", JSON.stringify(allUsers));
+        
+        // Recargar la tabla
+        renderUsers();
+        renderPagination();
+        
+        alert(`Usuario "${user.nombre}" eliminado exitosamente`);
+      }
     }
   };
 

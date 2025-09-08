@@ -1,4 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Asegurar que el usuario admin tenga la contraseña correcta
+  let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+  const adminIndex = usuarios.findIndex(user => user.email === "admin@admin.com");
+  
+  if (adminIndex > -1) {
+    // Actualizar el admin existente - manejar diferentes formatos
+    usuarios[adminIndex].clave = "asdasd";
+    usuarios[adminIndex].password = "asdasd";
+    usuarios[adminIndex].nombre = "admin";
+    usuarios[adminIndex].hasLifetime10 = false;
+    usuarios[adminIndex].isDuocStudent = false;
+    usuarios[adminIndex].fechaNacimiento = null;
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+  } else {
+    // Crear admin si no existe
+    usuarios.unshift({
+      nombre: "admin",
+      email: "admin@admin.com",
+      clave: "asdasd",
+      password: "asdasd",
+      hasLifetime10: false,
+      isDuocStudent: false,
+      fechaNacimiento: null
+    });
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+  }
+
   const formLogin = document.getElementById("formLogin");
   const emailInput = document.getElementById("login-email");
   const passwordInput = document.getElementById("login-clave");
@@ -14,7 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
     // Buscar al usuario con el correo y contraseña ingresados
-    const usuario = usuarios.find(u => u.email === email && u.password === password);
+    // Compatible con usuarios antiguos (password) y nuevos (clave)
+    const usuario = usuarios.find(u => u.email === email && (u.clave === password || u.password === password));
 
     if (usuario) {
       // Calcular si hoy es su cumpleaños y es estudiante Duoc

@@ -110,36 +110,63 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // Función para configurar filtros
   function setupFilters() {
-    const categoryFilter = document.getElementById('category-filter');
-    const searchInput = document.getElementById('search-input');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const statusFilter = document.getElementById('statusFilter');
+    const searchInput = document.getElementById('searchInput');
     
     if (categoryFilter) {
       categoryFilter.addEventListener('change', () => {
-        const category = categoryFilter.value;
-        
-        if (category === 'all') {
-          filteredProducts = [...allProducts];
-        } else {
-          filteredProducts = allProducts.filter(producto => producto.categoria === category);
-        }
-        
-        renderProducts();
+        applyFilters();
+      });
+    }
+    
+    if (statusFilter) {
+      statusFilter.addEventListener('change', () => {
+        applyFilters();
       });
     }
     
     if (searchInput) {
-      searchInput.addEventListener('input', (e) => {
-        const searchTerm = e.target.value.toLowerCase();
-        
-        filteredProducts = allProducts.filter(producto => 
-          producto.nombre.toLowerCase().includes(searchTerm) ||
-          producto.descripcion.toLowerCase().includes(searchTerm) ||
-          producto.categoria.toLowerCase().includes(searchTerm)
-        );
-        
-        renderProducts();
+      searchInput.addEventListener('input', () => {
+        applyFilters();
       });
     }
+  }
+  
+  // Función para aplicar todos los filtros
+  function applyFilters() {
+    const categoryFilter = document.getElementById('categoryFilter');
+    const statusFilter = document.getElementById('statusFilter');
+    const searchInput = document.getElementById('searchInput');
+    
+    let filtered = [...allProducts];
+    
+    // Filtro por categoría
+    if (categoryFilter && categoryFilter.value) {
+      const category = categoryFilter.value;
+      filtered = filtered.filter(producto => producto.categoria === category);
+    }
+    
+    // Filtro por estado
+    if (statusFilter && statusFilter.value) {
+      const status = statusFilter.value;
+      filtered = filtered.filter(producto => producto.estado === status);
+    }
+    
+    // Filtro por búsqueda
+    if (searchInput && searchInput.value.trim()) {
+      const searchTerm = searchInput.value.toLowerCase().trim();
+      filtered = filtered.filter(producto => 
+        producto.nombre.toLowerCase().includes(searchTerm) ||
+        producto.descripcion.toLowerCase().includes(searchTerm) ||
+        producto.categoria.toLowerCase().includes(searchTerm)
+      );
+    }
+    
+    filteredProducts = filtered;
+    currentPage = 1;
+    renderProducts();
+    renderPagination();
   }
   
   // Función para verificar autenticación de administrador
@@ -163,6 +190,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   
   // Funciones globales simplificadas
+  window.changePage = function(page) {
+    currentPage = page;
+    renderProducts();
+    renderPagination();
+  };
+  
   window.viewProduct = function(codigo) {
     const producto = allProducts.find(p => p.codigo === codigo);
     if (producto) {
@@ -175,8 +208,27 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   
   window.deleteProduct = function(codigo) {
-    if (confirm(`¿Estás seguro de que quieres eliminar el producto ${codigo}?`)) {
-      alert(`Producto ${codigo} eliminado`);
+    const producto = allProducts.find(p => p.codigo === codigo);
+    if (!producto) {
+      alert('Producto no encontrado');
+      return;
+    }
+    
+    if (confirm(`¿Estás seguro de que quieres eliminar el producto "${producto.nombre}" (${codigo})?`)) {
+      // Eliminar producto del array
+      const productIndex = allProducts.findIndex(p => p.codigo === codigo);
+      if (productIndex > -1) {
+        allProducts.splice(productIndex, 1);
+        
+        // Guardar en localStorage
+        localStorage.setItem("productos", JSON.stringify(allProducts));
+        
+        // Recargar la tabla
+        renderProducts();
+        renderPagination();
+        
+        alert(`Producto "${producto.nombre}" eliminado exitosamente`);
+      }
     }
   };
 

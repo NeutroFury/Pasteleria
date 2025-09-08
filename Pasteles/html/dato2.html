@@ -29,13 +29,18 @@
           <li><a href="blogs.html">Blog</a></li>
         </ul>
       </nav>
-      <nav>
-        <ul class="login_register">
-          <li><a href="carrito.html" class="cart">🛒 Carrito (0)</a></li>
-          <li><a href="login.html">Iniciar sesión</a></li>
-          <li><a href="registro.html">Registrar usuario</a></li>
-        </ul>
-      </nav>
+       <nav>
+         <ul class="login_register">
+           <li id="cartLink" style="display: none;"><a href="carrito.html" class="cart">🛒 Carrito (0)</a></li>
+           <li id="loginLink"><a href="login.html">Iniciar sesión</a></li>
+           <li id="registerLink"><a href="registro.html">Registrar usuario</a></li>
+           <li id="logoutLink" style="display: none;"><a href="#" id="logoutLink">Cerrar sesión</a></li>
+           <li id="adminLink" style="display: none;"><a href="admin.html">Admin</a></li>
+         </ul>
+       </nav>
+       <div id="userInfo" style="display: none;">
+         <span>Hola, <span id="userEmail"></span></span>
+       </div>
     </header>
     <main>
         <h1 class="estiloEncabezado" style="text-align:center; margin-bottom:2rem;">DATO CURIOSO #2</h1>
@@ -94,5 +99,6 @@
         &copy; 2025 Pasteleria Mil Sabores. Todos los derechos reservados.
       </div>
     </footer>
+    <script src="js/main.js"></script>
   </body>
 </html>
