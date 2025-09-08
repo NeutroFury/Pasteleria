@@ -27,13 +27,19 @@ document.addEventListener("DOMContentLoaded", () => {
         const productDiv = document.createElement("div");
         productDiv.classList.add("carrito-item");
 
+        const subtotal = producto.precio * producto.cantidad;
+
         productDiv.innerHTML = `
           <img src="${producto.img}" alt="${producto.nombre}" class="carrito-img" />
           <div class="carrito-info">
             <h2 class="carrito-nombre">${producto.nombre}</h2>
             <p class="carrito-desc">${producto.descripcion}</p>
+            <div class="carrito-precio-detalle">
+              <span>Precio unitario: $${producto.precio}</span>
+              <span>Cantidad: ${producto.cantidad}</span>
+              <span class="subtotal">Subtotal: $${subtotal}</span>
+            </div>
           </div>
-          <div class="carrito-precio">$${producto.precio}</div>
           <div class="carrito-cantidad">
             <button class="carrito-btn decrease" data-index="${index}">-</button>
             <input type="number" value="${producto.cantidad}" min="1" class="carrito-input" data-index="${index}" />
@@ -46,9 +52,53 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    // Calcular el total
-    const total = carrito.reduce((sum, producto) => sum + producto.precio * producto.cantidad, 0);
-    cartTotalContainer.innerHTML = `<p>Total: $${total}</p>`;
+    // Calcular resumen detallado
+    renderResumenDetallado();
+  }
+
+  // Función para renderizar el resumen detallado del carrito
+  function renderResumenDetallado() {
+    const subtotal = carrito.reduce((sum, producto) => sum + producto.precio * producto.cantidad, 0);
+    const impuesto = subtotal * 0.19; // IVA 19%
+    const descuento = calcularDescuento();
+    const total = subtotal + impuesto - descuento;
+
+    cartTotalContainer.innerHTML = `
+      <div class="resumen-detallado">
+        <h3>Resumen de tu compra</h3>
+        <div class="resumen-linea">
+          <span>Subtotal (${carrito.length} ${carrito.length === 1 ? 'producto' : 'productos'}):</span>
+          <span>$${subtotal.toFixed(2)}</span>
+        </div>
+        <div class="resumen-linea">
+          <span>IVA (19%):</span>
+          <span>$${impuesto.toFixed(2)}</span>
+        </div>
+        ${descuento > 0 ? `
+        <div class="resumen-linea descuento">
+          <span>Descuento aplicado:</span>
+          <span>-$${descuento.toFixed(2)}</span>
+        </div>
+        ` : ''}
+        <div class="resumen-linea total">
+          <span><strong>Total a pagar:</strong></span>
+          <span><strong>$${total.toFixed(2)}</strong></span>
+        </div>
+      </div>
+    `;
+  }
+
+  // Función para calcular descuentos
+  function calcularDescuento() {
+    const coupon = couponInput ? couponInput.value.trim().toUpperCase() : '';
+    const subtotal = carrito.reduce((sum, producto) => sum + producto.precio * producto.cantidad, 0);
+    
+    if (coupon === "DESCUENTO10") {
+      return subtotal * 0.1; // 10% de descuento
+    } else if (coupon === "BIENVENIDO") {
+      return 5000; // Descuento fijo de $5.000
+    }
+    return 0;
   }
 
   // Actualizar cantidad
@@ -68,10 +118,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // Función para aplicar cupones de descuento
   function applyDiscount() {
     const coupon = couponInput.value.trim().toUpperCase();
-    if (coupon === "DESCUENTO10") {
-      const total = carrito.reduce((sum, producto) => sum + producto.precio * producto.cantidad, 0);
-      const discountedTotal = total * 0.9; // Aplica el 10% de descuento
-      cartTotalContainer.innerHTML = `<p>Total con descuento: $${discountedTotal.toFixed(2)}</p>`;
+    if (coupon === "DESCUENTO10" || coupon === "BIENVENIDO") {
+      renderResumenDetallado(); // Re-renderizar con el descuento aplicado
+      couponInput.style.borderColor = "#28a745";
+      couponInput.style.backgroundColor = "#d4edda";
+    } else if (coupon !== "") {
+      couponInput.style.borderColor = "#dc3545";
+      couponInput.style.backgroundColor = "#f8d7da";
+      alert("Cupón no válido. Prueba con: DESCUENTO10 o BIENVENIDO");
     }
   }
 
