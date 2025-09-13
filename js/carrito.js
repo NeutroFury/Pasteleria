@@ -4,17 +4,22 @@
 
 // Lista de productos de la pastelería (versión simplificada)
 const productos = [
-  { id: 1, nombre: "Torta Chocolate", precio: 45000, categoria: "Tortas Cuadradas" },
-  { id: 2, nombre: "Torta Frutas", precio: 50000, categoria: "Tortas Cuadradas" },
-  { id: 3, nombre: "Torta Vainilla", precio: 40000, categoria: "Tortas Circulares" },
-  { id: 4, nombre: "Torta Manjar", precio: 42000, categoria: "Tortas Circulares" },
-  { id: 5, nombre: "Mousse Chocolate", precio: 5000, categoria: "Postres Individuales" },
-  { id: 6, nombre: "Tiramisú", precio: 5500, categoria: "Postres Individuales" },
-  { id: 7, nombre: "Cheesecake", precio: 47000, categoria: "Productos Sin Azúcar" },
-  { id: 8, nombre: "Empanada Manzana", precio: 3000, categoria: "Pastelería Tradicional" },
+  { id: 1, nombre: "Torta Cuadrada de Chocolate", precio: 45000, categoria: "Tortas Cuadradas" },
+  { id: 2, nombre: "Torta Cuadrada de Frutas", precio: 50000, categoria: "Tortas Cuadradas" },
+  { id: 3, nombre: "Torta Circular de Vainilla", precio: 40000, categoria: "Tortas Circulares" },
+  { id: 4, nombre: "Torta Circular de Manjar", precio: 42000, categoria: "Tortas Circulares" },
+  { id: 5, nombre: "Mousse de Chocolate", precio: 5000, categoria: "Postres Individuales" },
+  { id: 6, nombre: "Tiramisú Clásico", precio: 5500, categoria: "Postres Individuales" },
+  { id: 7, nombre: "Cheesecake Sin Azúcar", precio: 47000, categoria: "Productos Sin Azúcar" },
+  { id: 8, nombre: "Empanada de Manzana", precio: 3000, categoria: "Pastelería Tradicional" },
   { id: 9, nombre: "Brownie Sin Gluten", precio: 4000, categoria: "Productos Sin Gluten" },
-  { id: 10, nombre: "Torta Vegana", precio: 50000, categoria: "Productos Veganos" },
-  { id: 11, nombre: "Torta Santiago", precio: 6000, categoria: "Pastelería Tradicional"}
+  { id: 10, nombre: "Torta Vegana de Chocolate", precio: 50000, categoria: "Productos Veganos" },
+  { id: 11, nombre: "Torta Santiago", precio: 6000, categoria: "Pastelería Tradicional"},
+  { id: 12, nombre: "Torta Sin Azúcar de Naranja", precio: 7000, categoria: "Productos Sin Azúcar" },
+  { id: 13, nombre: "Galletas Veganas de Avena", precio: 4500, categoria: "Productos Veganos" },
+  { id: 14, nombre: "Torta Especial de Cumpleaños", precio: 55000, categoria: "Tortas Especiales" },
+  { id: 15, nombre: "Torta Especial de Boda", precio: 60000, categoria: "Tortas Especiales"},
+  { id: 16, nombre: "Pan Sin Gluten", precio: 3500, categoria: "Productos Sin Gluten" }
 ];
 
 // ============================================
