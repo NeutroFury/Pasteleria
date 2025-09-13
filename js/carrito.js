@@ -13,7 +13,8 @@ const productos = [
   { id: 7, nombre: "Cheesecake", precio: 47000, categoria: "Productos Sin Azúcar" },
   { id: 8, nombre: "Empanada Manzana", precio: 3000, categoria: "Pastelería Tradicional" },
   { id: 9, nombre: "Brownie Sin Gluten", precio: 4000, categoria: "Productos Sin Gluten" },
-  { id: 10, nombre: "Torta Vegana", precio: 50000, categoria: "Productos Veganos" }
+  { id: 10, nombre: "Torta Vegana", precio: 50000, categoria: "Productos Veganos" },
+  { id: 11, nombre: "Torta Santiago", precio: 6000, categoria: "Pastelería Tradicional"}
 ];
 
 // ============================================
