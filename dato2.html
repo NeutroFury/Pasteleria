@@ -29,50 +29,40 @@
           <li><a href="blogs.html">Blog</a></li>
         </ul>
       </nav>
-      <nav>
-        <ul class="login_register">
-          <li><a href="carrito.html" class="cart">🛒 Carrito (0)</a></li>
-          <li><a href="login.html">Iniciar sesión</a></li>
-          <li><a href="registro.html">Registrar usuario</a></li>
-        </ul>
-      </nav>
+       <nav>
+         <ul class="login_register">
+           <li id="cartLink" style="display: none;"><a href="carrito.html" class="cart">🛒 Carrito (0)</a></li>
+           <li id="loginLink"><a href="login.html">Iniciar sesión</a></li>
+           <li id="registerLink"><a href="registro.html">Registrar usuario</a></li>
+           <li id="logoutLink" style="display: none;"><a href="#" id="logoutLink">Cerrar sesión</a></li>
+           <li id="adminLink" style="display: none;"><a href="admin.html">Admin</a></li>
+         </ul>
+       </nav>
+       <div id="userInfo" style="display: none;">
+         <span>Hola, <span id="userEmail"></span></span>
+       </div>
     </header>
-
     <main>
-<h1 class="estiloEncabezado" style="text-align:center; margin-bottom:2rem;">NOTICIAS IMPORTANTES</h1>
-      
-      <section class="blog-caso">
-        <div class="blog-caso-info">
-          <h2 class="estiloEncabezado">DATO CURIOSO #1</h2>
-          <p class="blog-caso-texto">
-            Nuestro equipo comparte tips para identificar ingredientes únicos en la repostería chilena. ¡Descubre más en nuestro blog!
-          </p>
-          <a href="dato1.html">
-          <button class="btn-principal blog-caso-btn">VER CASO</button>
-          </a>
-        </div>
-        <div class="blog-caso-img">
-          <img src="img/Ingredientes.png" alt="Caso curioso 1" />
-        </div>
-      </section>
-
-      <section class="blog-caso">
-        <div class="blog-caso-info">
-          <h2 class="estiloEncabezado">DATO CURIOSO #2</h2>
-          <p class="blog-caso-texto">
-            Aprende sobre la historia de la torta más grande de Chile y cómo fue posible lograr este récord. ¡Lee el caso completo!
-          </p>
-          <a href="dato2.html">
-          <button class="btn-principal blog-caso-btn">VER CASO</button>
-          </a>
-        </div>
-        <div class="blog-caso-img">
-          <img src="img/record.png" alt="Caso curioso 2" />
-        </div>
-      </section>
+        <h1 class="estiloEncabezado" style="text-align:center; margin-bottom:2rem;">DATO CURIOSO #2</h1>
+        <section class="blog-caso">
+            <div class="blog-caso-info" style="text-align: justify; margin: 0 2rem;">
+            <h2 class="blog-caso-titulo">UN HITO HISTORICO PARA LA PASTELERIA CHILENA</h2>
+            <p class="blog-caso-texto">
+                En el corazón de una pequeña ciudad del sur de Chile, cientos de pasteleros, estudiantes y voluntarios se unieron para un desafío que parecía imposible: preparar la torta más grande del país. Desde muy temprano, 
+                las calles se llenaron de aromas dulces mientras enormes bandejas de bizcocho salían de los hornos comunitarios.
+            <p>
+            <p class="blog-caso-texto">El secreto del éxito no fue solo la receta, sino la coordinación y el trabajo en equipo. Cada capa debía colocarse con precisión, y cada kilo 
+                de crema batida era aplicado como si se tratara de una obra de arte. El pueblo entero colaboró: unos aportaban ingredientes, otros decoraban, y muchos más ayudaban a mantener la organización.
+            </p>
+            <p class="blog-caso-texto">
+                Finalmente, tras horas de esfuerzo, la torta quedó lista: una creación monumental que rompió el récord nacional. No solo fue un logro gastronómico, sino también un símbolo de unión y orgullo colectivo.
+            </p>
+            </div>
+            <div class="blog-caso-img" style="text-align: center; margin: 2rem 0;">
+                <img src="img/record.png" alt="" />
+                
     </main>
-    
-    <footer>
+        <footer>
       <div class="footer-content">
         <div>
           <div class="footer-logo">
@@ -109,5 +99,6 @@
         &copy; 2025 Pasteleria Mil Sabores. Todos los derechos reservados.
       </div>
     </footer>
-</body>
+    <script src="js/main.js"></script>
+  </body>
 </html>

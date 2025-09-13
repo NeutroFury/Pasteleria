@@ -697,4 +697,54 @@ nav .login_register li#cartLink a:hover {
   color: inherit; /* Mantener el color original */
   background-color: inherit; /* Evitar el cambio de fondo */
 }
+/* Blog */
+.blog-caso {
+  display: flex;
+  align-items: center;
+  background: #f5e3d0;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(200, 164, 132, 0.1);
+  margin-bottom: 2rem;
+  padding: 2rem;
+  gap: 2rem;
+}
 
+.blog-caso-info {
+  flex: 1;
+}
+
+.blog-caso-titulo {
+  font-family: "Pacifico", cursive;
+  color: #7c3a2d;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.blog-caso-texto {
+  font-family: "Lato", Arial, sans-serif;
+  color: #7c3a2d;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.blog-caso-btn {
+  margin-top: 0.5rem;
+}
+
+.blog-caso-img {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.blog-caso-img img {
+  display: block;
+  max-width: 550px;
+  width: auto;
+  height: auto;
+  border-radius: 12px;
+  border: 2px solid #c8a484;
+  background: #fff;
+  margin: 0 auto;
+}
