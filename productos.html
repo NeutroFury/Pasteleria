@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Productos | Pastelería Mil Sabores</title>
+    <title>Pastelería Mil Sabores</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Pacifico&display=swap"
       rel="stylesheet"
@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body class="bodycolor">
-    <!-- Header -->
     <header>
       <div class="logo">
         <img
@@ -19,24 +18,29 @@
           alt="Logo Pastelería"
           class="logo-img"
         />
-        <h2 class="estiloEncabezado">Pastelería Mil Sabores</h2>
+        <h2 class="estiloEncabezado">Pasteleria mil sabores</h2>
       </div>
       <nav>
         <ul class="lista">
           <li><a href="index.html">Home</a></li>
-          <li><a href="productos.html" class="active">Productos</a></li>
+          <li><a href="productos.html">Productos</a></li>
           <li><a href="nosotros.html">Nosotros</a></li>
           <li><a href="contacto.html">Contacto</a></li>
           <li><a href="blogs.html">Blog</a></li>
         </ul>
       </nav>
-      <nav>
-        <ul class="login_register">
-          <li><a href="carrito.html" class="cart">🛒 Carrito (0)</a></li>
-          <li><a href="login.html">Iniciar sesión</a></li>
-          <li><a href="registro.html">Registrar usuario</a></li>
-        </ul>
-      </nav>
+       <nav>
+         <ul class="login_register">
+           <li id="cartLink" style="display: none;"><a href="carrito.html" class="cart">🛒 Carrito (0)</a></li>
+           <li id="loginLink"><a href="login.html">Iniciar sesión</a></li>
+           <li id="registerLink"><a href="registro.html">Registrar usuario</a></li>
+           <li id="logoutLink" style="display: none;"><a href="#" id="logoutLink">Cerrar sesión</a></li>
+           <li id="adminLink" style="display: none;"><a href="admin.html">Admin</a></li>
+         </ul>
+       </nav>
+       <div id="userInfo" style="display: none;">
+         <span>Hola, <span id="userEmail"></span></span>
+       </div>
     </header>
 
     <!-- Main -->
@@ -94,5 +98,7 @@
 
     <!-- Script catálogo -->
     <script src="js/productos.js"></script>
+    <!-- Script para verificar login -->
+    <script src="js/main.js"></script>
   </body>
 </html>

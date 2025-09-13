@@ -1,171 +1,194 @@
-/* Reset básico */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* ============================================
+   PASTELERÍA MIL SABORES - ESTILOS PRINCIPALES
+   ============================================ */
+
+/* ============================================
+   1. RESET Y VARIABLES GLOBALES
+   ============================================ */
+
+/* Reset básico - Eliminar estilos por defecto del navegador */
+* { /* Selector universal que aplica a todos los elementos */
+  margin: 0; /* Elimina todos los márgenes por defecto */
+  padding: 0; /* Elimina todos los paddings por defecto */
+  box-sizing: border-box; /* Incluye padding y border en el ancho total del elemento */
 }
 
-/* Fondo general */
-body.bodycolor {
-  background: #fff6e3;
-  font-family: 'Lato', Arial, sans-serif;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+/* ============================================
+   2. LAYOUT PRINCIPAL Y ESTRUCTURA GENERAL
+   ============================================ */
+
+/* Fondo general del sitio */
+body.bodycolor { /* Selector para el body con clase bodycolor */
+  background: #fff6e3; /* Color de fondo crema suave para toda la página */
+  font-family: 'Lato', Arial, sans-serif; /* Fuente principal: Lato, fallback a Arial y sans-serif */
+  min-height: 100vh; /* Altura mínima de 100% del viewport (pantalla completa) */
+  display: flex; /* Activa flexbox para el layout */
+  flex-direction: column; /* Organiza los elementos en columna (header, main, footer) */
 }
 
-/* Header */
-header {
-  width: 100%;
-  background: #fac3d6;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.7rem 2.5rem;
-  box-sizing: border-box;
-  min-height: 70px; 
-  gap: 2rem;
+/* ============================================
+   3. HEADER Y NAVEGACIÓN PRINCIPAL
+   ============================================ */
+
+/* Contenedor principal del header */
+header { /* Selector para el elemento header */
+  width: 100%; /* Ancho completo del contenedor padre */
+  background: #fac3d6; /* Color de fondo rosa claro para el header */
+  display: flex; /* Activa flexbox para organizar elementos horizontalmente */
+  align-items: center; /* Centra verticalmente todos los elementos del header */
+  justify-content: space-between; /* Distribuye elementos: logo a la izquierda, menú a la derecha */
+  padding: 0.7rem 2.5rem; /* Padding vertical 0.7rem, horizontal 2.5rem */
+  box-sizing: border-box; /* Incluye padding y border en el ancho total */
+  min-height: 70px; /* Altura mínima del header */
+  gap: 2rem; /* Espacio entre elementos flex */
 }
 
-/* Logo y nombre */
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
+/* Logo y nombre de la empresa */
+.logo { /* Selector para el contenedor del logo */
+  display: flex; /* Activa flexbox para organizar logo e imagen */
+  align-items: center; /* Centra verticalmente logo e imagen */
+  gap: 0.7rem; /* Espacio entre la imagen del logo y el texto */
 }
-.logo-img {
-  height: 48px;
-  width: auto;
+.logo-img { /* Selector para la imagen del logo */
+  height: 48px; /* Altura fija de 48px para la imagen del logo */
+  width: auto; /* Ancho automático manteniendo proporción */
 }
-.estiloEncabezado {
-  font-family: 'Pacifico', cursive;
-  color: #7c3a2d;
-  font-size: 1.5rem;
-  margin: 0;
-}
-
-/* Menú principal */
-.lista {
-  display: flex;
-  gap: 2rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  align-items: center; /* Asegura alineación vertical */
-}
-.lista li a {
-  text-decoration: none;
-  color: #7c3a2d;
-  font-family: 'Lato', Arial, sans-serif;
-  font-weight: 700;
-  font-size: 1.1rem;
-  transition: color 0.2s;
-}
-.lista li a:hover {
-  color: #d16a8a;
+.estiloEncabezado { /* Selector para el texto del nombre de la empresa */
+  font-family: 'Pacifico', cursive; /* Fuente decorativa Pacifico para el título */
+  color: #7c3a2d; /* Color marrón oscuro para el texto */
+  font-size: 1.5rem; /* Tamaño de fuente 1.5 veces el tamaño base */
+  margin: 0; /* Elimina márgenes por defecto */
 }
 
-/* Login/Register y Carrito */
-.login_register {
-  display: flex;
-  gap: 1rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+/* Navegación principal del sitio */
+.lista { /* Selector para la lista de navegación principal */
+  display: flex; /* Activa flexbox para organizar elementos horizontalmente */
+  gap: 2rem; /* Espacio de 2rem entre cada elemento de la lista */
+  list-style: none; /* Elimina los bullets/puntos de la lista */
+  margin: 0; /* Elimina márgenes por defecto */
+  padding: 0; /* Elimina padding por defecto */
+  align-items: center; /* Asegura alineación vertical de todos los elementos */
 }
-.login_register li a {
-  text-decoration: none;
-  color: #7c3a2d;
-  font-family: 'Lato', Arial, sans-serif;
-  font-weight: 700;
-  font-size: 1.05rem;
-  border: 1.5px solid #7c3a2d;
-  border-radius: 20px;
-  padding: 0.3rem 1.2rem;
-  background: #fff;
-  transition: background 0.2s, color 0.2s;
-  display: inline-block;
+.lista li a { /* Selector para los enlaces dentro de los items de la lista */
+  text-decoration: none; /* Elimina el subrayado de los enlaces */
+  color: #7c3a2d; /* Color marrón oscuro para los enlaces */
+  font-family: 'Lato', Arial, sans-serif; /* Fuente Lato para los enlaces */
+  font-weight: 700; /* Peso de fuente bold (700) */
+  font-size: 1.1rem; /* Tamaño de fuente 1.1 veces el tamaño base */
+  transition: color 0.2s; /* Transición suave de 0.2s para el cambio de color */
 }
-.login_register li a:hover {
-  background: #7c3a2d;
-  color: #fff;
+.lista li a:hover { /* Selector para el estado hover de los enlaces */
+  color: #d16a8a; /* Color rosa al pasar el mouse sobre el enlace */
 }
 
-/* Carrito */
-.cart {
-  border: 1.5px solid #7c3a2d;
-  border-radius: 20px;
-  padding: 0.3rem 1.2rem;
-  background: #fff;
-  color: #7c3a2d;
-  font-weight: 700;
-  font-size: 1.05rem;
-  font-family: 'Lato', Arial, sans-serif;
-  text-decoration: none;
-  transition: background 0.2s, color 0.2s;
-  display: inline-block;
+/* Enlaces de autenticación (Login/Register/Carrito) */
+.login_register { /* Selector para la lista de enlaces de autenticación */
+  display: flex; /* Activa flexbox para organizar elementos horizontalmente */
+  gap: 1rem; /* Espacio de 1rem entre cada elemento */
+  list-style: none; /* Elimina los bullets/puntos de la lista */
+  margin: 0; /* Elimina márgenes por defecto */
+  padding: 0; /* Elimina padding por defecto */
+}
+.login_register li a { /* Selector para los enlaces dentro de los items */
+  text-decoration: none; /* Elimina el subrayado de los enlaces */
+  color: #7c3a2d; /* Color marrón oscuro para el texto */
+  font-family: 'Lato', Arial, sans-serif; /* Fuente Lato para los enlaces */
+  font-weight: 700; /* Peso de fuente bold (700) */
+  font-size: 1.05rem; /* Tamaño de fuente ligeramente más grande */
+  border: 1.5px solid #7c3a2d; /* Borde sólido de 1.5px en color marrón */
+  border-radius: 20px; /* Bordes redondeados para efecto de botón */
+  padding: 0.3rem 1.2rem; /* Padding vertical 0.3rem, horizontal 1.2rem */
+  background: #fff; /* Fondo blanco para los botones */
+  transition: background 0.2s, color 0.2s; /* Transición suave para fondo y color */
+  display: inline-block; /* Permite padding y margin en elementos inline */
+}
+.login_register li a:hover { /* Selector para el estado hover de los botones */
+  background: #7c3a2d; /* Fondo marrón al pasar el mouse */
+  color: #fff; /* Texto blanco al pasar el mouse */
+}
+
+/* Botón del carrito de compras */
+.cart { /* Selector para el botón del carrito */
+  border: 1.5px solid #7c3a2d; /* Borde sólido de 1.5px en color marrón */
+  border-radius: 20px; /* Bordes redondeados para efecto de botón */
+  padding: 0.3rem 1.2rem; /* Padding vertical 0.3rem, horizontal 1.2rem */
+  background: #fff; /* Fondo blanco para el botón */
+  color: #7c3a2d; /* Color marrón oscuro para el texto */
+  font-weight: 700; /* Peso de fuente bold (700) */
+  font-size: 1.05rem; /* Tamaño de fuente ligeramente más grande */
+  font-family: 'Lato', Arial, sans-serif; /* Fuente Lato para el texto */
+  text-decoration: none; /* Elimina el subrayado del enlace */
+  transition: background 0.2s, color 0.2s; /* Transición suave para fondo y color */
   margin-left: 1.5rem; /* Separa el carrito del resto del menú */
-  height: 2.2rem;      /* Igual altura que los botones de login */
-  display: flex;
-  align-items: center;
+  height: 2.2rem; /* Altura fija igual que los botones de login */
+  display: flex; /* Activa flexbox para centrar contenido */
+  align-items: center; /* Centra verticalmente el contenido del botón */
 }
 
-/* Main */
-main {
-  flex: 1;
-  max-width: 1200px;
-  margin: 2rem auto;
-  width: 100%;
-  padding: 0 1rem;
-  box-sizing: border-box;
+/* ============================================
+   4. CONTENIDO PRINCIPAL
+   ============================================ */
+
+/* Contenedor principal del contenido */
+main { /* Selector para el elemento main */
+  flex: 1; /* Hace que main ocupe todo el espacio disponible entre header y footer */
+  max-width: 1200px; /* Ancho máximo de 1200px para el contenido */
+  margin: 2rem auto; /* Margen vertical 2rem, horizontal automático (centra el contenido) */
+  width: 100%; /* Ancho completo del contenedor padre */
+  padding: 0 1rem; /* Sin padding vertical, 1rem horizontal */
+  box-sizing: border-box; /* Incluye padding y border en el ancho total */
 }
 
-/* Centra el contenido del main */
-.centrado {
-  text-align: center;
+/* Utilidad para centrar texto */
+.centrado { /* Selector para centrar texto */
+  text-align: center; /* Centra el texto horizontalmente */
 }
 
-/* Banner */
-.banner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #f3e9e1;
-  border-radius: 10px;
-  margin-bottom: 2rem;
-  padding: 2rem;
-  gap: 2rem;
+/* ============================================
+   5. BANNER Y PRODUCTOS DESTACADOS
+   ============================================ */
+
+/* Banner principal de la página de inicio */
+.banner { /* Selector para el banner principal */
+  display: flex; /* Activa flexbox para organizar elementos horizontalmente */
+  justify-content: space-between; /* Distribuye elementos: texto a la izquierda, imagen a la derecha */
+  align-items: center; /* Centra verticalmente los elementos */
+  background: #f3e9e1; /* Color de fondo beige claro para el banner */
+  border-radius: 10px; /* Bordes redondeados */
+  margin-bottom: 2rem; /* Margen inferior de 2rem */
+  padding: 2rem; /* Padding de 2rem en todos los lados */
+  gap: 2rem; /* Espacio entre elementos flex */
 }
-.banner-info {
-  flex: 1 1 300px;
+.banner-info { /* Selector para la información del banner */
+  flex: 1 1 300px; /* Crece y encoge, tamaño base 300px */
 }
-.banner-img img {
-  max-width: 300px;
-  border-radius: 10px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+.banner-img img { /* Selector para la imagen del banner */
+  max-width: 300px; /* Ancho máximo de 300px */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08); /* Sombra suave debajo de la imagen */
 }
 
-/* Grilla de productos */
-.productos-destacados {
-  margin-bottom: 2rem;
+/* Sección de productos destacados */
+.productos-destacados { /* Selector para la sección de productos destacados */
+  margin-bottom: 2rem; /* Margen inferior de 2rem */
 }
-.productos-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1.5rem;
+.productos-grid { /* Selector para el grid de productos */
+  display: grid; /* Activa CSS Grid para organizar productos en filas y columnas */
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Columnas automáticas con ancho mínimo 180px */
+  gap: 1.5rem; /* Espacio de 1.5rem entre productos */
 }
-.producto {
-  background: #fdecc3;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  padding: 1rem;
-  text-align: center;
-  max-width: 220px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
+.producto { /* Selector para las tarjetas de productos */
+  background: #fdecc3; /* Color de fondo beige claro para las tarjetas */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Sombra suave debajo de la tarjeta */
+  padding: 1rem; /* Padding de 1rem en todos los lados */
+  text-align: center; /* Centra el texto dentro de la tarjeta */
+  max-width: 220px; /* Ancho máximo de 220px */
+  margin: 0 auto; /* Centra la tarjeta horizontalmente */
+  display: flex; /* Activa flexbox */
+  flex-direction: column; /* Organiza elementos en columna */
+  align-items: center; /* Centra elementos horizontalmente */
+  text-decoration: none; /* Elimina subrayado de enlaces */
 }
 .producto a {
   text-decoration: none;
@@ -207,7 +230,11 @@ main {
   margin-top: -1.2rem; 
 }
 
-/* Footer */
+/* ============================================
+   7. FOOTER Y INFORMACIÓN DE CONTACTO
+   ============================================ */
+
+/* Pie de página principal */
 footer {
   background: #fac3d6;
   padding: 1rem 0 0.5rem 0; /* Menos padding arriba */
@@ -300,37 +327,47 @@ footer {
   margin-top: 0; /* Sin espacio extra arriba */
 }
 
-/* Alertas */
-.mi-alerta-error {
-  background-color: #ffb3b3;
-  color: #900;
-  border: 1px solid #900;
-  padding: 10px;
-  border-radius: 5px;
-  font-family: "Lato", sans-serif;
-  font-weight: 400;
-  font-style: italic;
+/* ============================================
+   8. SISTEMA DE ALERTAS Y NOTIFICACIONES
+   ============================================ */
+
+/* Contenedor de mensajes del formulario */
+#mensajes {
+  margin-top: 16px; /* Separar los mensajes del formulario */
 }
-.mi-alerta-exito {
-  background-color: #b3ffcc;
-  color: #006622;
-  border: 1px solid #006622;
-  padding: 10px;
-  border-radius: 5px;
-  font-family: "Lato", sans-serif;
-  font-weight: 400;
-  font-style: italic;
-}
+
+/* Estilos base para todas las alertas */
+.mi-alerta-error,
+.mi-alerta-exito,
 .mi-alerta-descuento {
-  background-color: #b3d9ff;
-  color: #004080;
-  border: 1px solid #004080;
-  padding: 10px;
-  border-radius: 5px;
-  font-family: "Lato", sans-serif;
-  font-weight: 400;
-  font-style: italic;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 8px; /* Añadir margen entre los mensajes */
+  font-size: 1rem;
+  font-family: 'Lato', sans-serif;
 }
+
+/* Alerta de error - fondo rojo suave */
+.mi-alerta-error {
+  background-color: #ffe5e5;
+  color: #7a1120;
+  border: 1px solid #ffb8c0;
+}
+
+/* Alerta de éxito - fondo verde suave */
+.mi-alerta-exito {
+  background-color: #e9ffe8;
+  color: #0f5d1d;
+  border: 1px solid #b3ecb8;
+}
+
+/* Alerta de descuento - fondo amarillo suave */
+.mi-alerta-descuento {
+  background-color: #fffbe6;
+  color: #6f5300;
+  border: 1px solid #ffe58f;
+}
+
 
 .btn-principal {
   text-decoration: none;
@@ -354,7 +391,11 @@ footer {
   text-decoration: none;
 }
 
-/* Estilo para el login */
+/* ============================================
+   9. FORMULARIOS DE AUTENTICACIÓN
+   ============================================ */
+
+/* Contenedor del formulario de login */
 .login-container {
   background: #ffffff;
   border: 2px solid #fac3d6;
@@ -434,33 +475,110 @@ footer {
   background: #7c3a2d;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
-  header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 1rem;
-  }
-  main {
-    padding: 1rem;
-  }
-  .footer-content {
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1rem 0 0 0;
-  }
-  .productos-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-@media (max-width: 600px) {
-  .productos-grid {
-    grid-template-columns: 1fr;
+/* ============================================
+   10. DISEÑO RESPONSIVO Y MEDIA QUERIES
+   ============================================ */
+
+/* Pantallas grandes - mantener 2 columnas */
+@media (min-width: 1200px) { /* Media query para pantallas de 1200px o más */
+  .carrito-grid { /* Selector para el grid del carrito en pantallas grandes */
+    max-width: 1400px; /* Ancho máximo mayor para aprovechar pantallas grandes */
   }
 }
 
-/* ===== Auth shared (login/registro) ===== */
+/* Pantallas medianas - carrito en 2 columnas */
+@media (max-width: 1000px) and (min-width: 901px) { /* Media query para pantallas entre 901px y 1000px */
+  .carrito-grid { /* Selector para el grid del carrito en pantallas medianas */
+    max-width: 900px; /* Ancho máximo reducido para pantallas medianas */
+    gap: 1.5rem; /* Espacio reducido entre columnas */
+  }
+}
+
+/* Tablets y pantallas medianas */
+@media (max-width: 900px) { /* Media query para pantallas de 900px o menos */
+  header { /* Selector para el header en tablets */
+    flex-direction: column; /* Cambia a layout vertical (logo arriba, menú abajo) */
+    align-items: flex-start; /* Alinea elementos a la izquierda */
+    gap: 1rem; /* Espacio entre elementos */
+    padding: 1rem; /* Padding reducido */
+  }
+  main { /* Selector para el main en tablets */
+    padding: 1rem; /* Padding reducido para aprovechar espacio */
+  }
+  .footer-content { /* Selector para el footer en tablets */
+    flex-direction: column; /* Cambia a layout vertical */
+    gap: 1rem; /* Espacio entre secciones */
+    padding: 1rem 0 0 0; /* Padding ajustado */
+  }
+  .productos-grid { /* Selector para el grid de productos en tablets */
+    grid-template-columns: 1fr 1fr; /* Mantiene 2 columnas en tablets */
+  }
+  
+  /* Grid del carrito en tablets */
+  .carrito-grid { /* Selector para el grid del carrito en tablets */
+    grid-template-columns: 1fr; /* Cambia a 1 columna (productos arriba, carrito abajo) */
+    gap: 1.5rem; /* Espacio entre elementos */
+    padding: 0 0.5rem; /* Padding lateral reducido */
+  }
+  
+  /* Ajustar altura del carrito en tablets */
+  .carrito-card { /* Selector para la tarjeta del carrito en tablets */
+    max-height: 400px; /* Altura máxima reducida para tablets */
+  }
+  
+  /* Banner responsive en tablets */
+  .banner { /* Selector para el banner en tablets */
+    flex-direction: column; /* Cambia a layout vertical */
+    text-align: center; /* Centra el texto */
+  }
+}
+/* Móviles y pantallas pequeñas */
+@media (max-width: 600px) { /* Media query para pantallas de 600px o menos */
+  .productos-grid { /* Selector para el grid de productos en móviles */
+    grid-template-columns: 1fr; /* Cambia a 1 columna en móviles */
+  }
+  
+  /* Grid del carrito en móviles */
+  .carrito-grid { /* Selector para el grid del carrito en móviles */
+    grid-template-columns: 1fr; /* Mantiene 1 columna en móviles */
+    gap: 1rem; /* Espacio reducido entre elementos */
+    padding: 0 0.5rem; /* Padding lateral mínimo */
+  }
+  
+  /* Ajustar padding en móviles */
+  .carrito-card, /* Selector para tarjetas del carrito en móviles */
+  .productos-card { /* Selector para tarjetas de productos en móviles */
+    padding: 1rem; /* Padding reducido para ahorrar espacio */
+  }
+  
+  /* Ajustar altura del carrito en móviles */
+  .carrito-card { /* Selector para la tarjeta del carrito en móviles */
+    max-height: 350px; /* Altura máxima aún más reducida para móviles */
+  }
+  
+  /* Hacer botones más grandes en móviles */
+  .btn-agregar { /* Selector para botones de agregar en móviles */
+    width: 100%; /* Ancho completo para facilitar el toque */
+    padding: 0.7rem 1rem; /* Padding aumentado para mejor usabilidad táctil */
+  }
+  
+  /* Banner responsive en móviles */
+  .banner { /* Selector para el banner en móviles */
+    flex-direction: column; /* Mantiene layout vertical */
+    text-align: center; /* Centra el texto */
+    padding: 1rem; /* Padding reducido */
+  }
+  
+  .banner-img img { /* Selector para la imagen del banner en móviles */
+    max-width: 250px; /* Ancho máximo reducido para móviles */
+  }
+}
+
+/* ============================================
+   11. COMPONENTES DE AUTENTICACIÓN COMPARTIDOS
+   ============================================ */
+
+/* Contenedor principal para páginas de auth */
 .auth{
   flex: 1;
   display: flex;
@@ -542,162 +660,159 @@ footer {
   text-decoration: underline;
 }
 
-/* Mensajería coherente con tu proyecto */
-.mi-alerta-error{
-  background: #ffe5e5;
-  color: #7a1120;
-  border: 1px solid #ffb8c0;
-  padding: 10px 12px;
-  border-radius: 10px;
-  font-size: .95rem;
+
+
+
+/* ============================================
+   6. CARRITO DE COMPRAS
+   ============================================ */
+
+/* Grid del carrito de compras */
+.carrito-grid { /* Selector para el grid principal del carrito */
+  display: grid; /* Activa CSS Grid para organizar en 2 columnas */
+  grid-template-columns: 1fr 1fr; /* Dos columnas de igual tamaño */
+  gap: 2rem; /* Espacio de 2rem entre columnas */
+  max-width: 1200px; /* Ancho máximo de 1200px */
+  margin: 0 auto; /* Centra el grid horizontalmente */
+  padding: 0 1rem; /* Sin padding vertical, 1rem horizontal */
+  width: 100%; /* Ancho completo del contenedor padre */
 }
 
-.mi-alerta-exito{
-  background: #e9ffe8;
-  color: #0f5d1d;
-  border: 1px solid #b3ecb8;
-  padding: 10px 12px;
-  border-radius: 10px;
-  font-size: .95rem;
+/* Tarjeta del carrito - versión compacta */
+.carrito-card { /* Selector para la tarjeta del carrito */
+  background: #ffffff; /* Fondo blanco para la tarjeta */
+  border-radius: 18px; /* Bordes muy redondeados */
+  box-shadow: 0 4px 24px rgba(213, 106, 138, 0.10); /* Sombra suave con color rosa */
+  padding: 1.5rem; /* Padding de 1.5rem en todos los lados */
+  max-height: 600px; /* Limitar altura máxima para evitar tarjetas muy altas */
+  overflow-y: auto; /* Scroll vertical si el contenido excede la altura máxima */
 }
 
-.mi-alerta-descuento{
-  background: #fffbe6;
-  color: #6f5300;
-  border: 1px solid #ffe58f;
-  padding: 10px 12px;
-  border-radius: 10px;
-  font-size: .95rem;
-  margin-bottom: 8px;
+/* Tarjeta de productos - versión mejorada */
+.productos-card { /* Selector para la tarjeta de productos disponibles */
+  background: #ffffff; /* Fondo blanco para la tarjeta */
+  border-radius: 18px; /* Bordes muy redondeados */
+  box-shadow: 0 4px 24px rgba(213, 106, 138, 0.10); /* Sombra suave con color rosa */
+  padding: 1.5rem; /* Padding de 1.5rem en todos los lados */
+  height: fit-content; /* Altura ajustada automáticamente al contenido */
 }
 
-.imagen-nosotros {
-  margin-top: 2rem;
+/* Total del carrito */
+.carrito-total { /* Selector para el elemento que muestra el total */
+  font-size: 1.2rem; /* Tamaño de fuente 1.2 veces el tamaño base */
+  font-weight: bold; /* Peso de fuente bold para destacar */
+  color: #7c3a2d; /* Color marrón oscuro para el texto */
+  margin: 1rem 0; /* Margen vertical de 1rem, sin margen horizontal */
+  padding: 1rem; /* Padding de 1rem en todos los lados */
+  background: #f3e9e1; /* Fondo beige claro para destacar el total */
+  border-radius: 8px; /* Bordes redondeados */
+  text-align: center; /* Centra el texto del total */
 }
 
-.imagen-box-madera {
-  display: inline-block;
-  background: #f5e3d0; /* Café madera claro */
-  border: 3px solid #c8a484; /* Borde sutil café */
-  border-radius: 16px;
-  box-shadow: 0 2px 12px rgba(200, 164, 132, 0.10);
-  padding: 1.2rem 1.8rem;
-  margin-top: 2rem;
-  transition: box-shadow 0.2s;
-}
-.imagen-box-madera img {
-  display: block;
-  margin: 0 auto;
-  border-radius: 10px;
+/* Botones de cantidad en el carrito */
+.carrito-cantidad { /* Selector para el contenedor de botones de cantidad */
+  display: flex; /* Activa flexbox para organizar botones horizontalmente */
+  align-items: center; /* Centra verticalmente los botones */
+  gap: 0.5rem; /* Espacio de 0.5rem entre botones */
+  margin-top: 0.5rem; /* Margen superior de 0.5rem */
 }
 
-.contacto-card {
-  max-width: 400px;
-  margin: 2rem auto;
-  background: #ffffff;
-  border-radius: 18px;
-  box-shadow: 0 4px 24px rgba(213, 106, 138, 0.10);
-  padding: 2rem 2.5rem;
+.carrito-cantidad button { /* Selector para los botones de cantidad (+ y -) */
+  background: #d16a8a; /* Fondo rosa para los botones */
+  color: white; /* Texto blanco */
+  border: none; /* Sin borde */
+  border-radius: 50%; /* Botones circulares */
+  width: 30px; /* Ancho fijo de 30px */
+  height: 30px; /* Alto fijo de 30px */
+  cursor: pointer; /* Cursor de mano al pasar el mouse */
+  font-weight: bold; /* Texto en negrita */
+  font-size: 1rem; /* Tamaño de fuente normal */
+  display: flex; /* Activa flexbox para centrar contenido */
+  align-items: center; /* Centra verticalmente el contenido */
+  justify-content: center; /* Centra horizontalmente el contenido */
+  transition: background 0.2s; /* Transición suave para el cambio de fondo */
 }
 
-.form-control#mensaje {
-  min-height: 120px;
-  resize: vertical;
-  width: 100%;
-  border-radius: 12px;
-  font-size: 1.08rem;
-  padding: 1rem;
-  box-sizing: border-box;
-  border-color: #fac3d6;
+.carrito-cantidad button:hover { /* Selector para el estado hover de los botones */
+  background: #7c3a2d; /* Fondo marrón al pasar el mouse */
 }
 
-.centered {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+.carrito-cantidad button:disabled { /* Selector para botones deshabilitados */
+  background: #ccc; /* Fondo gris para botones deshabilitados */
+  cursor: not-allowed; /* Cursor que indica que no se puede hacer clic */
 }
 
-/* Mensajes de error y éxito */
-#mensajes {
-  margin-top: 16px; /* Separar los mensajes del formulario */
+/* Items individuales del carrito */
+.item-carrito { /* Selector para cada item individual del carrito */
+  background: #f9f9f9; /* Fondo gris muy claro */
+  border: 1px solid #e0e0e0; /* Borde gris claro */
+  border-radius: 8px; /* Bordes redondeados */
+  padding: 0.8rem; /* Padding más compacto para ahorrar espacio */
+  margin-bottom: 0.8rem; /* Margen inferior entre items */
 }
 
-.mi-alerta-error,
-.mi-alerta-exito,
-.mi-alerta-descuento {
-  padding: 12px;
-  border-radius: 8px;
-  margin-top: 8px; /* Añadir margen entre los mensajes */
-  font-size: 1rem;
-  font-family: 'Lato', sans-serif;
+.item-carrito strong { /* Selector para el texto destacado (nombre del producto) */
+  color: #7c3a2d; /* Color marrón oscuro */
+  font-size: 1rem; /* Tamaño de fuente más pequeño para ahorrar espacio */
 }
 
-.mi-alerta-error {
-  background-color: #ffe5e5;
-  color: #7a1120;
-  border: 1px solid #ffb8c0;
+/* Items de productos disponibles */
+.item-producto { /* Selector para cada producto disponible */
+  background: #f9f9f9; /* Fondo gris muy claro */
+  border: 1px solid #e0e0e0; /* Borde gris claro */
+  border-radius: 8px; /* Bordes redondeados */
+  padding: 1rem; /* Padding de 1rem en todos los lados */
+  margin-bottom: 1rem; /* Margen inferior entre productos */
+  transition: box-shadow 0.2s, transform 0.2s; /* Animaciones suaves para sombra y movimiento */
 }
 
-.mi-alerta-exito {
-  background-color: #e9ffe8;
-  color: #0f5d1d;
-  border: 1px solid #b3ecb8;
+.item-producto:hover { /* Selector para el estado hover de los productos */
+  box-shadow: 0 4px 12px rgba(213, 106, 138, 0.15); /* Sombra más pronunciada al pasar el mouse */
+  transform: translateY(-2px); /* Efecto de elevación: mueve el elemento 2px hacia arriba */
 }
 
-.mi-alerta-descuento {
-  background-color: #fffbe6;
-  color: #6f5300;
-  border: 1px solid #ffe58f;
+.item-producto strong { /* Selector para el nombre del producto */
+  color: #7c3a2d; /* Color marrón oscuro */
+  font-size: 1.1rem; /* Tamaño de fuente ligeramente más grande */
+  display: block; /* Hace que el elemento ocupe toda la línea */
+  margin-bottom: 0.5rem; /* Margen inferior de 0.5rem */
 }
 
-/* Aseguramos que el contenedor de la barra de navegación utilice flexbox */
-nav {
-  display: flex;
-  justify-content: space-between; /* Distribuir los elementos de la barra de navegación */
-  align-items: center; /* Alinear verticalmente los elementos */
-  padding: 10px 20px;
+.item-producto .categoria { /* Selector para el texto de categoría */
+  color: #888; /* Color gris para texto secundario */
+  font-size: 0.9rem; /* Tamaño de fuente más pequeño */
+  margin-bottom: 0.3rem; /* Margen inferior pequeño */
 }
 
-/* Barra de navegación de la izquierda */
-nav .lista {
-  display: flex;
-  gap: 20px; /* Espacio entre los elementos de la izquierda */
+.item-producto .precio { /* Selector para el precio del producto */
+  color: #d16a8a; /* Color rosa para destacar el precio */
+  font-weight: bold; /* Texto en negrita */
+  font-size: 1rem; /* Tamaño de fuente normal */
+  margin-bottom: 0.8rem; /* Margen inferior antes del botón */
 }
 
-/* Barra de navegación de la derecha (login, logout y carrito) */
-nav .login_register {
-  display: flex;
-  gap: 20px; /* Espacio entre los elementos de la derecha */
-  align-items: center;
+/* Botón de agregar al carrito */
+.btn-agregar { /* Selector para el botón de agregar al carrito */
+  background: #d16a8a; /* Fondo rosa */
+  color: white; /* Texto blanco */
+  border: none; /* Sin borde */
+  border-radius: 6px; /* Bordes redondeados */
+  padding: 0.5rem 1rem; /* Padding vertical 0.5rem, horizontal 1rem */
+  cursor: pointer; /* Cursor de mano al pasar el mouse */
+  font-weight: 600; /* Peso de fuente semi-bold */
+  font-size: 0.9rem; /* Tamaño de fuente ligeramente más pequeño */
+  transition: background 0.2s; /* Transición suave para el cambio de fondo */
 }
 
-/* Cada item en el login_register */
-nav .login_register li {
-  list-style: none;
+.btn-agregar:hover { /* Selector para el estado hover del botón */
+  background: #7c3a2d; /* Fondo marrón al pasar el mouse */
 }
 
-nav .login_register li a {
-  text-decoration: none;
-  color: #333;
-  font-weight: bold;
-}
+/* ============================================
+   12. SECCIÓN DE BLOG Y CONTENIDO ESPECÍFICO
+   ============================================ */
 
-nav .login_register li a:hover {
-  color: #7c3a2d; /* Color al pasar el ratón por encima */
-}
-
-/* Estilo global para todos los enlaces en la barra de navegación */
-nav .login_register li a:hover {
-  color: #7c3a2d; /* Cambiar color al pasar el ratón */
-  background-color: rgba(0, 0, 0, 0.1); /* Añadir un fondo suave */
-}
-
-/* Eliminar el efecto de hover para el enlace del carrito */
-nav .login_register li#cartLink a:hover {
-  color: inherit; /* Mantener el color original */
-  background-color: inherit; /* Evitar el cambio de fondo */
-}
-/* Blog */
+/* Tarjetas de casos del blog */
 .blog-caso {
   display: flex;
   align-items: center;
@@ -747,4 +862,59 @@ nav .login_register li#cartLink a:hover {
   border: 2px solid #c8a484;
   background: #fff;
   margin: 0 auto;
+}
+
+/* ============================================
+   13. UTILIDADES Y COMPONENTES ESPECÍFICOS
+   ============================================ */
+
+/* Imagen de la sección nosotros */
+.imagen-nosotros { /* Selector para imágenes de la sección nosotros */
+  margin-top: 2rem; /* Margen superior de 2rem */
+}
+
+/* Contenedor con estilo de caja de madera */
+.imagen-box-madera { /* Selector para cajas con estilo de madera */
+  display: inline-block; /* Elemento inline que permite padding y margin */
+  background: #f5e3d0; /* Fondo café madera claro */
+  border: 3px solid #c8a484; /* Borde sutil café */
+  border-radius: 16px; /* Bordes redondeados */
+  box-shadow: 0 2px 12px rgba(200, 164, 132, 0.10); /* Sombra suave con color madera */
+  padding: 1.2rem 1.8rem; /* Padding vertical 1.2rem, horizontal 1.8rem */
+  margin-top: 2rem; /* Margen superior de 2rem */
+  transition: box-shadow 0.2s; /* Transición suave para la sombra */
+}
+.imagen-box-madera img { /* Selector para imágenes dentro de cajas de madera */
+  display: block; /* Elemento de bloque */
+  margin: 0 auto; /* Centra la imagen horizontalmente */
+  border-radius: 10px; /* Bordes redondeados */
+}
+
+/* Tarjeta del formulario de contacto */
+.contacto-card { /* Selector para tarjetas de contacto */
+  max-width: 400px; /* Ancho máximo de 400px */
+  margin: 2rem auto; /* Margen vertical 2rem, horizontal automático (centra) */
+  background: #ffffff; /* Fondo blanco */
+  border-radius: 18px; /* Bordes muy redondeados */
+  box-shadow: 0 4px 24px rgba(213, 106, 138, 0.10); /* Sombra suave con color rosa */
+  padding: 2rem 2.5rem; /* Padding vertical 2rem, horizontal 2.5rem */
+}
+
+/* Campo de texto para mensajes */
+.form-control#mensaje { /* Selector específico para el campo de mensaje */
+  min-height: 120px; /* Altura mínima de 120px */
+  resize: vertical; /* Permite redimensionar solo verticalmente */
+  width: 100%; /* Ancho completo */
+  border-radius: 12px; /* Bordes redondeados */
+  font-size: 1.08rem; /* Tamaño de fuente ligeramente más grande */
+  padding: 1rem; /* Padding de 1rem en todos los lados */
+  box-sizing: border-box; /* Incluye padding y border en el ancho total */
+  border-color: #fac3d6; /* Color de borde rosa claro */
+}
+
+/* Utilidad para centrar elementos */
+.centered { /* Selector para centrar elementos */
+  display: block; /* Elemento de bloque */
+  margin-left: auto; /* Margen izquierdo automático */
+  margin-right: auto; /* Margen derecho automático */
 }
