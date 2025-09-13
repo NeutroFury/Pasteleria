@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciar Sesión | Pastelería Mil Sabores</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Pacifico&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="bodycolor">
+    <header>
+      <div class="logo">
+        <img
+          src="img/Logo emprendimiento reposteria beige.png"
+          alt="Logo Pastelería"
+          class="logo-img"
+        />
+        <h2 class="estiloEncabezado">Pastelería Mil Sabores</h2>
+      </div>
+      <nav>
+        <ul class="lista">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="blogs.html">Blog</a></li>
+        </ul>
+      </nav>
+      <nav>
+        <ul class="login_register">
+          <li><a href="login.html" class="active">Iniciar sesión</a></li>
+          <li><a href="registro.html">Registrar usuario</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+        <form id="formLogin">
+          <div class="form-group">
+            <label for="login-email">Correo electrónico</label>
+            <input type="email" id="login-email" required />
+          </div>
+          <div class="form-group">
+            <label for="login-clave">Contraseña</label>
+            <input type="password" id="login-clave" required />
+          </div>
+          <button type="submit" class="colorBoton1">
+            Ingresar
+          </button>
+        </form>
+        <div id="error-msg" style="color: red; display: none;">
+          <p>Correo o contraseña incorrectos</p>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <div>
+          <div class="footer-logo">
+            <img
+              src="img/Logo emprendimiento reposteria beige.png"
+              alt="Logo"
+              style="height: 40px; vertical-align: middle; margin-right: 8px"
+            />
+            Pastelería Mil Sabores
+          </div>
+          <div style="font-size: 0.95rem; color: #7c3a2d">
+            Celebrando nuestros 50 años
+          </div>
+        </div>
+        <div class="footer-links">
+          <h5>SOBRE NOSOTROS</h5>
+          <ul>
+            <li><a href="#">Nuestros productos</a></li>
+            <li><a href="#">Tiendas y teléfonos</a></li>
+            <li><a href="#">Preguntas frecuentes</a></li>
+          </ul>
+        </div>
+        <div class="newsletter">
+          <form>
+            <label for="newsletter-email">Suscríbete a nuestro newsletter:</label>
+            <div class="newsletter-input-group">
+              <input
+                type="email"
+                id="newsletter-email"
+                placeholder="Ingresa tu email"
+              />
+              <button type="submit">Suscribirse</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div style="margin-top: 1rem; color: #b48b7d; font-size: 0.9rem">
+        &copy; 2025 Pastelería Mil Sabores. Todos los derechos reservados.
+      </div>
+    </footer>
+
+    <script src="js/login.js"></script>
+  </body>
+</html>
