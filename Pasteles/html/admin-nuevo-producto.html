@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Producto | Panel Administrador</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="admin-container">
+        <nav class="admin-sidebar">
+            <div class="admin-logo">
+                <h2 style="margin: 0; font-family: 'Pacifico', cursive;">Pastelería Mil Sabores</h2>
+                <p style="margin: 0.5rem 0 0 0; opacity: 0.8;">Panel Administrador</p>
+            </div>
+            
+            <ul class="admin-nav">
+                <li><a href="admin.html">Dashboard</a></li>
+                <li><a href="admin-productos.html" class="active">Productos</a></li>
+                <li><a href="admin-usuarios.html">Usuarios</a></li>
+            </ul>
+        </nav>
+        
+        <main class="admin-content">
+            <div class="admin-header">
+                <div>
+                    <h1>Crear Nuevo Producto</h1>
+                    <p>Agrega un nuevo producto al catálogo</p>
+                </div>
+                <div>
+                    <a href="admin-productos.html" class="admin-btn-secondary">← Volver a Productos</a>
+                    <a href="index.html" class="btn-principal">🏠 Ir al Sitio</a>
+                </div>
+            </div>
+            
+            <div class="admin-form">
+                <form id="productForm">
+                    <div class="form-group">
+                        <label for="nombre">Nombre del Producto *</label>
+                        <input type="text" id="nombre" name="nombre" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="codigo">Código del Producto *</label>
+                        <input type="text" id="codigo" name="codigo" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="descripcion">Descripción *</label>
+                        <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="precio">Precio *</label>
+                        <input type="number" id="precio" name="precio" min="0" step="0.01" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="categoria">Categoría *</label>
+                        <select id="categoria" name="categoria" required>
+                            <option value="">Seleccionar categoría</option>
+                            <option value="pasteles">Pasteles</option>
+                            <option value="tortas">Tortas</option>
+                            <option value="postres">Postres</option>
+                            <option value="especiales">Especiales</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="stock">Stock Inicial *</label>
+                        <input type="number" id="stock" name="stock" min="0" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="estado">Estado *</label>
+                        <select id="estado" name="estado" required>
+                            <option value="">Seleccionar estado</option>
+                            <option value="disponible">Disponible</option>
+                            <option value="agotado">Agotado</option>
+                            <option value="descontinuado">Descontinuado</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="imagen">URL de la Imagen Principal *</label>
+                        <input type="url" id="imagen" name="imagen" required>
+                        <div id="imagePreview" style="margin-top: 1rem; text-align: center;">
+                            <!-- Vista previa de la imagen -->
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="imagenesAdicionales">URLs de Imágenes Adicionales</label>
+                        <textarea id="imagenesAdicionales" name="imagenesAdicionales" rows="3" placeholder="Una URL por línea"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ingredientes">Ingredientes</label>
+                        <textarea id="ingredientes" name="ingredientes" rows="3" placeholder="Lista de ingredientes principales"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="alergenos">Alérgenos</label>
+                        <input type="text" id="alergenos" name="alergenos" placeholder="Ej: Gluten, Lactosa, Frutos secos">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="tiempoPreparacion">Tiempo de Preparación (minutos)</label>
+                        <input type="number" id="tiempoPreparacion" name="tiempoPreparacion" min="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="peso">Peso (gramos)</label>
+                        <input type="number" id="peso" name="peso" min="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="porciones">Número de Porciones</label>
+                        <input type="number" id="porciones" name="porciones" min="1">
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button type="submit" class="admin-btn">Crear Producto</button>
+                        <a href="admin-productos.html" class="admin-btn-secondary">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+    
+    <script src="js/admin-nuevo-producto.js"></script>
+</body>
+</html>

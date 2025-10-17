@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administrador | Pastelería Mil Sabores</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="admin-container">
+        <nav class="admin-sidebar">
+            <div class="admin-logo">
+                <h2 style="margin: 0; font-family: 'Pacifico', cursive;">Pastelería Mil Sabores</h2>
+                <p style="margin: 0.5rem 0 0 0; opacity: 0.8;">Panel Administrador</p>
+            </div>
+            
+            <ul class="admin-nav">
+                <li><a href="admin.html" class="active">Dashboard</a></li>
+                <li><a href="admin-productos.html">Productos</a></li>
+                <li><a href="admin-usuarios.html">Usuarios</a></li>
+            </ul>
+            
+        </nav>
+        
+        <main class="admin-content">
+            <div class="admin-header">
+                <div>
+                    <h1>Dashboard</h1>
+                    <p>¡HOLA Administrador!</p>
+                </div>
+                <div>
+                    <a href="index.html" class="btn-principal">🏠 Ir al Sitio</a>
+                </div>
+            </div>
+            
+            <div class="admin-stats">
+                <div class="admin-stat-card">
+                    <h3 id="total-products">0</h3>
+                    <p>Productos Totales</p>
+                </div>
+                <div class="admin-stat-card">
+                    <h3 id="total-users">0</h3>
+                    <p>Usuarios Registrados</p>
+                </div>
+                <div class="admin-stat-card">
+                    <h3 id="total-orders">0</h3>
+                    <p>Pedidos Totales</p>
+                </div>
+                <div class="admin-stat-card">
+                    <h3 id="total-revenue">$0</h3>
+                    <p>Ingresos Totales</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; padding: 2rem;">
+                <h3 style="color: #7c3a2d; margin-bottom: 1rem;">Bienvenido al Panel de Administración</h3>
+                <p style="color: #6c757d; font-size: 1.1rem;">
+                    Desde aquí puedes gestionar productos, usuarios, pedidos y más.
+                    <br>Selecciona una opción del menú lateral para comenzar.
+                </p>
+            </div>
+        </main>
+    </div>
+    
+    <script src="js/admin.js"></script>
+</body>
+</html>
