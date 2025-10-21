@@ -1,4 +1,26 @@
+import { NavLink } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 export default function Home() {
+  
+    const [loggedIn, setLoggedIn] = useState(null);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        // Verificar si hay un usuario logueado al cargar el componente
+        const userLoggedIn = JSON.parse(localStorage.getItem("loggedIn"));
+        setLoggedIn(userLoggedIn);
+    }, []);
+
+    const handleLogout = () => {
+        // Solo borrar la sesión del usuario, NO todo el localStorage
+        localStorage.removeItem("loggedIn");
+        localStorage.removeItem("carrito");
+        navigate('/login'); // Usar navigate en lugar de window.location
+        setLoggedIn(null);
+    };
+
   return (
     <>
       <main>
@@ -10,7 +32,7 @@ export default function Home() {
               Descubre nuestras tortas y productos de repostería para todas las
               ocasiones. ¡Haz tu pedido en línea!
             </p>
-            <a href="productos.html" className="btn-principal">🍰 Ver productos</a>
+            <NavLink to="/productos" className="btn-principal">🍰 Ver productos</NavLink>
           </div>
           <div className="banner-img">
             <img

@@ -3,7 +3,7 @@
 // ============================================
 
 // Lista de productos de la pastelería (versión simplificada)
-const productos = [
+export const productos = [
   { id: 1, nombre: "Torta Cuadrada de Chocolate", precio: 45000, categoria: "Tortas Cuadradas" },
   { id: 2, nombre: "Torta Cuadrada de Frutas", precio: 50000, categoria: "Tortas Cuadradas" },
   { id: 3, nombre: "Torta Circular de Vainilla", precio: 40000, categoria: "Tortas Circulares" },

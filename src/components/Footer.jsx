@@ -1,7 +1,7 @@
 export default function Footer() {
     return (
         <>
-              <footer>
+        <footer>
         <div className="footer-content">
           <div>
             <div className="footer-logo">
@@ -24,10 +24,10 @@ export default function Footer() {
           <div className="footer-links">
             <h5>SOBRE NOSOTROS</h5>
             <ul>
-              <li><a href="#">Nuestros productos</a></li>
-              <li><a href="#">Tiendas y teléfonos</a></li>
-              <li><a href="#">Preguntas frecuentes</a></li>
-            </ul>
+            <li>Nuestros productos</li>
+            <li>Tiendas y teléfonos</li>
+            <li>Preguntas frecuentes</li>
+          </ul>
           </div>
 
           <div className="newsletter">

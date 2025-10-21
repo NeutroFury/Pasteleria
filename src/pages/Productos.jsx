@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-export default function Productos() {
+export default function Productos() { 
   const [productos, setProductos] = useState([]);
 
   // Cargar productos desde el archivo 
@@ -26,7 +26,7 @@ export default function Productos() {
     setProductos(data);
   }, []);
 
-  // Formateador de precios (igual que en tu JS)
+  // Formateador de precios 
   const CLP = (n) =>
     n.toLocaleString("es-CL", {
       style: "currency",

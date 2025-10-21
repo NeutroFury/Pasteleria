@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Pacifico&display=swap");
 
-
 /* ============================================
    PASTELERÍA MIL SABORES - ESTILOS PRINCIPALES
    ============================================ */
@@ -20,13 +19,147 @@
    2. LAYOUT PRINCIPAL Y ESTRUCTURA GENERAL
    ============================================ */
 
+/* Controles de usuario */
+.user-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem 1.2rem;
+    background: #fff;
+    border: 2px solid #fac3d6;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(213, 106, 138, 0.08);
+}
+
+.user-controls button {
+    height: 38px;
+    padding: 0 1.2rem;
+    border: 1.5px solid #fac3d6;
+    border-radius: 19px;
+    background: #fff;
+    color: #7c3a2d;
+    font-family: 'Lato', Arial, sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 100px;
+}
+
+.user-controls button:hover {
+    background: #fac3d6;
+    color: #7c3a2d;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(213, 106, 138, 0.15);
+}
+
+#userInfo {
+    height: 38px;
+    padding: 0 1.2rem;
+    background: #fdecc3;
+    border-radius: 19px;
+    color: #7c3a2d;
+    font-family: 'Lato', Arial, sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid #f3d4a0;
+}
+
+#cartLink {
+    background: #fdecc3;
+    border-color: #f3d4a0;
+}
+
+#cartLink:hover {
+    background: #f3d4a0;
+}
+
+#logoutLink {
+    border-color: #fac3d6;
+    background: #fac3d6;
+    color: #7c3a2d;
+}
+
+#logoutLink:hover {
+    background: #d16a8a;
+    border-color: #d16a8a;
+    color: #fff;
+}
+
 /* Fondo general del sitio */
+body, 
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 body.bodycolor { /* Selector para el body con clase bodycolor */
-  background: #fff6e3; /* Color de fondo crema suave para toda la página */
-  font-family: 'Lato', Arial, sans-serif; /* Fuente principal: Lato, fallback a Arial y sans-serif */
   min-height: 100vh; /* Altura mínima de 100% del viewport (pantalla completa) */
   display: flex; /* Activa flexbox para el layout */
   flex-direction: column; /* Organiza los elementos en columna (header, main, footer) */
+  background: #fff6e3; /* Color de fondo crema suave para toda la página */
+  font-family: 'Lato', Arial, sans-serif; /* Fuente principal: Lato, fallback a Arial y sans-serif */
+}
+
+/* Modificar el main para que ocupe el espacio disponible */
+main {
+  flex: 1 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Estilos base para el layout */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Contenedor principal */
+.bodycolor {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #fff6e3;
+}
+
+/* Contenido principal */
+main {
+  flex: 1 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Estilos del footer */
+footer {
+  margin-top: auto;
+  width: 100%;
+  background: #fac3d6;
+  padding: 1rem 0;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 /* ============================================
@@ -173,7 +306,7 @@ main { /* Selector para el elemento main */
 
 /* Sección de productos destacados */
 .productos-destacados { /* Selector para la sección de productos destacados */
-  margin-bottom: 2rem; /* Margen inferior de 2rem */
+  margin-bottom: 0;
 }
 .productos-grid { /* Selector para el grid de productos */
   display: grid; /* Activa CSS Grid para organizar productos en filas y columnas */
@@ -240,13 +373,9 @@ main { /* Selector para el elemento main */
 /* Pie de página principal */
 footer {
   background: #fac3d6;
-  padding: 1rem 0 0.5rem 0; /* Menos padding arriba */
-  text-align: center;
-  color: #7c3a2d;
   width: 100%;
-  margin-top: auto;
-  border: none;
-  box-shadow: none;
+  padding: 1rem 0 0.5rem 0;
+  margin-top: auto; /* Esto empuja el footer al final */
 }
 
 .footer-content {
@@ -257,7 +386,7 @@ footer {
   justify-content: space-between;
   align-items: flex-start;
   gap: 2rem;
-  padding: 0.5rem 0 0 0; /* Menos espacio arriba */
+  padding: 0 1rem;
 }
 
 .footer-logo {
@@ -662,9 +791,6 @@ footer {
   color: #7c3a2d;
   text-decoration: underline;
 }
-
-
-
 
 /* ============================================
    6. CARRITO DE COMPRAS

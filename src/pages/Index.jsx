@@ -1,6 +1,52 @@
+
+import { NavLink } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 export default function Index() {
+    const [loggedIn, setLoggedIn] = useState(null);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        // Verificar si hay un usuario logueado al cargar el componente
+        const userLoggedIn = JSON.parse(localStorage.getItem("loggedIn"));
+        setLoggedIn(userLoggedIn);
+    }, []);
+
+    const handleLogout = () => {
+        // Solo borrar la sesión del usuario, NO todo el localStorage
+        localStorage.removeItem("loggedIn");
+        localStorage.removeItem("carrito");
+        navigate('/login'); // Usar navigate en lugar de window.location
+        setLoggedIn(null);
+    };
+
     return(
         <>
+        <div className="user-controls">
+            {loggedIn ? (
+                <>
+                    <div id="userInfo">
+                        <span id="userEmail">{loggedIn.nombre}</span>
+                    </div>
+                    <button id="cartLink" onClick={() => navigate('/carrito')}>
+                        Carrito
+                    </button>
+                    <button id="logoutLink" onClick={handleLogout}>
+                        Cerrar sesión
+                    </button>
+                </>
+            ) : (
+                <>
+                    <button id="loginLink" onClick={() => navigate('/login')}>
+                        Iniciar sesión
+                    </button>
+                    <button id="registerLink" onClick={() => navigate('/registro')}>
+                        Registrar usuario
+                    </button>
+                </>
+            )}
+        </div>
         <main>
     {/* Banner principal */}
     <section className="banner">
@@ -10,9 +56,7 @@ export default function Index() {
           Descubre nuestras tortas y productos de repostería para todas las
           ocasiones. ¡Haz tu pedido en línea!
         </p>
-        <a href="productos.html" className="btn-principal">
-          🍰 Ver productos
-        </a>
+        <NavLink to="/productos" className="btn-principal">🍰 Ver productos</NavLink>
       </div>
       <div className="banner-img">
         <img

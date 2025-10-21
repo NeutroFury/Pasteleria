@@ -1,9 +1,85 @@
-import {Link, NavLink} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+
+// Función para obtener los datos del usuario logueado desde localStorage
+const getLoggedInUser = () => {
+  const loggedIn = localStorage.getItem("loggedIn");
+  // Devuelve el objeto del usuario o null si no hay sesión
+  return loggedIn ? JSON.parse(loggedIn) : null;
+};
 
 export default function Header() {
-    return (
-        <>
-            <header>
+  // 1. Estado para almacenar la información del usuario
+  const [user, setUser] = useState(getLoggedInUser()); const navigate = useNavigate();
+
+  // 2. useEffect para re-verificar la sesión al montar el componente (y quizás si cambia el storage)
+  useEffect(() => {
+    // Esto asegura que si la sesión se establece/elimina en otra pestaña, este componente se actualice.
+    const handleStorageChange = () => {
+      setUser(getLoggedInUser());
+    };
+    
+    window.addEventListener('storage', handleStorageChange);
+    
+    // Cleanup: remover el listener al desmontar el componente
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
+
+  // 3. Función para manejar el cierre de sesión
+  const handleLogout = () => {
+    // Eliminar la sesión del localStorage
+    localStorage.removeItem("loggedIn"); 
+    // Opcional: Eliminar el carrito al cerrar sesión
+    // localStorage.removeItem("carrito"); 
+    
+    // Limpiar el estado del usuario para forzar la re-renderización y mostrar los enlaces de login
+    setUser(null); 
+    
+    // Redirigir a la página de inicio de sesión o a Home (asumiendo que /login es la ruta)
+    navigate("/login"); 
+  };
+
+  // 4. Renderizado Condicional de los enlaces de autenticación
+  const authLinks = user ? (
+    // ESTADO LOGUEADO
+    <ul className="login_register">
+      {/* Información del Usuario (reemplaza userInfo y userEmail) */}
+      <div id="userInfo" style={{ fontSize: "1.2rem", color: "#7c3a2d", marginRight: "15px" }}>
+        <span>¡Hola, <span id="userEmail">{user.nombre}</span>!</span>
+      </div>
+      
+      {/* Enlace al Carrito */}
+      <NavLink to="/carrito" className="cart">🛒 Carrito (0)</NavLink>
+      
+      {/* Enlace de Cerrar Sesión */}
+      {/* Usamos un <a> simple o una NavLink con un manejador onClick, no una ruta real */}
+      <a 
+        href="#" 
+        onClick={handleLogout} 
+        style={{ cursor: 'pointer', marginLeft: '10px', color: '#7c3a2d' }}
+      >
+        Cerrar sesión
+      </a>
+    </ul>
+  ) : (
+    // ESTADO NO LOGUEADO
+    <ul className="login_register">
+      {/* Iniciar Sesión */}
+      <NavLink to="/login">Iniciar sesión</NavLink>
+      
+      {/* Registrar Usuario */}
+      <NavLink to="/registro">Registrar usuario</NavLink>
+      
+      {/* Enlace al Carrito (Visible o no, depende de si permites compras sin login) */}
+      {/* Lo dejamos oculto si no está logueado, según tu JS original, o lo muestras si permites Guest Checkout */}
+      {/* Por simplicidad, mantenemos la visibilidad de Carrito solo para usuarios logueados, quitándolo de este bloque */}
+    </ul>
+  );
+
+
+  return (
+    <>
+      <header>
         <div className="logo">
           <img
             src="img/Logo emprendimiento reposteria beige.png"
@@ -15,46 +91,21 @@ export default function Header() {
 
         <nav>
           <ul className="lista"> 
-            {/* <li><a href="index.html">Home</a></li> */}
-            <NavLink to="/">Home</NavLink>
-            {/* <li><a href="productos.html">Productos</a></li> */}
+            <NavLink to="/" end>Home</NavLink>
             <NavLink to="/productos">Productos</NavLink>
-            {/* <li><a href="nosotros.html">Nosotros</a></li> */}
             <NavLink to="/nosotros">Nosotros</NavLink>
-            {/* <li><a href="contacto.html">Contacto</a></li> */}
             <NavLink to="/contacto">Contacto</NavLink>
-            {/* <li><a href="blogs.html">Blog</a></li> */}
             <NavLink to="/blogs">Blog</NavLink>
           </ul>
         </nav>
 
+        {/* 5. Insertar el bloque de navegación condicional */}
         <nav>
-          <ul className="login_register">
-            {/* Mostrar "Iniciar sesión" y "Registrar usuario" si el usuario no está logueado */}
-            {/* <li id="loginLink"><a href="login.html">Iniciar sesión</a></li> */}
-            <NavLink to="/login">Iniciar sesión</NavLink>
-            <li id="registerLink">
-              {/* <a href="registro.html">Registrar usuario</a> */}
-            <NavLink to="/registro">Registrar usuario</NavLink>
-            </li>
-
-            {/* Mostrar "Cerrar sesión" y "Carrito" si el usuario está logueado */}
-            <li id="logoutLink" style={{ display: "none" }}>
-              <a href="javascript:void(0)" id="logoutLink">Cerrar sesión</a>
-            </li>
-            <li id="cartLink" style={{ display: "none" }}>
-              <a href="carrito.html" className="cart">🛒 Carrito (0)</a>
-            </li>
-          </ul>
+            {authLinks}
         </nav>
 
-        {/* Mostrar el nombre del usuario si está logueado */}
-        <div
-          id="userInfo"
-          style={{ display: "none", fontSize: "1.2rem", color: "#7c3a2d" }}
-        >
-          <span>Bienvenid@, <span id="userEmail"></span></span>
-        </div>
+        {/* NOTA: Eliminamos el div#userInfo duplicado del final ya que ahora se gestiona dentro de authLinks */}
       </header>
-      </>
-    )};
+    </>
+  );
+}
