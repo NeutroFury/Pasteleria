@@ -13,12 +13,12 @@ export default function Home() {
               ocasiones. ¡Haz tu pedido en línea!
             </p>
             <div className="banner-buttons">
-              <a href="productos" className="btn-principal">🍰 Ver productos</a>
+              <Link to="/productos" className="btn-principal">🍰 Ver productos</Link>
             </div>
           </div>
           <div className="banner-img">
             <img
-              src="img/Logo emprendimiento reposteria beige.png"
+              src={`${(process.env.PUBLIC_URL || '').replace(/\/$/,'')}/img/Logo emprendimiento reposteria beige.png`}
               alt="Productos destacados"
               width="400"
               height="auto"
@@ -40,7 +40,7 @@ export default function Home() {
           </div>
           <div className="banner-img">
             <img
-              src="img/Pastel_4.png"
+              src={`${(process.env.PUBLIC_URL || '').replace(/\/$/,'')}/img/Pastel_4.png`}
               alt="Ofertas especiales"
               width="400"
               height="auto"
@@ -54,7 +54,7 @@ export default function Home() {
           <div className="productos-grid">
             <div className="producto">
               <img
-                src="img/Pastel_1.png"
+                src={`${(process.env.PUBLIC_URL || '').replace(/\/$/,'')}/img/Pastel_1.png`}
                 width="200"
                 height="200"
                 alt="Producto 1"
@@ -66,7 +66,7 @@ export default function Home() {
 
             <div className="producto">
               <img
-                src="img/Pastel_2.png"
+                src={`${(process.env.PUBLIC_URL || '').replace(/\/$/,'')}/img/Pastel_2.png`}
                 width="200"
                 height="200"
                 alt="Producto 2"
@@ -81,7 +81,7 @@ export default function Home() {
 
             <div className="producto">
               <img
-                src="img/Pastel_3.png"
+                src={`${(process.env.PUBLIC_URL || '').replace(/\/$/,'')}/img/Pastel_3.png`}
                 width="200"
                 height="200"
                 alt="Producto 3"
@@ -96,7 +96,7 @@ export default function Home() {
 
             <div className="producto">
               <img
-                src="img/Pastel_4.png"
+                src={`${(process.env.PUBLIC_URL || '').replace(/\/$/,'')}/img/Pastel_4.png`}
                 width="200"
                 height="200"
                 alt="Producto 4"

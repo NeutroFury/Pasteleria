@@ -1150,7 +1150,7 @@ body:has(.admin-container) {
 }
 
 .admin-header .btn-principal {
-  min-width: 140px;
+  width: 160px; /* ancho fijo para alinear con el botón de acción */
   text-align: center;
   padding: 0.8rem 1.5rem;
   font-size: 0.9rem;
@@ -1160,7 +1160,8 @@ body:has(.admin-container) {
   border-radius: 8px !important;
   font-weight: 600 !important;
   text-decoration: none !important;
-  display: inline-block !important;
+  display: inline-flex !important;
+  align-items: center; justify-content: center;
   transition: all 0.3s ease !important;
 }
 
@@ -1168,6 +1169,25 @@ body:has(.admin-container) {
   background: #b48b7d !important;
   box-shadow: 0 4px 16px rgba(180, 139, 125, 0.15) !important;
   transform: translateY(-2px) !important;
+}
+
+/* Igualar tamaño y alineación de botones en headers (Nuevo X / Ir al Sitio) */
+.admin-header .admin-actions > * { /* cualquier botón/link dentro del bloque derecho */
+  width: 164px;               /* ancho exacto igual para todos */
+  height: 42px;               /* alto fijo para evitar variaciones */
+  padding: 0 16px !important; /* padding horizontal; sin afectar altura */
+  display: inline-flex !important;
+  align-items: center; justify-content: center;
+  text-align: center;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0;                  /* elimina diferencias por márgenes */
+}
+.admin-header .admin-btn {
+  background: #d16a8a;       /* mismo color */
+  color: #fff;
+  border: none;              /* sin borde para igualar altura visual */
 }
 
 /* Cards del dashboard */
@@ -1216,44 +1236,45 @@ body:has(.admin-container) {
 
 /* Botones del admin */
 .admin-btn {
-  background: #7c3a2d;
-  color: white;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  border-radius: 8px;
+  background: #d16a8a;           /* Igual que .btn-agregar */
+  color: #fff;
+  border: 2px solid #d16a8a;     /* Borde del mismo tono */
+  padding: 8px 14px;
+  border-radius: 10px;
   font-family: 'Lato', sans-serif;
-  font-weight: 600;
-  font-size: 0.9rem;
+  font-weight: 700;
+  font-size: 0.95rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.03s ease;
   text-decoration: none;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   margin: 0.3rem;
   text-align: center;
 }
 
-.admin-btn:hover {
-  background: #8b5a3c;
-  color: white;
-}
+.admin-btn:hover { background: #b35448; border-color: #b35448; transform: translateY(-1px); }
+.admin-btn:active { transform: translateY(0); }
+.admin-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
 .admin-btn-secondary {
-  background: #fac3d6;
-  color: #7c3a2d;
+  background: #fff;
+  color: #d16a8a;
+  border: 2px solid #d16a8a;    /* Outline rosa como en carrito */
 }
-
-.admin-btn-secondary:hover {
-  background: #f8b5c8;
-  color: #7c3a2d;
-}
+.admin-btn-secondary:hover { background: #d16a8a; color: #fff; }
 
 .admin-btn-danger {
   background: #dc3545;
+  border-color: #dc3545;
+  color: #fff;
 }
+.admin-btn-danger:hover { background: #c82333; border-color: #c82333; color: #fff; }
 
-.admin-btn-danger:hover {
-  background: #c82333;
-}
+/* Contenedores de acciones para alinear botones */
+.admin-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 
 /* Tablas del admin */
 .admin-table {
@@ -1426,6 +1447,69 @@ body:has(.admin-container) {
 }
 
 /* Elementos específicos del admin */
+
+/* --- Botones de acción compactos dentro de tablas --- */
+.admin-table .admin-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  line-height: 1;
+  border: 1.5px solid transparent;
+  background: #fff;
+  cursor: pointer;
+  transition: background .18s ease, color .18s ease, border-color .18s ease, transform .06s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.admin-table .admin-action-btn:active { transform: translateY(1px); }
+
+/* Editar: azul suave */
+.admin-table .admin-action-btn.is-edit {
+  color: #0b5ed7;
+  background: #eaf2ff;
+  border-color: #cfe2ff;
+}
+.admin-table .admin-action-btn.is-edit:hover {
+  background: #dbe8ff;
+  border-color: #a9ccff;
+}
+
+/* Eliminar: rojo */
+.admin-table .admin-action-btn.is-delete {
+  color: #c82333;
+  background: #fff1f2;
+  border-color: #f5c2c7;
+}
+.admin-table .admin-action-btn.is-delete:hover {
+  background: #ffe4e6;
+  border-color: #eea5ad;
+}
+
+/* Activar/Desactivar: ámbar/neutral */
+.admin-table .admin-action-btn.is-toggle {
+  color: #8a6d00;
+  background: #fff8e1;
+  border-color: #ffe08a;
+}
+.admin-table .admin-action-btn.is-toggle:hover {
+  background: #fff1c2;
+  border-color: #ffd666;
+}
+
+/* Historial: marrón de la marca */
+.admin-table .admin-action-btn.is-history {
+  color: #7c3a2d;
+  background: #fff6e3;
+  border-color: #f0d9d2;
+}
+.admin-table .admin-action-btn.is-history:hover {
+  background: #ffeccc;
+  border-color: #e5c8bf;
+}
 
 /* Estados de usuario */
 .status-badge {
@@ -1650,11 +1734,7 @@ body:has(.admin-container) {
     justify-content: center;
   }
   
-  .admin-header .btn-principal {
-    min-width: 120px;
-    font-size: 0.8rem;
-    padding: 0.7rem 1.2rem;
-  }
+  .admin-header .admin-actions > * { width: 130px; height: 40px; font-size: 0.85rem; }
   
   .admin-header h1 {
     font-size: 1.8rem;

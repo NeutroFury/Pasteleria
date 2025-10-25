@@ -35,6 +35,14 @@ export default function Carrito() {
     localStorage.setItem("productos", JSON.stringify(catalogo));
   }, []);
 
+  const resolveImg = (src) => {
+    if (!src) return '';
+    if (/^https?:\/\//i.test(src) || /^data:/i.test(src)) return src;
+    const s = String(src).replace(/^\/+/, '');
+    const prefix = (process.env.PUBLIC_URL || '').replace(/\/$/, '');
+    return `${prefix}/${s}` || `/${s}`;
+  };
+
   const guardar = (nuevo) => {
     setCarrito(nuevo);
     localStorage.setItem("carrito", JSON.stringify(nuevo));
@@ -121,7 +129,7 @@ export default function Carrito() {
                 <article key={p.codigo} className="product-card">
                   <div className="product-thumb">
                     {p.img ? (
-                      <img src={p.img} alt={p.nombre} />
+                      <img src={resolveImg(p.img)} alt={p.nombre} />
                     ) : (
                       <span>400 x 300</span>
                     )}

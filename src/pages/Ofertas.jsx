@@ -1,13 +1,19 @@
 import { useEffect, useMemo, useState } from "react";
-import catalogo from "../data/catalogo";
+import productService from "../data/productService";
 
 export default function Ofertas() {
+		const resolveImg = (src) => {
+			if (!src) return '';
+			if (/^https?:\/\//i.test(src) || /^data:/i.test(src)) return src;
+			const s = String(src).replace(/^\/+/, '');
+			const prefix = (process.env.PUBLIC_URL || '').replace(/\/$/, '');
+			return `${prefix}/${s}` || `/${s}`;
+		};
 	const [productos, setProductos] = useState([]);
 
 	useEffect(() => {
-		// Cargar catálogo y persistir para consistencia con otras vistas
-		setProductos(catalogo);
-		localStorage.setItem("productos", JSON.stringify(catalogo));
+			// Cargar desde servicio (localStorage con semilla del catálogo)
+			setProductos(productService.getAll());
 	}, []);
 
 	const CLP = (n) =>
@@ -23,7 +29,7 @@ export default function Ofertas() {
 		return d > 0 ? Math.round(base * (1 - d / 100)) : base;
 	};
 
-	const ofertas = useMemo(() => (productos || []).filter((p) => Number(p.descuento) > 0), [productos]);
+		const ofertas = useMemo(() => (productos || []).filter((p) => Number(p.descuento) > 0), [productos]);
 
 	const agregarAlCarrito = (codigo) => {
 		const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
@@ -127,8 +133,8 @@ export default function Ofertas() {
 							</div>
 
 							<div className="catalog-thumb">
-								<img
-									src={p.img}
+				    <img
+					    src={resolveImg(p.img)}
 									alt={p.nombre}
 									loading="lazy"
 								/>

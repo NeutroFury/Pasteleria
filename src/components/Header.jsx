@@ -58,7 +58,7 @@ export default function Header() {
   return (
     <header>
       <div className="logo">
-        <img src="/img/Logo emprendimiento reposteria beige.png" alt="Logo Pastelería" className="logo-img" />
+  <img src={`${(process.env.PUBLIC_URL || '').replace(/\/$/,'')}/img/Logo emprendimiento reposteria beige.png`} alt="Logo Pastelería" className="logo-img" />
         <h2 className="estiloEncabezado">Pastelería Mil Sabores</h2>
       </div>
 

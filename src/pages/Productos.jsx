@@ -1,16 +1,20 @@
 import { useState, useEffect } from "react";
-import catalogo from "../data/catalogo";
+import productService from "../data/productService";
 
 export default function Productos() {
+  const resolveImg = (src) => {
+    if (!src) return '';
+    if (/^https?:\/\//i.test(src) || /^data:/i.test(src)) return src;
+    const s = String(src).replace(/^\/+/, '');
+    const prefix = (process.env.PUBLIC_URL || '').replace(/\/$/, '');
+    return `${prefix}/${s}` || `/${s}`;
+  };
   const [productos, setProductos] = useState([]);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("Todas");
 
-  // Cargar productos desde el catálogo compartido
+  // Cargar productos desde servicio (usa localStorage con semilla del catálogo)
   useEffect(() => {
-    // Fuente única de productos
-    setProductos(catalogo);
-    // Persistimos siempre para que Ofertas/Carrito tengan los mismos datos (incluye descuentos)
-    localStorage.setItem("productos", JSON.stringify(catalogo));
+    setProductos(productService.getAll());
   }, []);
 
   // Formateador de precios (igual que en tu JS)
@@ -78,7 +82,7 @@ export default function Productos() {
   };
 
   // Obtener categorías únicas
-  const categorias = ["Todas", ...new Set(productos.map(p => p.categoria))];
+  const categorias = ["Todas", ...new Set((productos || []).map(p => p.categoria))];
 
   // Filtrar productos por categoría
   const productosFiltrados = categoriaSeleccionada === "Todas" 
@@ -147,7 +151,7 @@ export default function Productos() {
           >
             <div className="catalog-thumb">
               <img
-                src={p.img}
+                src={resolveImg(p.img)}
                 alt={p.nombre}
                 loading="lazy"
               />
