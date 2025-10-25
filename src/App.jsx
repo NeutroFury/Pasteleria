@@ -17,6 +17,9 @@ import { useLocation } from 'react-router-dom';
 import AdminUsuarios from './pages/Admin-usuarios.jsx';
 import AdminProductos from './pages/Admin-productos.jsx';
 import Ofertas from './pages/Ofertas.jsx';
+import Checkout from './pages/Checkout.jsx';
+import PagoBien from './pages/Pago-bien.jsx';
+import PagoMal from './pages/Pago-mal.jsx';
 
 
 function App() {
@@ -35,6 +38,9 @@ function App() {
         <Route path="/nosotros" element={<Nosotros />} />
         <Route path="/blogs" element={<Blogs/>} />
   <Route path="/ofertas" element={<Ofertas/>} />
+  <Route path="/checkout" element={<Checkout/>} />
+  <Route path="/pago-bien" element={<PagoBien/>} />
+  <Route path="/pago-mal" element={<PagoMal/>} />
         <Route path='/carrito' element={<Carrito/>} />
         <Route path="/contacto" element={<Contacto/>} />
         <Route path="/dato1" element={<Dato1/>} />

@@ -231,9 +231,9 @@ export default function Carrito() {
                 </div>
                 <div style={{ display: "flex", gap: 8 }}>
                   <button className="cart-clean-btn" onClick={limpiar}>Limpiar</button>
-                  <button className="btn-compra" onClick={() => alert("Continuar compra")}>
+                  <NavLink to="/checkout" className="btn-compra">
                     Comprar ahora
-                  </button>
+                  </NavLink>
                 </div>
               </div>
             </div>
