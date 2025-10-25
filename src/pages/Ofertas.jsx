@@ -99,10 +99,10 @@ export default function Ofertas() {
 					{ofertas.map((p) => (
 						<div
 							key={p.codigo}
+							className="card-sombra"
 							style={{
-								border: "1px solid #f0d9d2",
+								background: "#ffffff",
 								borderRadius: "12px",
-								boxShadow: "0 8px 20px rgba(0,0,0,.06)",
 								display: "flex",
 								flexDirection: "column",
 								overflow: "hidden",
@@ -126,12 +126,13 @@ export default function Ofertas() {
 								-{p.descuento}%
 							</div>
 
-							<img
-								src={p.img}
-								alt={p.nombre}
-								loading="lazy"
-								style={{ width: "100%", height: "160px", objectFit: "cover" }}
-							/>
+							<div className="catalog-thumb">
+								<img
+									src={p.img}
+									alt={p.nombre}
+									loading="lazy"
+								/>
+							</div>
 							<div style={{ padding: "10px 12px" }}>
 								<h3 style={{ color: "#7c3a2d", margin: "0 0 6px" }}>{p.nombre}</h3>
 								<p style={{ color: "#7c3a2d", opacity: ".9", marginBottom: "10px" }}>
@@ -152,14 +153,7 @@ export default function Ofertas() {
 									</div>
 									<button
 										onClick={() => agregarAlCarrito(p.codigo)}
-										style={{
-											background: "#d16a8a",
-											color: "#fff",
-											border: "none",
-											borderRadius: "10px",
-											padding: "8px 12px",
-											cursor: "pointer",
-										}}
+										className="btn-agregar"
 									>
 										Agregar
 									</button>

@@ -1,9 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-export default function Header(/* props si los tienes */) {
+export default function Header() {
   const [isLogged, setIsLogged] = useState(false);
   const [userName, setUserName] = useState('');
+  const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {
     const loadAuth = () => {
@@ -18,6 +19,32 @@ export default function Header(/* props si los tienes */) {
     return () => {
       window.removeEventListener('storage', onStorage);
       window.removeEventListener('auth-changed', onAuthChanged);
+    };
+  }, []);
+
+  // Contador de productos en el carrito
+  useEffect(() => {
+    const loadCart = () => {
+      try {
+        const raw = localStorage.getItem('carrito');
+        const arr = raw ? JSON.parse(raw) : [];
+        if (Array.isArray(arr)) {
+          const total = arr.reduce((sum, it) => sum + (Number(it.cantidad) || 1), 0);
+          setCartCount(total);
+        } else {
+          setCartCount(0);
+        }
+      } catch {
+        setCartCount(0);
+      }
+    };
+    loadCart();
+    const onChanged = () => loadCart();
+    window.addEventListener('carrito-changed', onChanged);
+    window.addEventListener('storage', onChanged);
+    return () => {
+      window.removeEventListener('carrito-changed', onChanged);
+      window.removeEventListener('storage', onChanged);
     };
   }, []);
 
@@ -53,7 +80,12 @@ export default function Header(/* props si los tienes */) {
             <>
               <li><NavLink to="/login">Iniciar sesión</NavLink></li>
               <li><NavLink to="/registro">Registrar usuario</NavLink></li>
-              <li id="cartLink"><NavLink to="/carrito" className="cart">🛒 Carrito (0)</NavLink></li>
+              <li id="cartLink">
+                <NavLink to="/carrito" className="cart" aria-label={`Carrito con ${cartCount} productos`}>
+                  🛒 Carrito
+                  <span className="cart-badge" aria-hidden="true">{cartCount}</span>
+                </NavLink>
+              </li>
             </>
           ) : (
             <>
@@ -61,10 +93,13 @@ export default function Header(/* props si los tienes */) {
                 <span style={{ color: '#7c3a2d' }}>Bienvenido {userName}</span>
               </li>
               <li>
-                <NavLink to="/carrito" className="cart">🛒 Carrito</NavLink>
+                <NavLink to="/carrito" className="cart" aria-label={`Carrito con ${cartCount} productos`}>
+                  🛒 Carrito
+                  <span className="cart-badge" aria-hidden="true">{cartCount}</span>
+                </NavLink>
               </li>
               <li>
-                <button onClick={handleLogout} style={{ background: 'transparent', border: '1px solid #7c3a2d', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer' }}>
+                <button onClick={handleLogout} className="btn-header">
                   Cerrar sesión
                 </button>
               </li>

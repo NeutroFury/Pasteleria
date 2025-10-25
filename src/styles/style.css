@@ -20,8 +20,8 @@
    2. LAYOUT PRINCIPAL Y ESTRUCTURA GENERAL
    ============================================ */
 
-/* Fondo general del sitio */
-body.bodycolor { /* Selector para el body con clase bodycolor */
+/* Fondo general del sitio: aplica a todas las páginas */
+body { /* Selector global para el body */
   background: #fff6e3; /* Color de fondo crema suave para toda la página */
   font-family: 'Lato', Arial, sans-serif; /* Fuente principal: Lato, fallback a Arial y sans-serif */
   min-height: 100vh; /* Altura mínima de 100% del viewport (pantalla completa) */
@@ -108,7 +108,7 @@ header { /* Selector para el elemento header */
   font-family: 'Lato', Arial, sans-serif; /* Fuente Lato para los enlaces */
   font-weight: 700; /* Peso de fuente bold (700) */
   font-size: 1.05rem; /* Tamaño de fuente ligeramente más grande */
-  border: 1.5px solid #7c3a2d; /* Borde sólido de 1.5px en color marrón */
+  border: 2px solid #7c3a2d; /* Borde más marcado para mejor definición */
   border-radius: 20px; /* Bordes redondeados para efecto de botón */
   padding: 0.3rem 1.2rem; /* Padding vertical 0.3rem, horizontal 1.2rem */
   background: #fff; /* Fondo blanco para los botones */
@@ -122,7 +122,7 @@ header { /* Selector para el elemento header */
 
 /* Botón del carrito de compras */
 .cart { /* Selector para el botón del carrito */
-  border: 1.5px solid #7c3a2d; /* Borde sólido de 1.5px en color marrón */
+  border: 2px solid #7c3a2d; /* Borde más marcado para mejor definición */
   border-radius: 20px; /* Bordes redondeados para efecto de botón */
   padding: 0.3rem 1.2rem; /* Padding vertical 0.3rem, horizontal 1.2rem */
   background: #fff; /* Fondo blanco para el botón */
@@ -137,6 +137,39 @@ header { /* Selector para el elemento header */
   display: flex; /* Activa flexbox para centrar contenido */
   align-items: center; /* Centra verticalmente el contenido del botón */
 }
+
+/* Badge contador del carrito */
+.cart-badge {
+  margin-left: 8px;
+  background: #d16a8a; /* Rosa original solicitado */
+  color: #fff;
+  border-radius: 999px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  font-size: 0.8rem;
+  line-height: 20px;
+  text-align: center;
+  display: inline-block;
+  border: 2px solid #fff; /* aro blanco para destacar sobre el botón */
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+}
+
+.cart:hover .cart-badge { background: #d16a8a; color: #fff; border-color: #fff; }
+
+/* Botón de acción del header (Cerrar sesión) */
+.btn-header {
+  background: #fff;
+  color: #7c3a2d;
+  border: 2px solid #7c3a2d; /* Borde marcado para coherencia con los demás botones */
+  border-radius: 20px;
+  padding: 0.3rem 1rem;
+  font-weight: 700;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.btn-header:hover { background: #7c3a2d; color: #fff; border-color: #7c3a2d; }
 
 /* ============================================
    4. CONTENIDO PRINCIPAL
@@ -171,6 +204,10 @@ main { /* Selector para el elemento main */
   margin-bottom: 2rem; /* Margen inferior de 2rem */
   padding: 2rem; /* Padding de 2rem en todos los lados */
   gap: 2rem; /* Espacio entre elementos flex */
+  /* Sombras: externa para elevación + interna (inset) para contorno/borde */
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08),
+              inset 0 0 0 1.5px rgba(124,58,45,0.15);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 .banner-info { /* Selector para la información del banner */
   flex: 1 1 300px; /* Crece y encoge, tamaño base 300px */
@@ -193,7 +230,9 @@ main { /* Selector para el elemento main */
 .producto { /* Selector para las tarjetas de productos */
   background: #fdecc3; /* Color de fondo beige claro para las tarjetas */
   border-radius: 10px; /* Bordes redondeados */
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Sombra suave debajo de la tarjeta */
+  /* Sombra externa + aro sutil en el borde */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.10),
+              inset 0 0 0 1px rgba(124,58,45,0.18);
   padding: 1rem; /* Padding de 1rem en todos los lados */
   text-align: center; /* Centra el texto dentro de la tarjeta */
   max-width: 220px; /* Ancho máximo de 220px */
@@ -202,6 +241,7 @@ main { /* Selector para el elemento main */
   flex-direction: column; /* Organiza elementos en columna */
   align-items: center; /* Centra elementos horizontalmente */
   text-decoration: none; /* Elimina subrayado de enlaces */
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 .producto a {
   text-decoration: none;
@@ -212,6 +252,20 @@ main { /* Selector para el elemento main */
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 0.5rem;
+}
+
+/* Efecto hover: eleva ligeramente la tarjeta y aumenta la sombra */
+.producto:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.14),
+              inset 0 0 0 2px rgba(124,58,45,0.22);
+}
+
+/* Efecto hover suave para banners */
+.banner:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 48px rgba(0,0,0,0.10),
+              inset 0 0 0 2px rgba(124,58,45,0.18);
 }
 .producto a h3 {
   text-decoration: none;
@@ -419,6 +473,21 @@ footer {
 .btn-compra:hover { background: #b35448; border-color: #b35448; }
 .btn-compra:active { transform: translateY(1px); }
 .btn-compra:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* Botón Agregar reutilizable (Productos, Ofertas, Carrito) */
+.btn-agregar {
+  background: #d16a8a;
+  color: #fff;
+  border: 2px solid #d16a8a; /* borde de 2px consistente */
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.02s ease;
+}
+.btn-agregar:hover { background-color: #b35448; border-color: #b35448; }
+.btn-agregar:active { background-color: #8f3e35; border-color: #8f3e35; transform: translateY(1px); }
+.btn-agregar:disabled { opacity: 0.6; cursor: not-allowed; }
 
 /* ============================================
    9. FORMULARIOS DE AUTENTICACIÓN
@@ -1446,28 +1515,58 @@ body:has(.admin-container) {
   box-shadow: 0 2px 8px rgba(124, 58, 45, 0.06);
 }
 
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 12px;
+/* Tarjeta con sombra de borde (para vistas Productos y Ofertas) */
+.card-sombra {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08),
+              inset 0 0 0 1px rgba(124,58,45,0.15);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
-.product-card { display: flex; flex-direction: column; gap: 6px; padding: 10px; }
-.product-card .product-thumb {
-  background: #faf6f4;
-  height: 100px;
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  overflow: hidden; margin-bottom: 8px;
+.card-sombra:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.12),
+              inset 0 0 0 2px rgba(124,58,45,0.18);
 }
-.product-card .product-thumb img { width: 100%; height: 100%; object-fit: cover; display:block; }
-.product-card .product-title { color: #7c3a2d; font-weight: 700; font-size: 0.95rem; line-height: 1.2; display:-webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-clamp: 2; }
-.product-card .product-price { color: #b35448; margin: 2px 0 6px; font-weight: 600; font-size: 0.95rem; }
-.product-card .btn-principal { padding: 6px 10px; font-size: 0.9rem; margin-top: 0; width: 100%; }
+ 
+ .product-grid {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+   gap: 12px;
+ }
+ .product-card { display: flex; flex-direction: column; gap: 6px; padding: 10px; }
+ .product-card .product-thumb {
+   background: #faf6f4;
+   height: 100px;
+   border-radius: 10px;
+   border: 1px solid #f1e4e0;
+   padding: 6px;
+   display: flex; align-items: center; justify-content: center;
+   overflow: hidden; margin-bottom: 8px;
+   box-shadow: 0 2px 8px rgba(124, 58, 45, 0.04);
+ }
+ .product-card .product-thumb img { width: 100%; height: 100%; object-fit: contain; display:block; background: transparent; filter: drop-shadow(0 1px 2px rgba(0,0,0,.12)); }
+ .product-card .product-title { color: #7c3a2d; font-weight: 700; font-size: 0.95rem; line-height: 1.2; display:-webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-clamp: 2; }
+ .product-card .product-price { color: #b35448; margin: 2px 0 6px; font-weight: 600; font-size: 0.95rem; }
+ .product-card .btn-principal { padding: 6px 10px; font-size: 0.9rem; margin-top: 0; width: 100%; }
+ 
+ /* Hacer la lista compacta y con scroll interno */
+ .product-cardlist { max-height: 560px; overflow: auto; padding-right: 4px; }
+ .product-cardlist::-webkit-scrollbar { width: 8px; }
+ .product-cardlist::-webkit-scrollbar-thumb { background: #e7d2cc; border-radius: 10px; }
 
-/* Hacer la lista compacta y con scroll interno */
-.product-cardlist { max-height: 560px; overflow: auto; padding-right: 4px; }
-.product-cardlist::-webkit-scrollbar { width: 8px; }
-.product-cardlist::-webkit-scrollbar-thumb { background: #e7d2cc; border-radius: 10px; }
+/* Marco profesional para las imágenes del catálogo (vista /productos) */
+.catalog-thumb {
+  height: 180px;
+  background: linear-gradient(180deg, #faf6f4 0%, #fffaf2 100%);
+  border: 1.5px solid #ead6cf;
+  border-radius: 14px;
+  padding: 10px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(124, 58, 45, 0.06), inset 0 0 0 1px #f3e1db;
+}
+.catalog-thumb img { max-width: 100%; max-height: 100%; object-fit: contain; display:block; border-radius: 10px; background: transparent; filter: drop-shadow(0 2px 3px rgba(0,0,0,.12)); }
 
 .cart-card .cart-table { width: 100%; border-collapse: collapse; }
 .cart-card .cart-table thead th {
@@ -1477,7 +1576,7 @@ body:has(.admin-container) {
   padding: 10px; border-bottom: 1px solid #f7e8e3; vertical-align: middle;
 }
 .cart-card .thumb {
-  width: 48px; height: 48px; border-radius: 8px; object-fit: cover;
+  width: 48px; height: 48px; border-radius: 8px; object-fit: cover; background:#faf6f4; border:1px solid #f1e4e0; padding:2px;
 }
 .qty-controls {
   display: inline-flex; align-items: center; gap: 8px;

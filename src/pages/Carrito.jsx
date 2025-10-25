@@ -139,7 +139,7 @@ export default function Carrito() {
                       <strong>{CLP(p.precio)}</strong>
                     )}
                   </div>
-                  <button className="btn-principal" onClick={() => agregarDesdeListado(p)}>
+                  <button className="btn-agregar" onClick={() => agregarDesdeListado(p)}>
                     Añadir
                   </button>
                 </article>
