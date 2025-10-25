@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import catalogo from "../data/catalogo";
 import "../styles/style.css";
 
 export default function Carrito() {
@@ -31,10 +32,17 @@ export default function Carrito() {
   useEffect(() => {
     try {
       const raw = localStorage.getItem("productos");
-      const arr = raw ? JSON.parse(raw) : [];
-      setProductos(Array.isArray(arr) ? arr : []);
+      const arr = raw ? JSON.parse(raw) : null;
+      if (Array.isArray(arr) && arr.length > 0) {
+        setProductos(arr);
+      } else {
+        setProductos(catalogo);
+        // Persistimos para que otras vistas lo usen como fuente común
+        localStorage.setItem("productos", JSON.stringify(catalogo));
+      }
     } catch {
-      setProductos([]);
+      setProductos(catalogo);
+      localStorage.setItem("productos", JSON.stringify(catalogo));
     }
   }, []);
 
@@ -107,23 +115,25 @@ export default function Carrito() {
         {/* Lista de productos */}
         <section className="carrito-left">
           <h2 className="estiloEncabezado">Lista de productos</h2>
-          <div className="product-grid">
-            {(productos || []).slice(0, 8).map((p) => (
-              <article key={p.codigo} className="product-card card">
-                <div className="product-thumb">
-                  {p.img ? (
-                    <img src={p.img} alt={p.nombre} />
-                  ) : (
-                    <span>400 x 300</span>
-                  )}
-                </div>
-                <div className="product-title">{p.nombre}</div>
-                <div className="product-price">{CLP(p.precio)}</div>
-                <button className="btn-principal" onClick={() => agregarDesdeListado(p)}>
-                  Añadir
-                </button>
-              </article>
-            ))}
+          <div className="card product-cardlist">
+            <div className="product-grid">
+              {(productos || []).map((p) => (
+                <article key={p.codigo} className="product-card">
+                  <div className="product-thumb">
+                    {p.img ? (
+                      <img src={p.img} alt={p.nombre} />
+                    ) : (
+                      <span>400 x 300</span>
+                    )}
+                  </div>
+                  <div className="product-title">{p.nombre}</div>
+                  <div className="product-price">{CLP(p.precio)}</div>
+                  <button className="btn-principal" onClick={() => agregarDesdeListado(p)}>
+                    Añadir
+                  </button>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -163,9 +173,23 @@ export default function Carrito() {
                           <td>{CLP(it.precio)}</td>
                           <td>
                             <div className="qty-controls">
-                              <button className="btn-secundario" onClick={() => decrementar(it.codigo)}>-</button>
+                              <button
+                                className="cart-qty-btn is-minus"
+                                onClick={() => decrementar(it.codigo)}
+                                aria-label={`Disminuir cantidad de ${it.nombre}`}
+                                disabled={(Number(it.cantidad) || 1) <= 1}
+                              >
+                                -
+                              </button>
                               <span>{it.cantidad}</span>
-                              <button className="btn-principal" onClick={() => incrementar(it.codigo)}>+</button>
+                              <button
+                                className="cart-qty-btn is-plus"
+                                onClick={() => incrementar(it.codigo)}
+                                aria-label={`Aumentar cantidad de ${it.nombre}`}
+                                disabled={(Number(it.cantidad) || 1) >= 5}
+                              >
+                                +
+                              </button>
                             </div>
                           </td>
                           <td style={{ fontWeight: 700 }}>{CLP(subtotal)}</td>
@@ -187,8 +211,8 @@ export default function Carrito() {
                   <span className="total">{CLP(total)}</span>
                 </div>
                 <div style={{ display: "flex", gap: 8 }}>
-                  <button className="btn-secundario" onClick={limpiar}>Limpiar</button>
-                  <button className="btn-principal" onClick={() => alert("Continuar compra")}>
+                  <button className="cart-clean-btn" onClick={limpiar}>Limpiar</button>
+                  <button className="btn-compra" onClick={() => alert("Continuar compra")}>
                     Comprar ahora
                   </button>
                 </div>
