@@ -26,6 +26,28 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Banner de Ofertas */}
+        <section className="banner ofertas-banner">
+          <div className="banner-info">
+            <h1>OFERTAS ESPECIALES</h1>
+            <p>
+              Aprovecha descuentos por tiempo limitado en nuestros productos
+              favoritos. ¡No te los pierdas!
+            </p>
+            <div className="banner-buttons">
+              <Link to="/ofertas" className="btn-principal">🛍️ Ver ofertas</Link>
+            </div>
+          </div>
+          <div className="banner-img">
+            <img
+              src="img/Pastel_4.png"
+              alt="Ofertas especiales"
+              width="400"
+              height="auto"
+            />
+          </div>
+        </section>
+
         {/* Grilla de productos destacados */}
         <section className="productos-destacados">
           <h2 className="titulo-productos">Productos destacados</h2>

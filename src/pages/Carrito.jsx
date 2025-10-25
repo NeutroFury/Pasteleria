@@ -30,20 +30,9 @@ export default function Carrito() {
 
   // Cargar productos (solo para mostrar en la lista)
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem("productos");
-      const arr = raw ? JSON.parse(raw) : null;
-      if (Array.isArray(arr) && arr.length > 0) {
-        setProductos(arr);
-      } else {
-        setProductos(catalogo);
-        // Persistimos para que otras vistas lo usen como fuente común
-        localStorage.setItem("productos", JSON.stringify(catalogo));
-      }
-    } catch {
-      setProductos(catalogo);
-      localStorage.setItem("productos", JSON.stringify(catalogo));
-    }
+    // Usar el catálogo actual y persistir para consistencia
+    setProductos(catalogo);
+    localStorage.setItem("productos", JSON.stringify(catalogo));
   }, []);
 
   const guardar = (nuevo) => {
@@ -83,17 +72,28 @@ export default function Carrito() {
       maximumFractionDigits: 0,
     });
 
+  const precioConDescuento = (p) => {
+    const base = Number(p.precio) || 0;
+    const d = Number(p.descuento) || 0;
+    return d > 0 ? Math.round(base * (1 - d / 100)) : base;
+  };
+
   const agregarDesdeListado = (p) => {
     let nuevo = Array.isArray(carrito) ? [...carrito] : [];
     const existe = nuevo.find((x) => x.codigo === p.codigo);
     if (existe) {
       if ((Number(existe.cantidad) || 1) >= 5) return;
+      // Asegurar precio vigente (aplicar descuento si corresponde)
+      const pf = precioConDescuento(p);
+      if (Number(existe.precio) !== pf) {
+        existe.precio = pf;
+      }
       existe.cantidad = (Number(existe.cantidad) || 1) + 1;
     } else {
       nuevo.push({
         codigo: p.codigo,
         nombre: p.nombre,
-        precio: Number(p.precio) || 0,
+        precio: precioConDescuento(p),
         img: p.img,
         categoria: p.categoria,
         cantidad: 1,
@@ -127,7 +127,18 @@ export default function Carrito() {
                     )}
                   </div>
                   <div className="product-title">{p.nombre}</div>
-                  <div className="product-price">{CLP(p.precio)}</div>
+                  <div className="product-price">
+                    {p.descuento ? (
+                      <div style={{ display: "flex", flexDirection: "column" }}>
+                        <span style={{ textDecoration: "line-through", opacity: 0.6 }}>
+                          {CLP(p.precio)}
+                        </span>
+                        <strong>{CLP(precioConDescuento(p))}</strong>
+                      </div>
+                    ) : (
+                      <strong>{CLP(p.precio)}</strong>
+                    )}
+                  </div>
                   <button className="btn-principal" onClick={() => agregarDesdeListado(p)}>
                     Añadir
                   </button>

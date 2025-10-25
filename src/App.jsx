@@ -16,6 +16,7 @@ import Registro from './pages/Registro';
 import { useLocation } from 'react-router-dom';
 import AdminUsuarios from './pages/Admin-usuarios.jsx';
 import AdminProductos from './pages/Admin-productos.jsx';
+import Ofertas from './pages/Ofertas.jsx';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/nosotros" element={<Nosotros />} />
         <Route path="/blogs" element={<Blogs/>} />
+  <Route path="/ofertas" element={<Ofertas/>} />
         <Route path='/carrito' element={<Carrito/>} />
         <Route path="/contacto" element={<Contacto/>} />
         <Route path="/dato1" element={<Dato1/>} />

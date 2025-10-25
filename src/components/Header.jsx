@@ -39,9 +39,10 @@ export default function Header(/* props si los tienes */) {
         <ul className="lista">
           <li><NavLink to="/" end>Home</NavLink></li>
           <li><NavLink to="/productos">Productos</NavLink></li>
+          <li><NavLink to="/ofertas">Ofertas</NavLink></li>
           <li><NavLink to="/nosotros">Nosotros</NavLink></li>
           <li><NavLink to="/contacto">Contacto</NavLink></li>
-          <li><NavLink to="/blog">Blog</NavLink></li>
+          <li><NavLink to="/blogs">Blog</NavLink></li>
           <li><NavLink to="/admin">Admin</NavLink></li>
         </ul>
       </nav>
