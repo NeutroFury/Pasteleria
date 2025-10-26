@@ -20,12 +20,15 @@ import Ofertas from './pages/Ofertas.jsx';
 import Checkout from './pages/Checkout.jsx';
 import PagoBien from './pages/Pago-bien.jsx';
 import PagoMal from './pages/Pago-mal.jsx';
+import AdminBoletas from './pages/Admin-Boletas.jsx';
+import AdminProductosCriticos from './pages/Admin-productos-criticos.jsx';
+import AdminReportes from './pages/Admin-reportes.jsx';
 
 
 function App() {
   const location = useLocation();
   // Modificamos la lógica para incluir también la ruta admin-usuarios
-  const hideLayout = ['/admin', '/admin-usuarios','/admin-productos'].includes(location.pathname);
+  const hideLayout = ['/admin', '/admin-usuarios','/admin-productos','/admin-boletas','/admin-productos-criticos','/admin-reportes'].includes(location.pathname);
 
   return (
     <div className="App">
@@ -34,6 +37,9 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin-usuarios" element={<AdminUsuarios />} />
         <Route path="/admin-productos" element={<AdminProductos />} />
+  <Route path="/admin-boletas" element={<AdminBoletas />} />
+    <Route path="/admin-productos-criticos" element={<AdminProductosCriticos />} />
+    <Route path="/admin-reportes" element={<AdminReportes />} />
         <Route path="/" element={<Home />} />
         <Route path="/nosotros" element={<Nosotros />} />
         <Route path="/blogs" element={<Blogs/>} />

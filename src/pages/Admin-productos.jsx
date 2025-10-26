@@ -186,7 +186,10 @@ export default function AdminProductos() {
         <ul className="admin-nav">
           <li><Link to="/admin">Dashboard</Link></li>
           <li><Link to="/admin-productos" className="active">Productos</Link></li>
+          <li><Link to="/admin-productos-criticos">Críticos</Link></li>
           <li><Link to="/admin-usuarios">Usuarios</Link></li>
+          <li><Link to="/admin-boletas">Boletas</Link></li>
+          <li><Link to="/admin-reportes">Reportes</Link></li>
         </ul>
       </nav>
       

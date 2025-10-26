@@ -1,12 +1,16 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/style.css";
+import orderService from "../data/orderService";
 
 export default function PagoBien() {
 	const navigate = useNavigate();
 	const [orden, setOrden] = useState(null);
+  const savedOnce = useRef(false);
 
 	useEffect(() => {
+		if (savedOnce.current) return; // evita duplicar por StrictMode en desarrollo
+		savedOnce.current = true;
 		try {
 			const raw = localStorage.getItem("ultima_orden");
 			const o = raw ? JSON.parse(raw) : null;
@@ -21,6 +25,8 @@ export default function PagoBien() {
 			if (!o.nro) {
 				o.nro = `#${new Date().getFullYear()}${String(Date.now()).slice(-4)}`;
 			}
+			// Registrar la orden como 'pagado' en el historial de boletas
+			try { orderService.saveFromUltimaOrden("pagado"); } catch {}
 			setOrden(o);
 		} catch {
 			navigate("/carrito");

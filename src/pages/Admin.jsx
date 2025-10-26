@@ -1,8 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/style.css';
+import orderService from '../data/orderService';
+import productService from '../data/productService';
+import userService from '../data/userService';
 
 export default function Admin() {
+  const [stats, setStats] = useState({ products: 0, users: 0, orders: 0, revenue: 0 });
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [lastUpdated, setLastUpdated] = useState(null);
   useEffect(() => {
     // Añade clase al body para ocultar header/footer desde CSS
     document.body.classList.add('no-layout');
@@ -10,6 +16,25 @@ export default function Admin() {
       document.body.classList.remove('no-layout');
     };
   }, []);
+
+  const CLP = (n) => Number(n).toLocaleString('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 });
+
+  const refreshStats = async () => {
+    setIsRefreshing(true);
+    // pequeño delay para dar feedback visual si es muy rápido
+    await new Promise(r => setTimeout(r, 150));
+    try { orderService.dedupe(); } catch {}
+    const products = (productService.getAll() || []).length;
+    const users = (userService.getAll() || []).length;
+    const ordersList = orderService.getAll() || [];
+    const orders = ordersList.length;
+    const revenue = ordersList.filter(o => o.estado === 'pagado').reduce((s, o) => s + (Number(o.total)||0), 0);
+    setStats({ products, users, orders, revenue });
+    setLastUpdated(new Date());
+    setIsRefreshing(false);
+  };
+
+  useEffect(() => { refreshStats(); }, []);
 
   return (
     <div className="admin-container">
@@ -22,36 +47,54 @@ export default function Admin() {
         <ul className="admin-nav">
           <li><Link to="/admin" className="active">Dashboard</Link></li>
           <li><Link to="/admin-productos">Productos</Link></li>
+          <li><Link to="/admin-productos-criticos">Críticos</Link></li>
           <li><Link to="/admin-usuarios">Usuarios</Link></li>
+          <li><Link to="/admin-boletas">Boletas</Link></li>
+          <li><Link to="/admin-reportes">Reportes</Link></li>
         </ul>
       </nav>
 
       <main className="admin-content">
+        <div className="admin-content-inner">
         <div className="admin-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div>
-            <h1>Dashboard</h1>
-            <p>¡HOLA Administrador!</p>
+          <div style={{ display:'flex', alignItems:'center', gap:10 }}>
+            <h1 style={{ margin: 0 }}>Dashboard</h1>
+            {/* Botón de refresco compacto junto al título */}
+            <button
+              onClick={refreshStats}
+              disabled={isRefreshing}
+              title={isRefreshing ? 'Actualizando…' : 'Actualizar estadísticas'}
+              aria-label="Actualizar estadísticas"
+              style={{
+                width: 34, height: 34, display:'inline-flex', alignItems:'center', justifyContent:'center',
+                borderRadius: 999, border: '1px solid #e0c9bb', background:'#f3e9e1', color:'#7c3a2d', cursor: isRefreshing ? 'default' : 'pointer'
+              }}>
+              {isRefreshing ? '…' : '↻'}
+            </button>
           </div>
-          <div>
+          <div style={{ display:'flex', alignItems:'center', gap:8 }}>
+            {lastUpdated && (
+              <small style={{ color:'#7c3a2d', opacity:.8 }}>Actualizado: {new Date(lastUpdated).toLocaleTimeString('es-CL')}</small>
+            )}
             <Link to="/" className="btn-principal">🏠 Ir al Sitio</Link>
           </div>
         </div>
 
-        <div className="admin-stats" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+        <div className="admin-stats">
           <div className="admin-stat-card">
-            <h3 id="total-products">0</h3>
+            <h3 id="total-products">{stats.products}</h3>
             <p>Productos Totales</p>
           </div>
           <div className="admin-stat-card">
-            <h3 id="total-users">0</h3>
+            <h3 id="total-users">{stats.users}</h3>
             <p>Usuarios Registrados</p>
           </div>
           <div className="admin-stat-card">
-            <h3 id="total-orders">0</h3>
+            <h3 id="total-orders">{stats.orders}</h3>
             <p>Pedidos Totales</p>
           </div>
           <div className="admin-stat-card">
-            <h3 id="total-revenue">$0</h3>
+            <h3 id="total-revenue">{CLP(stats.revenue)}</h3>
             <p>Ingresos Totales</p>
           </div>
         </div>
@@ -62,6 +105,7 @@ export default function Admin() {
             Desde aquí puedes gestionar productos, usuarios, pedidos y más.
             <br />Selecciona una opción del menú lateral para comenzar.
           </p>
+        </div>
         </div>
       </main>
     </div>

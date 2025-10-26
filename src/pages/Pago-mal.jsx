@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/style.css";
+import orderService from "../data/orderService";
 
 export default function PagoMal() {
 	const navigate = useNavigate();
@@ -20,6 +21,8 @@ export default function PagoMal() {
 			if (!o.nro) {
 				o.nro = `#${new Date().getFullYear()}${String(Date.now()).slice(-4)}`;
 			}
+			// Registrar la orden como 'fallido' en el historial
+			try { orderService.saveFromUltimaOrden("fallido"); } catch {}
 			setOrden(o);
 		} catch {
 			navigate("/carrito");
