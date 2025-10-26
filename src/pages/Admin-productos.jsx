@@ -190,6 +190,7 @@ export default function AdminProductos() {
           <li><Link to="/admin-usuarios">Usuarios</Link></li>
           <li><Link to="/admin-boletas">Boletas</Link></li>
           <li><Link to="/admin-reportes">Reportes</Link></li>
+          <li><Link to="/admin-perfil">Perfil</Link></li>
         </ul>
       </nav>
       

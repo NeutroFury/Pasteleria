@@ -111,6 +111,7 @@ export default function AdminBoletas() {
           <li><Link to="/admin-usuarios">Usuarios</Link></li>
           <li><Link to="/admin-boletas" className="active">Boletas</Link></li>
           <li><Link to="/admin-reportes">Reportes</Link></li>
+          <li><Link to="/admin-perfil">Perfil</Link></li>
         </ul>
       </nav>
 

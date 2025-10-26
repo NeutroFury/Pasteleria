@@ -95,6 +95,7 @@ export default function AdminReportes() {
           <li><Link to="/admin-usuarios">Usuarios</Link></li>
           <li><Link to="/admin-boletas">Boletas</Link></li>
           <li><Link to="/admin-reportes" className="active">Reportes</Link></li>
+          <li><Link to="/admin-perfil">Perfil</Link></li>
         </ul>
       </nav>
 
