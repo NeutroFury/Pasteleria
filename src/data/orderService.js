@@ -64,22 +64,22 @@ export const orderService = {
     this.saveAll(filtered);
   },
   seedIfEmpty() {
+    // Ya no sembramos datos de ejemplo.
+    return this.getAll();
+  },
+  purgeExamples() {
     const list = this.getAll();
-    if (list.length) return list;
-    const demo = [
-      normalize({
-        id: `ORD-DEMO-1`, codigo: "ORDER001", nro: "#2025-0001", estado: "pagado",
-        cliente: { nombre: "Cliente Demo", correo: "cliente@demo.local", comuna: "Santiago" },
-        items: [ { codigo: "TC001", nombre: "Torta Chocolate", cantidad: 1, precio: 36000, img: "img/torta01.png" } ],
-      }),
-      normalize({
-        id: `ORD-DEMO-2`, codigo: "ORDER002", nro: "#2025-0002", estado: "fallido",
-        cliente: { nombre: "Ana Pérez", correo: "ana@correo.cl", comuna: "Providencia" },
-        items: [ { codigo: "TT001", nombre: "Torta Vainilla", cantidad: 2, precio: 40000, img: "img/torta02.png" } ],
-      }),
-    ];
-    this.saveAll(demo);
-    return demo;
+    const filtered = list.filter((o) => {
+      const isDemoId = String(o.id || "").startsWith("ORD-DEMO");
+      const name = (o.cliente && o.cliente.nombre) || "";
+      const isDemoName = name === "Cliente Demo" || name === "Ana Pérez" || name === "Ana Perez";
+      return !isDemoId && !isDemoName;
+    });
+    if (filtered.length !== list.length) {
+      this.saveAll(filtered);
+      return { removed: list.length - filtered.length, total: filtered.length };
+    }
+    return { removed: 0, total: filtered.length };
   },
   saveFromUltimaOrden(estado = "pagado") {
     try {

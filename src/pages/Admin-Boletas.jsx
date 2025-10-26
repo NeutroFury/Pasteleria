@@ -21,10 +21,9 @@ export default function AdminBoletas() {
   };
 
   const load = () => {
-    // Limpieza de posibles duplicados antes de cargar
+    // Limpieza de posibles duplicados y eliminación de ejemplos por defecto
     try { orderService.dedupe(); } catch {}
-    const list = orderService.getAll();
-    if (!list || list.length === 0) orderService.seedIfEmpty();
+    try { orderService.purgeExamples(); } catch {}
     setOrders(orderService.getAll());
   };
 
@@ -190,13 +189,13 @@ export default function AdminBoletas() {
         {visible && !!ordenSel && (
           <div role="dialog" aria-modal="true" className="modal-backdrop" onClick={cerrarBoleta}
                style={{ position:'fixed', inset:0, background:'rgba(0,0,0,.35)', display:'flex', alignItems:'center', justifyContent:'center', padding:16, zIndex: 50 }}>
-            <div className="card" onClick={(e)=>e.stopPropagation()} style={{ width:'min(980px, 96vw)', maxHeight:'90vh', overflow:'auto' }}>
+            <div className="card cart-card" onClick={(e)=>e.stopPropagation()} style={{ width:'min(980px, 96vw)', maxHeight:'90vh', overflow:'auto' }}>
               <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', gap:8 }}>
                 <h2 className="estiloEncabezado" style={{ margin:0 }}>Boleta {ordenSel.nro}</h2>
                 <div style={{ display:'flex', gap:8 }}>
-                  <button className="btn-principal" onClick={()=>window.print()}>Imprimir</button>
-                  <button className="btn-principal" style={{ background:'#2e8b57', borderColor:'#2e8b57' }} onClick={enviarEmail}>Enviar email</button>
-                  <button className="admin-btn-secondary" onClick={cerrarBoleta}>Cerrar</button>
+                  <button className="btn-compra" onClick={()=>window.print()}>Imprimir</button>
+                  <button className="btn-compra" onClick={enviarEmail}>Enviar email</button>
+                  <button className="btn-compra" onClick={cerrarBoleta}>Cerrar</button>
                 </div>
               </div>
 

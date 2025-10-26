@@ -173,12 +173,12 @@ export default function PagoBien() {
 
 						<div className="receipt-actions" style={{ display: "flex", gap: 10, justifyContent: "center", marginTop: 12 }}>
 							{/* Mismo estilo de botón que el de envío por email */}
-							<button onClick={imprimirPDF} className="btn-compra" style={{ background: "#d16a8a", borderColor: "#d16a8a" }}>
+							<button onClick={imprimirPDF} className="btn-compra">
 								Imprimir boleta en PDF
 							</button>
-							<button onClick={enviarEmail} className="btn-compra" style={{ background: "#2e8b57", borderColor: "#2e8b57" }}>
-						Enviar boleta por email
-					</button>
+							<button onClick={enviarEmail} className="btn-compra">
+							Enviar boleta por email
+						</button>
 				</div>
 			</div>
 		</main>
