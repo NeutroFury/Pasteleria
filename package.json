@@ -1,0 +1,58 @@
+{
+  "name": "pasteleria-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "bootstrap": "^5.3.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.30.1",
+    "react-scripts": "^5.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+<<<<<<< HEAD
+    "eject": "react-scripts eject",
+    "test:karma": "karma start"
+=======
+    "eject": "react-scripts eject"
+>>>>>>> 491edbdfa3d0ed9c07dcc2c95333bb12aa2f45ca
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+<<<<<<< HEAD
+    "@babel/plugin-transform-classes": "^7.28.4",
+    "jasmine-core": "^5.12.0",
+    "karma": "^6.4.4",
+    "karma-chrome-launcher": "^3.2.0",
+    "karma-jasmine": "^5.1.0",
+    "karma-spec-reporter": "^0.0.36"
+=======
+    "@babel/plugin-transform-classes": "^7.28.4"
+>>>>>>> 491edbdfa3d0ed9c07dcc2c95333bb12aa2f45ca
+  }
+}
