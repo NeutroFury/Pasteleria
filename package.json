@@ -18,12 +18,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-<<<<<<< HEAD
     "eject": "react-scripts eject",
     "test:karma": "karma start"
-=======
-    "eject": "react-scripts eject"
->>>>>>> 491edbdfa3d0ed9c07dcc2c95333bb12aa2f45ca
   },
   "eslintConfig": {
     "extends": [
@@ -44,15 +40,12 @@
     ]
   },
   "devDependencies": {
-<<<<<<< HEAD
+
     "@babel/plugin-transform-classes": "^7.28.4",
     "jasmine-core": "^5.12.0",
     "karma": "^6.4.4",
     "karma-chrome-launcher": "^3.2.0",
     "karma-jasmine": "^5.1.0",
     "karma-spec-reporter": "^0.0.36"
-=======
-    "@babel/plugin-transform-classes": "^7.28.4"
->>>>>>> 491edbdfa3d0ed9c07dcc2c95333bb12aa2f45ca
-  }
-}
+}}
+
