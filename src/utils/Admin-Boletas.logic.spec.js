@@ -17,6 +17,10 @@ describe('AdminBoletas.logic', function () {
 
   // Asegura que la lógica esté cargada 
   beforeEach(function () {
+    // Silenciar errores en consola generados a propósito por los tests (p.ej. localStorage lleno)
+    if (console && typeof console.error === 'function') {
+      try { spyOn(console, 'error').and.stub(); } catch (e) {}
+    }
     // Inicializa mocks
     mockSetToast = jasmine.createSpy('setToast');
     mockWindow = {
