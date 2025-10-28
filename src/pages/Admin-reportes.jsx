@@ -139,7 +139,7 @@ export default function AdminReportes() {
                   <td>{p.codigo}</td>
                   <td style={{ color:'#7c3a2d', fontWeight:600 }}>{p.nombre}</td>
                   <td>{p.cantidad}</td>
-                  <td>{CLP(p.ingresos)}</td>
+                  <td>{window.AdminReportesLogic.CLP(p.ingresos)}</td>
                 </tr>
               ))}
             </tbody>

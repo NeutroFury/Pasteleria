@@ -16,15 +16,111 @@ export default function AdminBoletas() {
   const [toast, setToast] = useState(null); // { text, kind }
   const pageSize = 10;
 
-  // --- 1. Definir la lógica ---
-  // (Añade esta línea para acceder a la lógica importada)
-  const logic = window.AdminBoletasLogic;
+  // --- 1. Definir la lógica (con fallback defensivo para evitar crashes si no cargó) ---
+  const logic = useMemo(() => {
+    const w = typeof window !== 'undefined' ? window : {};
+    const L = w.AdminBoletasLogic || {};
+    return {
+      // Fallbacks mínimos por si la lógica global no está disponible aún
+      CLP: (n) => Number(n).toLocaleString('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 }),
+      badge: (s) => (
+        <span style={{
+          background: s === 'pagado' ? '#e9ffe8' : s === 'fallido' ? '#fff5f5' : s === 'anulado' ? '#f5f5f5' : '#f5f5f5',
+          color: s === 'pagado' ? '#0f5d1d' : s === 'fallido' ? '#9b2c2c' : '#4a4a4a',
+          padding: '4px 8px',
+          borderRadius: 999,
+          fontSize: 12,
+          fontWeight: 700,
+          textTransform: 'capitalize'
+        }}>{s}</span>
+      ),
+      showToast: (setToast, win, text, kind = 'info') => {
+        if (!setToast || !win) return;
+        setToast({ text, kind });
+        try {
+          win.clearTimeout(win.__toastTimer);
+          win.__toastTimer = win.setTimeout(() => setToast(null), 2600);
+        } catch {}
+      },
+      load: (svc, setOrdersFn) => {
+        if (!svc || !setOrdersFn) return;
+        try { svc.dedupe && svc.dedupe(); } catch {}
+        try { svc.purgeExamples && svc.purgeExamples(); } catch {}
+        try { setOrdersFn(svc.getAll ? svc.getAll() : []); } catch { setOrdersFn([]); }
+      },
+      verBoleta: (ls, o, setOrdenSelFn, setVisibleFn) => {
+        try { ls && ls.setItem && ls.setItem('ultima_orden', JSON.stringify(o)); } catch {}
+        setOrdenSelFn && setOrdenSelFn(o || null);
+        setVisibleFn && setVisibleFn(true);
+      },
+      cerrarBoleta: (setVisibleFn, setOrdenSelFn) => {
+        setVisibleFn && setVisibleFn(false);
+        setOrdenSelFn && setOrdenSelFn(null);
+      },
+      enviarEmail: (ordenSel, CLP_func, win) => {
+        if (!ordenSel || !CLP_func || !win) return;
+        const total = (ordenSel.items || []).reduce((s, it) => s + (Number(it.precio) || 0) * (Number(it.cantidad) || 1), 0);
+        const to = ordenSel?.cliente?.correo || '';
+        const subject = encodeURIComponent(`Boleta de compra ${ordenSel.codigo || ordenSel.id}`);
+        const cuerpoTexto = [
+          `Hola ${ordenSel?.cliente?.nombre || ''},`,
+          '',
+          `Adjuntamos el detalle de tu compra ${ordenSel.codigo || ordenSel.id}.`,
+          '',
+          ...(ordenSel.items || []).map((it) => `• ${it.nombre} x${it.cantidad} = ${CLP_func((Number(it.precio) || 0) * (Number(it.cantidad) || 1))}`),
+          '',
+          `Total pagado: ${CLP_func(total)}`,
+        ].join('\r\n');
+        const cuerpo = encodeURIComponent(cuerpoTexto);
+        try { win.location.href = `mailto:${to}?subject=${subject}&body=${cuerpo}`; } catch {}
+      },
+      anular: (win, svc, loadFn, toastFn, o) => {
+        if (!win || !svc || !loadFn || !toastFn || !o) return;
+        if (!win.confirm || win.confirm('¿Anular esta boleta?')) {
+          try { svc.update && svc.update(o.id, { estado: 'anulado' }); } catch {}
+          try { loadFn(); } catch {}
+          try { toastFn('Boleta anulada', 'info'); } catch {}
+        }
+      },
+      depurar: (svc, loadFn, toastFn) => {
+        if (!svc || !loadFn || !toastFn) return;
+        let res = null;
+        try { res = svc.dedupe ? svc.dedupe() : null; } catch {}
+        try { loadFn(); } catch {}
+        try {
+          const removed = res && typeof res.removed === 'number' ? res.removed : 0;
+          toastFn(`Depuración completa. Eliminados ${removed} duplicados.`, 'success');
+        } catch {}
+      },
+      abrirPestanaBoleta: (ls, win, o) => {
+        try { ls && ls.setItem && ls.setItem('ultima_orden', JSON.stringify(o)); } catch {}
+        try { win && win.open && win.open('/pago-bien', '_blank'); } catch {}
+      },
+      // Sobrescribe con la lógica real si está presente
+      ...L
+    };
+  }, []);
+
+  // Render seguro del badge (evita depender de la implementación global)
+  const renderBadge = (s) => (
+    <span style={{
+      background: s === 'pagado' ? '#e9ffe8' : s === 'fallido' ? '#fff5f5' : s === 'anulado' ? '#f5f5f5' : '#f5f5f5',
+      color: s === 'pagado' ? '#0f5d1d' : s === 'fallido' ? '#9b2c2c' : '#4a4a4a',
+      padding: '4px 8px',
+      borderRadius: 999,
+      fontSize: 12,
+      fontWeight: 700,
+      textTransform: 'capitalize'
+    }}>{s}</span>
+  );
 
   // --- 2. Hooks (Modificados para usar 'logic') ---
   useEffect(() => {
-    // Se llama a la lógica externa
-    logic.load(orderService, setOrders);
-  }, []); // El array vacío está bien si 'logic' y 'orderService' son estables
+    // Se llama a la lógica externa si está disponible
+    if (logic && typeof logic.load === 'function') {
+      logic.load(orderService, setOrders);
+    }
+  }, [logic]);
 
   // (Estos se mantienen igual, son lógica de renderizado)
   const filtered = useMemo(() => {
@@ -126,17 +222,17 @@ export default function AdminBoletas() {
                       <small style={{ opacity: .8 }}>{o.cliente?.correo}</small>
                     </div>
                   </td>
-                  {/* ✅ Llamada a logic.badge */}
-                  <td>{logic.badge(o.estado)}</td>
-                  {/* ✅ Llamada a logic.CLP */}
-                  <td>{logic.CLP(o.total)}</td>
+                  {/* Badge renderizado localmente para evitar issues de ref en runtime */}
+                  <td>{renderBadge(o.estado)}</td>
+                  {/* ✅ Llamada a logic.CLP con fallback */}
+                  <td>{logic && typeof logic.CLP === 'function' ? logic.CLP(o.total) : o.total}</td>
                   <td>{new Date(o.fecha).toLocaleString('es-CL')}</td>
                   <td>
                     <div className="admin-actions">
-                      {/* ✅ Llamada a logic.verBoleta */}
-                      <button className="admin-action-btn is-history" onClick={() => logic.verBoleta(localStorage, o, setOrdenSel, setVisible)}>Mostrar boleta</button>
-                      {/* ✅ Llamada a logic.abrirPestanaBoleta */}
-                      <button className="admin-action-btn" onClick={() => logic.abrirPestanaBoleta(localStorage, window, o)}>Abrir pestaña</button>
+                      {/* ✅ Llamada a logic.verBoleta con fallback */}
+                      <button className="admin-action-btn is-history" onClick={() => logic && typeof logic.verBoleta === 'function' ? logic.verBoleta(localStorage, o, setOrdenSel, setVisible) : setVisible(true)}>Mostrar boleta</button>
+                      {/* ✅ Llamada a logic.abrirPestanaBoleta con fallback */}
+                      <button className="admin-action-btn" onClick={() => logic && typeof logic.abrirPestanaBoleta === 'function' ? logic.abrirPestanaBoleta(localStorage, window, o) : null}>Abrir pestaña</button>
                       {o.estado !== 'anulado' && (
                         /* ✅ Llamada a logic.anular */
                         <button
@@ -144,7 +240,7 @@ export default function AdminBoletas() {
                           onClick={() => {
                             const showToast_func = (text, kind) => logic.showToast(setToast, window, text, kind);
                             const load_func = () => logic.load(orderService, setOrders);
-                            logic.anular(window, orderService, load_func, showToast_func, o);
+                            logic && typeof logic.anular === 'function' && logic.anular(window, orderService, load_func, showToast_func, o);
                           }}
                         >
                           Anular
@@ -200,11 +296,11 @@ export default function AdminBoletas() {
                         <tr key={it.codigo}>
                           <td><img className="thumb" src={it.img} alt={it.nombre} /></td>
                           <td style={{ color: '#7c3a2d', fontWeight: 600 }}>{it.nombre}</td>
-                          {/* ✅ Llamada a logic.CLP */}
-                          <td>{logic.CLP(it.precio)}</td>
+                          {/* ✅ Llamada a logic.CLP con fallback */}
+                          <td>{logic && typeof logic.CLP === 'function' ? logic.CLP(it.precio) : it.precio}</td>
                           <td>{it.cantidad}</td>
-                          {/* ✅ Llamada a logic.CLP */}
-                          <td style={{ fontWeight: 700 }}>{logic.CLP(sub)}</td>
+                          {/* ✅ Llamada a logic.CLP con fallback */}
+                          <td style={{ fontWeight: 700 }}>{logic && typeof logic.CLP === 'function' ? logic.CLP(sub) : sub}</td>
                         </tr>
                       );
                     })}
@@ -213,8 +309,8 @@ export default function AdminBoletas() {
               </div>
 
               <div className="receipt-totalbox" style={{ background: '#f3e9e1', borderRadius: 10, padding: 14, marginTop: 12, display: 'flex', justifyContent: 'center' }}>
-                {/* ✅ Llamada a logic.CLP */}
-                <strong style={{ color: '#7c3a2d', fontSize: 18 }}>Total: {logic.CLP(ordenSel.total)}</strong>
+                {/* ✅ Llamada a logic.CLP con fallback */}
+                <strong style={{ color: '#7c3a2d', fontSize: 18 }}>Total: {logic && typeof logic.CLP === 'function' ? logic.CLP(ordenSel.total) : ordenSel.total}</strong>
               </div>
             </div>
           </div>
