@@ -2,7 +2,7 @@ import './styles/style.css';
 import Admin from './pages/Admin.jsx';
 import Home from './pages/Home';
 import Nosotros from './pages/Nosotros';
-import { Routes, Route, NavLink } from 'react-router-dom';
+import { Routes, Route} from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Blogs from './pages/Blogs';
